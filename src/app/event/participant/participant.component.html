@@ -1,0 +1,53 @@
+<!-- <div [@routerTransition]> -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <!-- begin:: Subheader -->
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+            <div class="kt-container  kt-container--fluid ">
+               
+                <div class="kt-subheader__main">
+                    <button type="button" style="margin-right:15px;" (click)="back()"
+                            class="btn btn-outline-metal back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{"EventManage" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span *ngIf="eventMode !== 'Evaluation'" class="kt-subheader__desc">{{"Participants" | localize}}</span>
+                        <span *ngIf="eventMode === 'Evaluation'" class="kt-subheader__desc">{{"Vendors" | localize}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Subheader -->
+
+        <!-- begin:: Content -->
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+            <div class="filter d-flex justify-content-between">
+                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter
+                </button> -->
+                <a href="" class="kt-subheader__breadcrumbs-link">{{eventID}} - {{eventName}}</a>
+                <div class="edit-event">
+                    <button type="button" [disabled]="disabledButton" *ngIf="!disabledButton" class="btn btn-primary" (click)="edit()"><i class="fa fa-plus"></i> {{"Add" | localize}} </button>
+                    <button type="button" [disabled]="disabledButton" *ngIf="!disabledButton && allowedDelete" class="btn btn-danger" (click)="deleteParticipant()"><i class="fa fa-times"></i> {{"Delete" | localize}} </button>
+                    <button *ngIf="eventMode !== 'Evaluation'" type="button" [disabled]="disabledButton" class="btn btn-primary"><i class="fa fa-mail-bulk"></i> {{"ReInvEmail" | localize}} </button>
+                </div>
+            </div>
+
+            <div class="table-data kt-margin-t-30">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__body  kt-padding-2">
+                        <div class="form-group">
+                            <participant-grid #participantgrid [campID]="campID" [detail]="!disabledButton" (onSelectedChange)="select($event)" (onDetailClick)="detailVendor($event)" ></participant-grid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Content -->
+        <participantListModal #participantListModal (modalSave)="uploadComplete($event)"></participantListModal>
+        <committeeListModal #committeeListModal (modalSave)="refresh()"></committeeListModal>
+    </div>
+<!-- </div> -->

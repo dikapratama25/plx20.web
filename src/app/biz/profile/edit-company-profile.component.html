@@ -1,0 +1,412 @@
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <!-- <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"> -->
+      <div class="modal-content">
+        <form *ngIf="active" #editCompanyProfileForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{modalTitle}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div clas="modal-body">
+                <tabset #tabs>
+                    <tab heading="{{'Company' | localize}}" id="tab-1" index="1" class="tab-wrapper">
+                        <div class="kt-wizard-v1__content">
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <div class="kt-wizard-v1__form">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{{'CompanyProfileName' | localize }} :</label>
+                                                            <input #CompName="ngModel" id="compName"
+                                                                type="text" name="compName" class="form-control"
+                                                                [(ngModel)]="inputHelper.CompanyName">
+                                                            <validation-messages [formCtrl]="CompName" >
+                                                            </validation-messages>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{{'CEO' | localize }} :</label>
+                                                            <input #compCEO="ngModel" id="CEO" type="text" name="CEO"
+                                                                class="form-control"
+                                                                [(ngModel)]="inputHelper.ContactPerson2">
+                                                            <validation-messages [formCtrl]="compCEO">
+                                                            </validation-messages>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>{{"PostCode" | localize}} :</label>
+                                                    <input #CompID="ngModel" id="compID" type="text"
+                                                        name="compID" class="form-control"
+                                                        [(ngModel)]="inputHelper.PostalCode">
+                                                    <validation-messages [formCtrl]="CompID">
+                                                    </validation-messages>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>{{'TaxOrganizationType' | localize}}</label>
+                                                    <div class="form-group campID">
+                                                        <div class="campIDLbl">
+                                                            <select #CompTaxType required name="compTaxType" id="compTaxType"
+                                                                class="form-control"
+                                                                [(ngModel)]="companySelectedTaxOrganizationType" (change)="companyTaxOrganizationTypeOnChange()"
+                                                                [attr.data-live-search]="true">
+                                                                <option *ngFor="let data of dataTaxType"
+                                                                    [value]="data.Code" [attr.disabled]="data.Code === '-'? true : null">
+                                                                    {{data.CodeDesc | uppercase}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>{{'SupplierType' | localize}}</label>
+                                                    <div class="form-group campID">
+                                                        <div class="campIDLbl">
+                                                            <select #CompSupplyID required name="compSupplyID" id="compSupplyID"
+                                                                class="form-control"
+                                                                [(ngModel)]="companySelectedSupplierType" (change)="companySupplierTypeOnChange()"
+                                                                [attr.data-live-search]="true">
+                                                                <option *ngFor="let data of dataSupplierID"
+                                                                    [value]="data.Code" [attr.disabled]="data.Code === '-'? true : null">
+                                                                    {{data.CodeDesc | uppercase}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>{{'TelNo' | localize }} :</label>
+                                                    <input #CompanyTelNo="ngModel" id="compBusinessTelNo" type="text"
+                                                        name="compBusinessTelNo" onkeydown="return ( event.ctrlKey || event.altKey
+                                                           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                    || (95<event.keyCode && event.keyCode<106)
+                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                    || (event.keyCode==46) || (event.keyCode==189) )"
+                                                        maxlength="12" class="form-control"
+                                                        [(ngModel)]="inputHelper.TelNo">
+                                                    <validation-messages [formCtrl]="CompanyTelNo">
+                                                    </validation-messages>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>{{'FaxNo' | localize }} :</label>
+                                                    <input id="compBusinessFaxNo" type="text" name="compBusinessFaxNo"
+                                                        onkeydown="return ( event.ctrlKey || event.altKey
+                                                           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                    || (95<event.keyCode && event.keyCode<106)
+                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                    || (event.keyCode==46) || (event.keyCode==189) )"
+                                                        maxlength="12" class="form-control"
+                                                        [(ngModel)]="inputHelper.FaxNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>{{'TaxpayerID' | localize}} :</label>
+                                                    <input #CompTaxpayerID="ngModel"
+                                                        title="SSM ID / Registration Number for Foreign Supplier / IC Number for Individual"
+                                                        id="taxpayerID" type="text" name="taxpayerID"
+                                                        class="form-control" [(ngModel)]="inputHelper.RegNo">
+                                                    <validation-messages [formCtrl]="CompTaxpayerID">
+                                                    </validation-messages>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>{{'TaxRegistrationNumber' | localize}} :</label>
+                                                    <input #CompTaxRegNo="ngModel" title="SST / Tax Registration Number"
+                                                        id="compTaxRegNo" type="text" name="compTaxRegNo"
+                                                        class="form-control" [(ngModel)]="inputHelper.ReqNo">
+                                                    <validation-messages [formCtrl]="CompTaxRegNo">
+                                                    </validation-messages>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{{'BusinessAddress' | localize }} :</label>
+                                                            <input #CompanyAddress="ngModel" id="compBusinessAddress1"
+                                                                type="text" name="compBusinessAddress1"
+                                                                class="form-control"
+                                                                [(ngModel)]="inputHelper.Address1"
+                                                                (ngModelChange)="inputHelper.Address1=$event.toUpperCase()">
+                                                            <validation-messages [formCtrl]="CompanyAddress">
+                                                            </validation-messages>
+                                                            <input id="compBusinessAddress2" type="text"
+                                                                name="compBusinessAddress2"
+                                                                class="form-control kt-margin-t-50"
+                                                                [(ngModel)]="inputHelper.Address2"
+                                                                (ngModelChange)="inputHelper.Address2=$event.toUpperCase()">
+                                                            <input id="compBusinessAddress3" type="text"
+                                                                name="compBusinessAddress3"
+                                                                class="form-control  kt-margin-t-50"
+                                                                [(ngModel)]="inputHelper.Address3"
+                                                                (ngModelChange)="inputHelper.Address3=$event.toUpperCase()">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>{{'Country' | localize}}</label>
+                                                            <div class="form-group campID">
+                                                                <div class="campIDLbl">
+                                                                    <select #CompCountry required name="compCountry"
+                                                                        id="compCountry" class="form-control"
+                                                                        [(ngModel)]="inputHelper.Country"
+                                                                        [attr.data-live-search]="true" (change)="companyCountryComboOnChange()">
+                                                                        <option *ngFor="let data of dataCountryID"
+                                                                            [value]="data.Code">
+                                                                            {{data.Remark | uppercase}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label>{{'State' | localize}}</label>
+                                                                <div class="form-group campID">
+                                                                    <div class="campIDLbl">
+                                                                        <select #CompState required
+                                                                            name="compState" id="compState"
+                                                                            class="form-control"
+                                                                            [(ngModel)]="companySelectedState"
+                                                                            [attr.data-live-search]="true" (change)="companyStateComboOnChange()">
+                                                                            <option *ngFor="let data of stateList"
+                                                                                [value]="data.Code" [attr.disabled]="data.Code === '-'? true : null">
+                                                                                {{data.Remark | uppercase}}</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label>{{'City' | localize}}</label>
+                                                                <div class="campIDLbl">
+                                                                    <select #CompCity required name="compCity"
+                                                                        id="compCity" class="form-control"
+                                                                        [(ngModel)]="companySelectedCity" (change)="companyCityComboOnChange()"
+                                                                        [attr.data-live-search]="true">
+                                                                        <option *ngFor="let data of cityList"
+                                                                            [value]="data.Code" [attr.disabled]="data.Code === '-'? true : null">
+                                                                            {{data.Remark | uppercase}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="{{'Contact' | localize}}" id="tab-2" index="2" class="tab-wrapper">
+                            <div class="kt-wizard-v1__content">
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12">
+                                        <div class="kt-wizard-v1__form">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{'ContactPersonProfile' | localize }} :</label>
+                                                        <input #CompContactPerson="ngModel" id="compContactPerson" type="text"
+                                                            name="compContactPerson" class="form-control"
+                                                            [(ngModel)]="inputHelper.ContactPerson"
+                                                            (ngModelChange)="inputHelper.ContactPerson=$event.toUpperCase()">
+                                                        <validation-messages [formCtrl]="CompContactPerson">
+                                                        </validation-messages>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{'NRICNo' | localize }} :</label>
+                                                        <input #CompNric="ngModel" id="compNric" type="text" name="compNric"
+                                                            onkeydown="return ( event.ctrlKey || event.altKey
+                                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                    || (95<event.keyCode && event.keyCode<106)
+                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                    || (event.keyCode==46) )" class="form-control" minlength="12"
+                                                            maxlength="12" [(ngModel)]="inputHelper.ICNo">
+                                                        <validation-messages [formCtrl]="CompNric"></validation-messages>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>{{'Email' | localize }} :</label>
+                                                                <input #CompEmail="ngModel" id="compEmail" type="email"
+                                                                    name="compEmail" class="form-control"
+                                                                    [(ngModel)]="inputHelper.ContactPersonEmail">
+                                                                <validation-messages [formCtrl]="CompEmail">
+                                                                </validation-messages>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>{{'CPMobileNo' | localize }} :</label>
+                                                        <input #CompCPMobileNo="ngModel" id="compCPMobileNo" type="text"
+                                                            name="compCPMobileNo" class="form-control" onkeydown="return ( event.ctrlKey || event.altKey
+                                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                        || (95<event.keyCode && event.keyCode<106)
+                                                        || (event.keyCode==8) || (event.keyCode==9)
+                                                        || (event.keyCode>34 && event.keyCode<40)
+                                                        || (event.keyCode==46) || (event.keyCode==189) )"
+                                                            maxlength="12" [(ngModel)]="inputHelper.ContactPersonMobile">
+                                                        <validation-messages [formCtrl]="CompCPMobileNo">
+                                                        </validation-messages>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>{{'BillingAddress' | localize }} :</label>
+                                                                <input #CompBranchAddress="ngModel" id="compCollectAddress1"
+                                                                    type="text" name="compCollectAddress1"
+                                                                    class="form-control"
+                                                                    [(ngModel)]="inputHelper.AddressBl1"
+                                                                    (ngModelChange)="inputHelper.AddressBl1=$event.toUpperCase()">
+                                                                <validation-messages [formCtrl]="CompBranchAddress">
+                                                                </validation-messages>
+                                                                <input id="compCollectAddress2" type="text"
+                                                                    name="compCollectAddress2"
+                                                                    class="form-control kt-margin-t-50"
+                                                                    [(ngModel)]="inputHelper.AddressBl2"
+                                                                    (ngModelChange)="inputHelper.AddressBl2=$event.toUpperCase()">
+                                                                <input id="compCollectAddress3" type="text"
+                                                                    name="compCollectAddress3"
+                                                                    class="form-control kt-margin-t-50"
+                                                                    [(ngModel)]="inputHelper.AddressBl3"
+                                                                    (ngModelChange)="inputHelper.AddressBl3=$event.toUpperCase()">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <label>{{'State' | localize }} :</label>
+                                                                <div class="campIDLbl">
+                                                                    <select #CompBranchState required name="compBranchState"
+                                                                        id="compBranchState" class="form-control"
+                                                                        [(ngModel)]="branchCompanySelectedState" (change)="companyBranchStateComboOnChange()"
+                                                                        [attr.data-live-search]="true">
+                                                                        <option *ngFor="let data of BranchStateList"
+                                                                            [value]="data.Code" [attr.disabled]="data.Code === '-'? true : null">
+                                                                            {{data.Remark | uppercase}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{'City' | localize }} :</label>
+                                                                        <div class="campIDLbl">
+                                                                            <select #CompBranchCity required
+                                                                                name="compBranchCity" id="compBranchCity"
+                                                                                class="form-control"
+                                                                                [(ngModel)]="branchCompanySelectedCity" (change)="companyBranchCityComboOnChange()"
+                                                                                [attr.data-live-search]="true">
+                                                                                <option
+                                                                                    *ngFor="let data of BranchCityList"
+                                                                                    [value]="data.Code" [attr.disabled]="data.Code === '-'? true : null">
+                                                                                    {{data.Remark | uppercase}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{'PostCode' | localize }} :</label>
+                                                                        <input #CompBranchPostCode="ngModel"
+                                                                            id="compCollectPostCode" type="text"
+                                                                            name="compCollectPostCode" onkeydown="return ( event.ctrlKey || event.altKey
+                                                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                    || (95<event.keyCode && event.keyCode<106)
+                                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                                    || (event.keyCode==46) )" class="form-control"
+                                                                            minlength="5" maxlength="5"
+                                                                            [(ngModel)]="inputHelper.PostalCodeBl">
+                                                                        <validation-messages
+                                                                            [formCtrl]="CompBranchPostCode">
+                                                                        </validation-messages>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                  </tabset>
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{"Cancel" | localize}}</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!editCompanyProfileForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>

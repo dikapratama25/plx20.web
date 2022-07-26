@@ -1,0 +1,55 @@
+<div bsModal #supportDocsModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="supportDocsModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title">
+              <span>{{"SupportingDocument" | localize}}</span>
+          </h5>
+          <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <div class="row kt-margin-t-20">
+					<div class="col-md-12"> <!-- col-lg-8"> -->
+					  <div id="fileUploadEnvWrp">
+              <div id="supportDocumentList" class="tableBase form-group">
+                <base-list
+                [(gridUrl)]="urlSupportingDocs"
+                [downloadDoc]="downloadFlag" downloadDocAlignment="right" downloadDocLabel="Download"
+                (onDownloadDocClick)="onDownloadClick($event)"
+                #baselistTab
+                [enableFilter]="false">
+                </base-list>
+              </div>
+					  </div>
+					</div>
+					<!-- <div class="col-md-4">
+					  <div id="uploadUIWrp">
+              <div class="form-group">
+                <file-upload #fileUploadInput ng-disabled="!uploadedAll" [multiple]="false" id="fileUploadInput"
+                      [customUpload]="true" name="DefaultFileUploadFileInput[]" [APIUrl]="uploadUrl" [accept]="accept"
+                      [maxFileSize]="10000000" [showChoosenUpload]="false" [showUploaded]="false" [showCancelButton]="false"
+                      [chooseLabel]="DropZone" [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
+                </file-upload>
+              </div>
+              <div id="statUpload">
+                <div class="statGraph">
+                </div>
+                <div class="displayFlex">
+                <div class="lblStat">{{'TotalFile' | localize}} : </div>
+                <div class="valStat">{{totalDataFilled}} / {{totalData}}</div>
+                </div>
+              </div>
+					  </div>
+					</div> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+              (click)="close()">{{"Cancel" | localize}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<selectSupportdocModal #selectSupportdocModal (modalSave)="uploadHandlers($event)"></selectSupportdocModal>

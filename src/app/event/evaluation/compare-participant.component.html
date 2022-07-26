@@ -1,0 +1,73 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+   <!-- begin:: Subheader -->
+   <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+      <div class="kt-container  kt-container--fluid ">
+         <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">{{ title }}</h3>
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+               <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+               <span class="kt-subheader__breadcrumbs-separator"></span>
+               <a href="" class="kt-subheader__breadcrumbs-link">{{ subTitle }}</a>
+               <!-- <span class="kt-subheader__breadcrumbs-separator"></span>
+               <a routerLink="" (click)="goBack()" class="kt-subheader__breadcrumbs-link">
+                  {{"Back" | localize}}</a> -->
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- end:: Subheader -->
+
+   <!-- begin:: Content -->
+   <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="kt-portlet">
+               <!-- <div class="kt-portlet__head">
+                  <div class="kt-portlet__head-label">
+                     <div class="" style="
+                        padding: 1.5em 0;
+                        ">
+                        <h1 class="kt-portlet__head-title kt-font-dark" style="
+                           font-size: 1.5em;
+                           ">Tender Road Management, soil isolation and maintenance</h1>
+                        <div style="
+                           padding-top: 6px;
+                           ">EVY07A80CR</div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__head-toolbar">
+                     <div class="kt-portlet__head-actions">
+                        <button *ngIf="checkData == 0" type="button" class="btn btn-secondary btn-elevate btn-pill kt-margin-r-5" style=""><i
+                              class="la la-arrow-down"></i>Technical Doc</button>
+                        <button *ngIf="checkData == 1" type="button" class="btn btn-secondary btn-elevate btn-pill kt-margin-r-5" style=""><i
+                              class="la la-arrow-down"></i>Commercial Doc</button>
+                        <button type="button" class="btn btn-success btn-pill" style="
+                           min-width: 100px;
+                           ">Save</button>
+                     </div>
+                  </div>
+               </div> -->
+               <div class="kt-portlet__body">
+                  <div class="kt-section kt-section--first">
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <base-list #commbaseList [indexing]="true" [(gridUrl)]="gridUrl" [enableFilter]="false" emptyMessage="{{'NoDataToCompare' | localize}}"></base-list>
+                           <!-- <tabset class="nav nav-tabs nav-tabs-line nav-tabs-line-2x nav-tabs-line-success clTheme tab-container">
+                              <tab *ngIf="checkData == 0" heading="{{'Technical' | localize}}">
+                                    <base-list #baseList [(gridUrl)]="gridUrl" [enableFilter]="false" emptyMessage="{{'NoDataToCompare' | localize}}"></base-list>
+                              </tab>
+                              <tab *ngIf="checkData == 1" heading="{{'Commercial' | localize}}">
+                                    <base-list #commbaseList [(gridUrl)]="commgridUrl" [enableFilter]="false" emptyMessage="{{'NoDataToCompare' | localize}}"></base-list>
+                              </tab>
+                           </tabset> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

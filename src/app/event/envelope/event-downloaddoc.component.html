@@ -1,0 +1,106 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding-bottom: 0px;">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <!-- <span>{{"BillingDoc" | localize}}</span> -->
+                        <span>Download</span>
+                    </h3>
+
+                    <div class="kt-subheader__breadcrumbs" *ngIf="isGranted('Pages.Account.BillingDoc.ViewAll')">
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <a routerLink="" (click)="goBack()" class="kt-subheader__breadcrumbs-link">
+                        {{"Back" | localize}}</a>
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <!-- <a class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">{{"BillingDocList" | localize}}</a> -->
+                        <a class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Available Documents</a>
+                    </div>
+                    <div class="kt-subheader__breadcrumbs" *ngIf="!isGranted('Pages.Account.BillingDoc.ViewAll')">
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <!-- <a class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">{{"BillingDocList" | localize}}</a> -->
+                        <a class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Available Documents</a>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="condition == 'accept'">
+    <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <span class="kt-portlet__head-icon" style="padding-right:1em;"><i class="flaticon-file-2"></i></span>
+                   
+                    <h3  class="kt-portlet__head-title headTitleEvt">{{eventID}} - {{eventName}}</h3>
+                </div>
+                <!-- <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">{{eventID}} - {{eventName}} {{companyName}}</h3>  
+                    <small style="font-size: 1.1em;">&nbsp;: {{customerID}}</small>
+                </div> -->
+                <div class="kt-portlet__head-toolbar">
+                    <countdown #cd [config]="{leftTime: 27750, format: 'HH:mm:ss'}"></countdown>
+                </div>
+            </div>
+
+            <div class="kt-portlet__body filterSpecial">
+                <!-- <div id="documentFilter" class="displayFlex" style="justify-content: flex-end;">
+                    <div id="docTypeFilter" class="pdLR" style="padding:0 1.2em;flex: 1;">
+                        <label for="status" class="form-control-label">{{'DocumentType' | localize}}</label>
+                        <div class="labelMatrix">
+                            <ng-select id="status" name="status" [(ngModel)]="selectedType" [items]="typeCombo" [clearable]="false"
+                                bindValue="Code" bindLabel="CodeDesc" placeholder="Select Status...">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div id="docNoFilter" class="pdLR"  style="padding:0 1.2em;flex: 1;">
+                        <label>{{"DocumentNo" | localize}}</label>
+                        <input type="text" autofocus size="1" class="form-control" [(ngModel)]="documentNo" id="filterText" name="filterText" placeholder="Search...">
+                    </div>
+                    <div id="btnSetFilter" class="pdLR" style="margin: auto;padding:0 1.2em;padding-top: 2em;">
+                        <div class="displayFlex">
+                            <button class="btn btn-secondary btn-md input-group-append" (click)="getDocumentList()">
+                                <i class="fa fa-search"></i>{{"Search" | localize}}
+                            </button>
+                            <button class="btn btn-secondary btn-md input-group-append" (click)="clearDocumentFilter()">
+                                <i class="fa fa-times"></i>{{"Clear" | localize}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row kt-margin-b-25">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          
+                        </div>
+                    </div>
+                    <div class="row col-md-3" style="margin-top: 25px">
+                        <div class="col-md-6 col-auto">
+
+                        </div>
+                        <div class="col-md-6 col-auto">
+
+                        </div>
+                    </div>
+                </div> -->
+                <base-list #documentList [(gridUrl)]="documentListUrl" [enableFilter]="false" [indexing]="true"
+                downloadDoc="true" downloadDocAlignment="left" downloadDocLabel="Download" (onDownloadDocClick)="downloadDocument($event)">
+                </base-list>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div *ngIf="condition == 'reject'">
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body filterSpecial" style="text-align: center;">
+                    <p>Data/Document for this costumer is empty sorry :(</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

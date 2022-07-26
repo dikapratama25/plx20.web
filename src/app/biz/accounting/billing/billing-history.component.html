@@ -1,0 +1,99 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+       <div class="kt-subheader kt-grid__item">
+          <div [class]="containerClass">
+             <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>{{"BillingHistory" | localize}}</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <!-- span class="kt-subheader__desc">
+                    <span class="kt-subheader__desc">{{"ListBillingHistory" | localize}}</span>
+                </span -->
+            </div>
+          </div>
+       </div>
+
+       <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+          <div class="kt-portlet kt-portlet--mobile kt-portlet--height-fluid">
+             <div class="kt-portlet__body kt-portlet__body--fullheight">
+                <base-list #billingHistory [(gridUrl)]="gridUrl" [enableFilter]="true" [filterTemplate]="filter"
+                      actionColumn="none">
+                      <ng-template #filter>
+                        <div class="row flex filterContent">
+                           <!--div class="col-lg-6 col-md-6 col-sm-6">
+                              <label class="col-form-label">{{"TransactionNumber" | localize}}</label>
+                              <div class="input-group">
+                                <input class="form-control" name="inputTransNo" [(ngModel)]="inputTransNo" type="text" (change)="refresh()">
+                              </div>
+                           </div>
+                           <div class="col-lg-6 col-md-6 col-sm-6">
+                              <label class="col-form-label">{{"BillingNumber" | localize}}</label>
+                              <div class="input-group">
+                                <input id="billNo" class="form-control" name="inputBillNo" [(ngModel)]="inputBillNo" type="text" (change)="refresh()">
+                              </div>
+                           </div-->
+                           <div class="col-lg-4 col-md-4 col-sm-12">
+                                <label class="col-form-label">{{"BillingTransactionStartDate" | localize}}</label>
+                                <div class="input-group date">
+                                    <div class="input-group">
+                                       <input id="billingStartDate" (dateChange)="checkBillingStartDate($event)" type="text"
+                                          #processFilterStartPicker name="billingStartDate" class="form-control" [(ngModel)]="billingStartDate"
+                                          datePickerMomentModifier bsDatepicker
+                                          [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                          <div class="input-group-append">
+                                          <span class="input-group-text" id="basic-addon2">
+                                             <i class="fa fa-calendar"></i>
+                                          </span>
+                                       </div>
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <label class="col-form-label">{{"BillingTransactionEndDate" | localize}}</label>
+                                <div class="input-group date">
+                                    <div class="input-group">
+                                       <input id="billingEndDate" (dateChange)="checkBillingEndDate($event)" type="text"
+                                          #processFilterStartPicker name="billingEndDate" class="form-control" [(ngModel)]="billingEndDate"
+                                          datePickerMomentModifier bsDatepicker
+                                          [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                       <div class="input-group-append">
+                                          <span class="input-group-text" id="basic-addon2">
+                                             <i class="fa fa-calendar"></i>
+                                          </span>
+                                       </div>
+                                    </div>
+                                 </div>
+                            </div>
+                            <!-- div class="col-lg-6 col-md-6 col-sm-6">
+                                <label class="col-form-label">{{"BillingChargeType" | localize}}</label>
+                                <ng-select [(ngModel)]="chargeType" [items]="comboChargeType" [closeOnSelect]="true"
+                                   bindValue="Code" bindLabel="Type" (change)="comboChargeTypeOnChanged($event)">
+                                </ng-select>
+                             </div-->
+                             <div class="col-lg-4 col-md-4 col-sm-12">
+                                <label class="col-form-label">{{"BillingPaymentStatus" | localize}}</label>
+                                <ng-select [(ngModel)]="paymentStatus" [items]="comboPaymentStatus" [closeOnSelect]="true"
+                                   bindValue="Code" bindLabel="Status" (change)="comboPaymentStatusOnChanged($event)">
+                                </ng-select>
+                             </div>
+                           <div class="col-lg-4 col-md-4 col-sm-12">
+                              <label class="col-form-label">{{"AppName" | localize}}</label>
+                              <ng-select [(ngModel)]="section" [items]="options" [closeOnSelect]="true"
+                                 bindValue="Code" bindLabel="Remark" (change)="onServiceChange($event)">
+                              </ng-select>
+                           </div>
+                           <div class="col-lg-4 col-md-4 col-sm-12">
+                              <label class="col-form-label">{{"TransType" | localize}}</label>
+                              <ng-select [(ngModel)]="paymentType" [items]="paymentTypeList" [closeOnSelect]="true"
+                                 bindValue="Code" bindLabel="Remark" (change)="onPaymentTypeChange($event)">
+                              </ng-select>
+                           </div>
+                        </div>
+                     </ng-template>
+                </base-list>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>

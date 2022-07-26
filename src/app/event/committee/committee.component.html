@@ -1,0 +1,100 @@
+<!-- <div [@routerTransition]> -->
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <!-- begin:: Subheader -->
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+            <div class="kt-container  kt-container--fluid ">
+                
+                <div class="kt-subheader__main">
+                    <button type="button" style="margin-right:15px;" (click)="goBack()"
+                            class="btn btn-outline-metal back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{ "EventManage"|localize }}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        
+                        <div *ngIf="isVendorDetail===false">
+                            <span *ngIf="eventMode !== 'Evaluation'" class="kt-subheader__desc">{{"Committees" | localize}}</span>
+                            <span *ngIf="eventMode === 'Evaluation' "  class="kt-subheader__desc">{{"Evaluators" | localize}}</span>
+                        </div>
+                        <div *ngIf="isVendorDetail===true">
+                            <span  class="kt-subheader__desc">{{"VendorDetail" | localize}}</span>
+                        </div>
+                    </span>
+                </div>
+                
+                
+            </div>
+        </div>
+        <!-- end:: Subheader -->
+
+        <!-- begin:: Content -->
+        <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+            <div class="filter d-flex justify-content-between">
+                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter
+                </button> -->
+                <a href="" class="kt-subheader__breadcrumbs-link">{{eventID}} - {{eventName}}</a>
+                <div class="edit-event">
+                    <button type="button" [disabled]="disabledButton" *ngIf="!disabledButton" class="btn btn-primary" (click)="edit()"><i class="fa fa-plus"></i> {{"Add" | localize}} </button>
+                    <button type="button" [disabled]="disabledButton" *ngIf="!disabledButton && allowedDelete" class="btn btn-danger" (click)="deleteCommittee()"><i class="fa fa-times"></i> {{"Delete" | localize}} </button>
+                    <button *ngIf="!isEassesment" type="button" [disabled]="disabledButton" class="btn btn-primary" (click)="setAsRequired()"><i class="fa fa-plus"></i> {{"ChangeWitness" | localize}} </button>
+                    <!-- <button type="button" [disabled]="disabledButton" class="btn btn-primary" (click)="sendInvCommittee()"><i class="fa fa-mail-bulk"></i> {{"ReInvEmail" | localize}} </button> -->
+                </div>
+            </div>
+
+            <div class="table-data kt-margin-t-30">
+                <div class="kt-portlet kt-portlet--mobile">
+                  
+                    <div class="kt-portlet__head" *ngIf="isVendorDetail">
+                        <div class="kt-portlet__head-label">
+                            <span class="kt-portlet__head-icon">
+                                <i class="flaticon-file-2"></i>
+                            </span>
+                            <h3 class="kt-portlet__head-title">
+                                {{companyName}} 
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                           
+                                <ng-select style="width: 300px;" [(ngModel)]="selectedPaxMode" [items]="comboPaxMode" [closeOnSelect]="true"
+                                bindLabel="Remark" bindValue="Code" id="paxMode" name="paxMode"
+                                (change)="onPaxModeChange($event)">
+                                </ng-select>
+                               
+                           
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body  kt-padding-2">
+                        <div class="form-group">
+                            <!-- <committee-grid #committeegrid [campID]="campID"></committee-grid> -->
+                            <tabset #mainTabs class="tab-container tabbable-line">
+                                <tab heading="{{'Requester' | localize}}">
+                                    <div class="form-group">
+                                        <committee-grid #requestergrid [campID]="campID" [detail]="vendorDetailInfo" (onSelectedChange)="select($event)" (onDetailClick)="detailParticipant($event)"  [reviewerType]="requesterRole" [customParameter]="customParameter"></committee-grid>
+                                    </div>
+                                </tab>
+                                <tab heading="{{'Buyer' | localize}}">
+                                    <div class="form-group">
+                                        <committee-grid #commercialgrid [campID]="campID" [detail]="vendorDetailInfo" (onSelectedChange)="select($event)" (onDetailClick)="detailParticipant($event)" [reviewerType]="commercialRole" [customParameter]="customParameter"></committee-grid>
+                                    </div>
+                                </tab>
+                                <tab *ngIf="isEassesment && isWithHSE" heading="{{'HSE' | localize}}">
+                                    <div class="form-group">
+                                        <committee-grid #technicalgrid [campID]="campID" [reviewerType]="technicalRole" (onSelectedChange)="select($event)" [detail]="vendorDetailInfo" (onDetailClick)="detailParticipant($event)" [customParameter]="customParameter"></committee-grid>
+                                    </div>
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Content -->
+        <committeeListModal #committeeListModal (modalSave)="uploadComplete($event)"></committeeListModal>
+        <committeeInfoDetailModal #committeeInfoDetailModal (modalSave)="refresh()"></committeeInfoDetailModal>
+        
+    </div>
+<!-- </div> -->

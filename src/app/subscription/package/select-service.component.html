@@ -1,0 +1,75 @@
+<div bsModal #serviceModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="participantModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form *ngIf="active" #serviceForm="ngForm" novalidate> <!--(ngSubmit)="delete()">-->
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <span>{{"AddSubscription" | localize}}</span>
+                    </h5>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- <base-list #supplist [(gridUrl)]="gridURL" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="select($event)">
+                    </base-list> -->
+                    <div class="row" style="border-bottom: 1px solid #ebedf2;padding-bottom:15px;margin-bottom:15px;">
+                        <div class="col-md-4">
+                            <span style="color: #28961E;">1. {{"BrowseServices" | localize}}</span>
+                            <br>
+                            <span>{{"BrowseServiceDesc" | localize}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span style="color: #28961E;">2. {{"ViewDetail" | localize}}</span>
+                            <br>
+                            <span>{{"ViewDetailDesc" | localize}}</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span style="color: #28961E;">3. {{"ProceedToSubscribe" | localize}}</span>
+                            <br>
+                            <span>{{"ProceedToSubscribeDesc" | localize}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <ng-select class="kt-selectpicker" style="border: 2px solid #EDEFF3" [(ngModel)]="section" [items]="options" [closeOnSelect]="true"
+                                    bindLabel="Code" [searchable]="false" [clearable]="false" (change)="onServiceChange($event)">
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <h3 class="kt-portlet__head-title">{{item.Remark}}</h3>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item">
+                                        {{item.Remark}}
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-2">
+                            <a href="#" class="btn btn-wide btn-bold btn-font-sm kt-margin-r-10" style="background-color: #025EA8;border-radius: 5px; color: #ffffff"> Proceed
+                            </a>
+                        </div> -->
+                    </div>
+                    <div style="background-color: #EDEFF3">
+                        <div class="kt-container" style="padding: 15px 25px;">
+                            <div *ngIf="appId===undefined" class="row">
+                                <div class="col-md-2" style="text-align:center;font-size:50px;">
+                                    <i class="flaticon2-shopping-cart"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <span style="color: #393A3E">Description</span>
+                                    <br>
+                                    <span style="color: #393A3E">Designed to replace costly traditionalpurchasing process</span>
+                                    <br>
+                                    <span style="color: #393A3E">Replace tedious manual sourcing-procurement tasks with a platform that can be accessed anywhere</span>
+                                </div>
+                            </div>                            
+                            <div *ngIf="appId!==undefined" class="row">
+                                <select-package #servicepackage [appId]="appId" selectedIndex="0"></select-package>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

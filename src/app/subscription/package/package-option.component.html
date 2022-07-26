@@ -1,0 +1,295 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div [class]="containerClass">                
+                <div class="kt-subheader__main">
+              
+                    <h3 class="kt-subheader__title">
+                        <span>{{"MySubscription" | localize}}</span>
+                    </h3>
+                    <!-- <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"Service" | localize}}</span>
+                    </span> -->
+                </div>
+                <!-- <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn" style="background-color: #FF9332;color: #ffffff;" (click)="save()" [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 0 || checkData == 2 || checkData == 4">
+                            <i class="fa fa-search"></i>
+                            {{"BrowseService" | localize}}
+                        </button>
+                    </div>
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn btn-primary" (click)="update()" [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 1 || checkData == 3 || checkData == 5">
+                            <i class="fa fa-plus"></i>
+                            {{"AddSubscription" | localize}}
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="row col-lg-12 kt-margin-t-20">
+                <div class="col-md-8">
+                    <div class="kt-widget kt-widget--user-profile-1">
+                        <div class="kt-widget__head">
+                            <div class="kt-widget__media">
+                                <div class="kt-avatar" id="kt_user_avatar">
+                                    <div class="kt-avatar__holder" style="background-image: url(assets/dpl/images/Comp.png)"></div>
+                                    
+                                </div>
+                            </div>
+                            <div class="kt-widget__content">
+                                <div class="kt-widget__section">
+                                    <a href="#" class="kt-widget__username">
+                                        Procurement 
+                                        <!-- <i class="kt-font-success">Active</i> -->
+                                        <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill kt-badge--rounded kt-margin-l-20" style="border-radius: 5px; background-color: #28961E">Active</span>
+                                    </a>
+                                    <span class="kt-widget__subtitle">
+                                        Automatic your sourcing, purchasing, fulfillment & Invoicing
+                                    </span>
+                                    <div class="row kt-margin-t-20">
+                                        <div class="col-md-6">
+                                            <span class="kt-widget__subtitle">
+                                                Registration Date
+                                                <br>
+                                                01/02/2021
+                                            </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="kt-widget__subtitle">
+                                                Expired Date
+                                                <br>
+                                                01/02/2022
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row kt-block-center" id="edit">
+                        <button type="button" class="btn btn-primary btn-wide kt-block-center kt-margin-r-20" style="border-radius: 5px; background-color: transparent; border: 1px solid #AEAFB0; color: #6F6F6F">Start Service</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--tabs"  style="background-color: #EDEFF3; border-radius: 5px">
+                <div class="kt-portlet__head" style="border-bottom: 1px solid #AEAFB0;">
+                    <div class="kt-portlet__head-toolbar">
+                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-line-2x" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#kt_portlet_base_demo_1_2_tab_content" role="tab">
+                                    {{"SubscriptionPlan" | localize}}
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab">
+                                    Vendor Plan
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="kt_portlet_base_demo_1_2_tab_content" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="kt-portlet" style="border: 1px solid #EDEFF3; border-radius: 5px">
+                                        <div class="kt-portlet__body">
+                                            <h3 class="kt-font-bold kt-font-dark">Micro</h3>
+                                            <div class="kt-separator kt-margin-t-0 kt-margin-b-10" style=" border: 2px solid #28961E; width: 30px"></div>
+                                            <span class="kt-font-dark">Subscription rate</span>
+                                            <div class="kt-container kt-margin-t-20">
+                                                <h3 class="kt-font-dark kt-font-bold">RM<small class="kt-font-danger kt-font-bold" style="font-size: 1.75rem">0</small></h3>
+                                                <button (click)="selectPlan('1', 'Micro', 'Yearly', 0)" class="btn btn-block btn-sm btn-secondary text-white" style="border-radius: 5px; background-color: #025EA8;">Subscribe</button>
+                                            </div>
+                                            <div class="kt-widget1">
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">2 Named Users</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">100 vendor connections</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="fa fa-times" style="color: #6F6F6F"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">RFQ Sourching</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">RM1 / transaction  <br> <small>(or choosing Unlimited Transaction Plan)</small></p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="fa fa-times" style="color: #6F6F6F"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">No standard reports</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="kt-portlet" style="border: 1px solid #EDEFF3; border-radius: 5px">
+                                        <div class="kt-portlet__body">
+                                            <h3 class="kt-font-bold kt-font-dark">Small</h3>
+                                            <div class="kt-separator kt-margin-t-0 kt-margin-b-10" style=" border: 2px solid #28961E; width: 30px"></div>
+                                            <span class="kt-font-dark">Subscription rate</span>
+                                            <div class="kt-container kt-margin-t-20">
+                                                <h3 class="kt-font-dark kt-font-bold">RM<small class="kt-font-danger kt-font-bold" style="font-size: 1.75rem">500</small><small style="color: #6F6F6F; font-size: 1rem">/Year</small></h3>
+                                                <button (click)="selectPlan('2', 'Small', 'Yearly', 500)" class="btn btn-block btn-sm btn-secondary text-white" style="border-radius: 5px; background-color: #025EA8;">Subscribe</button>
+                                            </div>
+                                            <div class="kt-widget1">
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">5 Named Users</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">300 vendor connections</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">RFQ Sourching Included</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">RM1 / transaction  <br> <small>(or choosing Unlimited Transaction Plan)</small></p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="fa fa-times" style="color: #6F6F6F"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">No standard reports</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="kt-portlet" style="border: 1px solid #EDEFF3; border-radius: 5px">
+                                        <div class="kt-portlet__body">
+                                            <h3 class="kt-font-bold kt-font-dark">Medium</h3>
+                                            <div class="kt-separator kt-margin-t-0 kt-margin-b-10" style=" border: 2px solid #28961E; width: 30px"></div>
+                                            <span class="kt-font-dark">Subscription rate</span>
+                                            <div class="kt-container kt-margin-t-20">
+                                                <h3 class="kt-font-dark kt-font-bold">RM<small class="kt-font-danger kt-font-bold" style="font-size: 1.75rem">5,000</small><small style="color: #6F6F6F; font-size: 1rem">/Year</small></h3>
+                                                <button (click)="selectPlan('3', 'Medium', 'Yearly', 5000)" class="btn btn-block btn-sm btn-secondary text-white" style="border-radius: 5px; background-color: #025EA8;">Subscribe</button>
+                                                <span class="kt-font-dark">or RM2.500 with SME Digitalisation Grant</span>
+                                            </div>
+                                            <div class="kt-widget1">
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">8 Named Users</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">500 vendor connections</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">RFQ Sourching included</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">Unlimited Transaction</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">5 standard reports</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="kt-portlet" style="border: 1px solid #EDEFF3; border-radius: 5px">
+                                        <div class="kt-portlet__body">
+                                            <h3 class="kt-font-bold kt-font-dark">Enterprise</h3>
+                                            <div class="kt-separator kt-margin-t-0 kt-margin-b-10" style=" border: 2px solid #28961E; width: 30px"></div>
+                                            <span class="kt-font-dark">Subscription rate</span>
+                                            <div class="kt-container kt-margin-t-20">
+                                                <h3 class="kt-font-dark kt-font-bold">RM<small class="kt-font-danger kt-font-bold" style="font-size: 1.75rem">7,500</small><small style="color: #6F6F6F; font-size: 1rem">/Year</small></h3>
+                                                <button (click)="selectPlan('4', 'Enterprise', 'Yearly', 7500)" class="btn btn-block btn-sm btn-secondary text-white" style="border-radius: 5px; background-color: #025EA8;">Subscribe</button>
+                                                <span class="kt-font-dark">or RM6.000 with SME Digitalisation Grant</span>
+                                            </div>
+                                            <div class="kt-widget1">
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">10 Named Users</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">500 vendor connections</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">RFQ Sourching included</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">Unlimited Transaction</p>
+                                                </div>
+                                                <div class="kt-widget1__item" style="border-bottom: 1px solid #EDEFF3">
+                                                    <div class="kt-widget1__info">
+                                                        <h5 class="kt-widget1__tittle"><i class="flaticon2-check-mark" style="color: #28961E"></i></h5>
+                                                    </div>
+                                                    <p class="kt-font-bold kt-align-right">10 standard reports</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="kt_portlet_base_demo_1_3_tab_content" role="tabpanel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- end:: Content -->
+    </div>
+</div>
+<!-- <previewBillingModal #previewBillingModal></previewBillingModal> -->

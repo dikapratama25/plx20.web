@@ -1,0 +1,25 @@
+<div bsModal #previewBillingModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="previewBillingModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div id="previewModal" class="modal-content">
+        <div class="modal-header">
+           <h4 class="modal-title">
+               <span>{{"Preview" | localize}}</span>
+           </h4>
+            <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div id="previewBody" class="modal-body noUlLine">
+            <div id="imgPreviewWrp" *ngIf="extensionFile != '.pdf'">
+                <img [attr.src]="url" class="imgInvoice"/>
+            </div>
+            <div  class="container" *ngIf="extensionFile == '.pdf'">
+                <iframe id="previewUpload" [attr.src]="url" class="responsive-iframe"></iframe>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+

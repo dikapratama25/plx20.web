@@ -1,0 +1,149 @@
+:root{
+    --contrastMain : #007eff;
+}
+
+body{
+    margin:0;
+}
+
+*:active,*:focus{
+    outline-color:var(--orangeUnify);
+    }
+    [type="submit"]{
+    outline: none;
+    }
+    body{
+    font-family: poppins;
+    font-size: 15px;
+    padding:0;
+    margin:0;
+    }
+    .displayFlex{
+    display: flex;
+    }
+    #offerContent{
+    width:100%;
+    max-width: 500px;
+    }
+    .marginAuto{
+    margin:auto;
+    max-width: 500px;
+    }
+    body{
+    margin:0;
+    padding:0;
+    }
+    .item{
+    position: relative;
+    }
+    .learnMoreWrp{
+    position: absolute;
+    bottom:20px;
+    width:calc(100% - 20px);
+    left:10px;
+    }
+    .learnMoreWrp a{
+    display:block;
+    width: 100%;
+    padding:15px 0;
+    text-align: center;
+    background-color: rgb(0, 141, 141);
+    border-radius: 20px;
+    color:#fff !important;
+    text-decoration: none !important;
+    }
+    .sectionImg{
+    position: relative;
+    padding: 0;
+    box-sizing: border-box;
+    margin-bottom: -6px;
+    }
+    #joinDatabase,#rentNow{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    /* background-color: green; */
+    }
+    #rentNow,.red{
+    /* background-color: red; */
+    }
+    .blue{
+    /* background-color: blue; */
+    }
+    .yellow{
+    /* background-color: yellow; */
+    }
+    #wrpLinkLead2 > div{
+    flex:1;
+    }
+    [id^="boxIQOS"]{
+    flex-direction: column;
+    }
+    [id^="boxIQOS"] > a{
+    display: block;
+    flex:1;
+    width:100%;
+    }
+    [id^="boxIQOS4"]{
+    bottom:0;left:0;
+    width:100%;
+    height: 100%;
+    position: absolute;
+    }
+    [id^="boxIQOS4"] > a {
+    flex:none;
+    }
+    #showPopUp{
+    position: absolute;
+    width: 100%;
+    max-width: 500px;
+    min-height: 100vh;
+    background-color: #fff;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    }
+    #viewContent{
+    width: 100%;
+    height: 100vh;
+    border: none;
+    }
+    #closePopUp{
+    position: absolute;
+    top:0;
+    right:20px;
+    color:#000;
+    font-weight: 600;
+    z-index: 2;
+    padding: 5px 15px;
+    }
+    #layerPopUp{
+    display: none;
+    position: fixed;
+    width:100%;
+    min-height: 100vh;
+    z-index: 1;
+    }
+    #popUpWrp{
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    }
+    .sectionImg > img{
+    width:100%;
+    }
+/*------------------- standard to hide unecessary elements ----------------------*/
+#kt_login > div:first-child > div:first-child,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__signup-label,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__head
+{
+    display: none;
+}
+#kt_login > div:first-child > div:nth-child(2){
+    padding:0;
+}
+/*-------------------- End -------------------------------------------------------*/

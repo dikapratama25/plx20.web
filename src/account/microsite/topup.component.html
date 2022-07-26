@@ -1,0 +1,90 @@
+<div [@routerTransition]>
+    <form #topUpForm="ngForm" class="kt-form" method="post" novalidate (ngSubmit)="topUpOnSubmit(0)">
+        <div id="voucerDetail" class="maxWrp">
+            <div id="bannerSection">
+                <img src="assets/common/images/topup/Camp Ms.png"/>
+            </div>
+            <div id="voucherHeader">
+                <div id="titleVoucher">Get MYR 10.00 on prepaid reload</div>
+            </div>
+            <div id="howToClaim">
+                <div class="small_Separator"></div>
+                <h2>How to Redeem</h2>
+                <p>(For the first 5,000 Users)</p>
+                <div id="voucherSteps">
+                    <ul>
+                        <li>
+                            <div class="stepBlock displayFlex">
+                                <div class="iconWrp">
+                                    <img src="assets/common/images/topup/register.png"/></div>
+                                    <div class="textDesc">
+                                        <div>Step 1:</div>
+                                        <div class="stepTxt">Register with a valid phone number</div>
+                                    </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="stepBlock displayFlex">
+                                <div class="iconWrp"><img src="assets/common/images/topup/select_service_provider.png"/></div>
+                                <div class="textDesc">
+                                    <div>Step 2:</div>
+                                    <div class="stepTxt">Select Service Provider</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="stepBlock displayFlex">
+                                <div class="iconWrp"><img src="assets/common/images/topup/confirm_mobile.png" /></div>
+                                <div class="textDesc">
+                                    <div>Step 3:</div>
+                                    <div class="stepTxt">Confirm Redemtion</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="formData">
+                <div class="rowInput">
+                    <!-- {{ inputHelper.phoneNum }} -->
+                    <div class="labelInput">Phone Number</div>
+                    <input type="text" #mobilePhone name="mobilePhone"
+                     id="mobilePhone" [(ngModel)]="inputProfile.MobileNo"
+                     (input)="inputMobilePhoneNumberOnChange()"
+                     placeholder="(e.g 60123456789)"
+                     [disabled]="isSelectServiceProviderInactive" required/>
+                </div>
+                <!-- <div id="phnNum">{{ inputProfile.MobileNo }}</div> -->
+                <div id="rewardAmt">MYR 10.00</div>
+                <div class="rowInput">
+                    <div class="labelInput">Service Provider</div>
+                    <select #providerName name="providerName" id="providerName"
+                    [(ngModel)]="inputHelper.ServiceProvider" (change)="comboServiceProviderOnChange()"
+                    [disabled]="isSelectServiceProviderInactive" required>
+                        <option value="-" disabled>Please select one</option>
+                        <option *ngFor="let serviceProvider of serviceProviders"
+                        [value]="serviceProvider.ID" [attr.data-live-search]="true">
+                            {{ serviceProvider.Name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="rowInput">
+                    <div id="promoPeriod">
+                        <div class="labelInput promoEnd"><span>Campaign end: </span><span>{{ promoDueDate }}</span> </div>
+                    </div>
+                </div>
+                <div class="rowInput"><div class="emphasisText">*Term and condition applied</div></div>
+                <div class="rowInput">
+                    <button id="btnReward" type="submit" class="btnReward" [disabled]="isBtnRewardInactive">{{ btnRewardLabel }}</button>
+                </div>
+            </div>
+            <div *ngIf="!isReedemed" id="footerT_C">
+                <ol id="tcReward">
+                    <li>Welcome to the Eshare App (the “Platform”). These Terms of Service govern your access and use of the Platform  and the use of any services, functions, information made available to you. Please read the following Terms of Service carefully before using this Site or registering a Eshare account ("Account") so that you are aware of your legal rights and obligations with respect to ESHARE SDN.BHD (Company Registration No. 202101008491 [1408790-W]) and its affiliates and subsidiaries (individually and collectively,  "we", "us" or "our"). The "Services" we provide or make available include (a) the Site, (b) the services provided by the Site and software made available through the Site, and (c) all information, linked pages, features, data, text, images, photographs, graphics, music, sounds, video (including live streams), messages, tags, content, programming, software, application services (including, without limitation, any mobile application services) or other materials made available through the Site or its related services ("Content"). Any new features added to or augmenting the Services are also subject to these Terms of Service. These Terms of Service govern your use of Services provided by Eshare. If you do not agree to Eshare Terms and Conditions, do not access and/or use this Platform and/or the Services.</li>
+                    <li>The Services include an online platform service that provides a place and opportunity for the sale of goods between the Buyer/Subscriber (“Buyer/Subscriber”) and the Biz Partner  (“Seller”) (collectively “you”, “Users” or “Parties”). The actual contract for sale is directly between Buyer/Subscriber and Seller and Eshare is not a party to that or any other contract between Buyer/Subscriber  and Biz Partner and Eshare strictly accepts no obligations in connection with any such contract. Parties to such transaction will be entirely responsible for the sales contract between them, the listing of goods, warranty of purchase and the like. Eshare is not involved in the transaction between Users. Eshare may or may not pre-screen Users or the Content or information provided by Users. ESHARE SDN. BHD reserves the right to remove any Content or information posted by you on the from time to time.</li>
+                    <li>Before becoming a User of the Site, you must read and accept all of the terms and conditions in, and linked to, these Terms of Service and you must consent to the processing of your personal data as described in the Privacy Policy set out at Eshare.</li>
+                </ol>
+            </div>
+        </div>
+    </form>
+</div>

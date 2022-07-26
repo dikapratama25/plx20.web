@@ -1,0 +1,27 @@
+<div bsModal #popupMessageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="popupMessageModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg" style="width: 400px;">
+        <div class="modal-content">
+            <form *ngIf="active" #editionForm="ngForm" novalidate (ngSubmit)="accept()">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="text-align: center;">
+                    <span class="fa fa-info" style="font-size: 30px;"></span>
+                    <h3 class="modal-title">
+                        <span>{{poptitle | localize}}</span>
+                    </h3>
+                    <h5>
+                        <span>{{popmessage | localize}}</span>
+                    </h5>
+                </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="submit" class="btn btn-primary" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')">{{"Accept" | localize}}</button>
+                    <button type="button" class="btn btn-danger" (click)="decline()">{{"Decline" | localize}}</button>
+                    <button type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

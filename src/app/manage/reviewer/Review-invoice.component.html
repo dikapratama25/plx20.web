@@ -1,0 +1,237 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+        <div [class]="containerClass">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                    <span>Review</span>
+                </h3>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="app/workorder/workorder" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">
+                        Invoice
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div style="font-size: 1.1em;color: #000;">FRIDAY</div>
+            <div style="font-size: 1.3em;font-weight: 500;color: #000;">13/11/2020</div>
+        </div>
+    </div>
+    <div class="row statBlock">
+        <div class="col-lg-3">
+            <div class="smallText">Open for last 7 days</div>
+            <div class="kt-portlet ">
+                <div class="kt-portlet__head btn-primary">
+                    <div class="kt-portlet__head-label displayFlex">
+                        <div class="kt-portlet__head-title">
+                            <h5>Open</h5>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <span class="ctrVal">2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body hideThis"></div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-lg-12"><div class="smallText">Today Statistic</div></div>
+                <div class="col-xl-3">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__head ">
+                            <div class="kt-portlet__head-label displayFlex">
+                                <div class="kt-portlet__head-title">
+                                    <h5>Total Invoice</h5>
+                                </div>
+                                <div class="kt-portlet__head-toolbar">
+                                    <span class="ctrVal">20</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body hideThis"></div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="kt-portlet ">
+                        <div class="kt-portlet__head btn-primary">
+                            <div class="kt-portlet__head-label displayFlex">
+                                <div class="kt-portlet__head-title">
+                                    <h5>Open</h5>
+                                </div>
+                                <div class="kt-portlet__head-toolbar">
+                                    <span class="ctrVal">6</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body hideThis"></div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="kt-portlet ">
+                        <div class="kt-portlet__head btn-success">
+                            <div class="kt-portlet__head-label displayFlex">
+                                <div class="kt-portlet__head-title">
+                                    <h5>Approved</h5>
+                                </div>
+                                <div class="kt-portlet__head-toolbar">
+                                    <span class="ctrVal">10</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body hideThis"></div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="kt-portlet ">
+                        <div class="kt-portlet__head btn-danger">
+                            <div class="kt-portlet__head-label displayFlex">
+                                <div class="kt-portlet__head-title">
+                                    <h5>Rejected</h5>
+                                </div>
+                                <div class="kt-portlet__head-toolbar">
+                                    <span class="ctrVal">4</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body hideThis"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head hideThis">
+                    <div class="kt-portlet__head-label">
+                        <div class="kt-portlet__head-title"></div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="kt-section">
+                        <span class="kt-section__info">
+                            <div class="form-group form-group-last">
+                                <div class="alert alert-secondary" role="alert">
+                                    <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                      <div class="alert-text">There are Open invoice reviews for the past 7 days. Please review and adjust</div>
+                                </div>
+                            </div>
+                        </span>
+                        <div class="kt-section__content">
+                            <div class="displayFlex" style="justify-content: space-between;"> 
+                                <div class="displayFlex"><i class="flaticon2-down"></i><p style="margin-left:5px">Advance Search</p></div>
+                                <div class="kt-input-icon kt-input-icon--right" style="width:300px">
+                                    <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                                    <span class="kt-input-icon__icon kt-input-icon__icon--right">
+                                        <span><i class="la la-search"></i></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                   <tr>
+                                      <th>#</th>
+                                      <th>Status</th>
+                                      <th>Vendor Name</th>
+                                      <th>Invoice No</th>
+                                      <th>Created Date</th>
+                                      <th>Due Date</th>
+                                   </tr>
+                                </thead>
+                                <tbody>
+                                   <tr style="background-color: #fff8a4;">
+                                      <th scope="row">1</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>ASTC Sdn Bhd</td>
+                                      <td>INV111201</td>
+                                      <td>26/10/2020</td>
+                                      <td>10/11/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">2</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>ASTC Sdn Bhd</td>
+                                      <td>INV111202</td>
+                                      <td>03/11/2020</td>
+                                      <td>03/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">3</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>Victory Sunset Sdn Bhd</td>
+                                      <td>INV111223</td>
+                                      <td>08/11/2020</td>
+                                      <td>08/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">4</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>BDS Sdn Bhd</td>
+                                      <td>INV111221</td>
+                                      <td>09/11/2020</td>
+                                      <td>09/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">5</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>Victory Sunset Sdn Bhd</td>
+                                      <td>INV111220</td>
+                                      <td>09/11/2020</td>
+                                      <td>09/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">6</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>Victory Sunset Sdn Bhd</td>
+                                      <td>INV111221</td>
+                                      <td>09/11/2020</td>
+                                      <td>09/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">7</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>ASTC Sdn Bhd</td>
+                                      <td>INV111301</td>
+                                      <td>09/11/2020</td>
+                                      <td>08/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">8</th>
+                                      <td><span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill">Open</span></td>
+                                      <td>BDS Sdn Bhd</td>
+                                      <td>INV111311</td>
+                                      <td>09/11/2020</td>
+                                      <td>08/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">9</th>
+                                      <td><span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill">Approved</span></td>
+                                      <td>CCSV Sdn Bhd</td>
+                                      <td>INV112301</td>
+                                      <td>09/11/2020</td>
+                                      <td>08/12/2020</td>
+                                   </tr>
+                                   <tr>
+                                      <th scope="row">10</th>
+                                      <td><span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill">Approved</span></td>
+                                      <td>BDS Sdn Bhd</td>
+                                      <td>INV112321</td>
+                                      <td>08/11/2020</td>
+                                      <td>09/12/2020</td>
+                                   </tr>
+                                </tbody>
+                             </table>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

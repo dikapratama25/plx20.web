@@ -1,0 +1,168 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <button type="button" style="margin-right:15px;" (click)="back()" *ngIf="type === 1"
+                        class="btn btn-outline-metal back"><i
+                            class="fa fa-arrow-left"></i>{{"Back" | localize}}</button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Gallery" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        {{"GallerySubTitle" | localize}}
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button *ngIf="isGranted('Pages.Event.Channel.Gallery.Upload') && type === 0" type="button"
+                            class="btn {{uploadFormAreShown ? 'btn-outline-warning' : 'btn-outline-success'}}"
+                            (click)="uploadFormAreShown=!uploadFormAreShown">
+                            <i class="fa {{uploadFormAreShown ? 'fa-times' : 'fa-plus'}}"></i>
+                            {{uploadFormAreShown ? "Cancel": "UploadImage" | localize}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="uploadFormAreShown" [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="col-sm-12 kt-padding-t-10 kt-padding-b-10">
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{"DimensionType" | localize}}</label>
+                                        <select #dimensionTypeCombobox name="dimensionType" id="dimensionType"
+                                            class="form-control" [(ngModel)]="dimensionType"
+                                            (change)="onDimensionTypeChanged()" [attr.data-live-search]="true">
+                                            <option *ngFor="let data of dataDimensionType" [value]="data">
+                                                {{data | uppercase}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{"Dimension" | localize}} (Width x Height)</label>
+                                        <select #dimensionCombobox name="dimension" id="dimension" class="form-control"
+                                            [(ngModel)]="dimension" (change)="onDimensionChanged()"
+                                            [attr.data-live-search]="true">
+                                            <option *ngFor="let data of dataDimensionListFiltered" [value]="data.Code">
+                                                {{data.CodeRemark | uppercase}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label>{{"MaxSize" | localize}}</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="number" name="MaxSize"
+                                                [(ngModel)]="maxSize" [disabled]="true">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon2">
+                                                    KB
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <uploader uploadType="image" (onUploadData)="uploadAll($event)" (onUploadAll)="uploadAll($event)"></uploader> -->
+
+                            <file-upload [APIUrl]="APIUrl" [accept]="accept" [maxFileSize]="maxSizeByte"
+                                (onUpload)="uploadAll($event)"></file-upload>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <!-- <div class="kt-portlet__body"> -->
+                <div class="col-sm-12 kt-padding-t-10 kt-padding-b-10">
+                    <!-- <span class="clickable-item text-muted" *ngIf="!uploadFormAreShown"
+                            (click)="uploadFormAreShown=!uploadFormAreShown">
+                            <i class="fa fa-angle-down"></i>
+                            {{"ShowUploadForm" | localize}}
+                        </span> -->
+                    <!-- <span class="clickable-item text-muted" *ngIf="uploadFormAreShown"
+                            (click)="uploadFormAreShown=!uploadFormAreShown">
+                            <i class="fa fa-angle-up"></i>
+                            {{"HideUploadForm" | localize}}
+                        </span> -->
+
+                    <div class="row" *ngIf="isGranted('Pages.Event.Channel.Gallery.Upload')">
+                        <div class="col-md-9">
+                            <div class="row" *ngIf="listType === 0">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{"DimensionType" | localize}}</label>
+                                        <select #dimensionTypeFilterCombobox name="dimensionTypeFilter"
+                                            id="dimensionTypeFilter" class="form-control"
+                                            [(ngModel)]="dimensionTypeFilter" (change)="refresh()"
+                                            [attr.data-live-search]="true">
+                                            <option *ngFor="let data of dataDimensionTypeFilter" [value]="data">
+                                                {{data | uppercase}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="listType === 1">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="text-align: right" *ngIf="isGranted('Pages.Event.Channel.Gallery.Upload')">
+                            <div class="" *ngIf="type === 0">
+                                <button type="button" class="btn {{listStyle}}" style="display: inline-block"
+                                    (click)="setListButtonStyle(0)"><i class="fa fa-list-ul"></i>
+                                    {{"List" | localize}}</button>
+                                <button type="button" class="btn {{gridStyle}}" style="display: inline-block"
+                                    (click)="setListButtonStyle(1)"><i class="fa fa-th-large"></i>
+                                    {{"Grid" | localize}}</button>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-3" style="text-align: right" *ngIf="isGranted('Pages.Event.Channel.Subscribe')">
+                            <div class="">
+                                <button type="button" class="btn {{gridStyle}}" style="display: inline-block"
+                                    (click)="setListButtonStyleA()"><i class="fa fa-th-large"></i>
+                                    {{"Grid B" | localize}}</button>
+                            </div>
+                        </div> -->
+                        <!-- <div class="col-md-3" style="text-align: right">
+                            <div class="" *ngIf="type === 0 && campaignNo === undefined">
+                                <button type="button" class="btn {{listStyle}}" style="display: inline-block"
+                                    (click)="setListButtonStyle(0)"><i class="fa fa-list-ul"></i>
+                                    {{"List" | localize}}</button>
+                                <button type="button" class="btn {{gridStyle}}" style="display: inline-block"
+                                    (click)="setListButtonStyle(1)"><i class="fa fa-th-large"></i>
+                                    {{"Grid" | localize}}</button>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div *ngIf="isGranted('Pages.Event.Channel.Gallery.Upload')">
+                    <div class="col-sm-12" *ngIf="listType === 0">
+                        <base-list #baseList [(gridUrl)]="galleryUrl" [enableFilter]="false" actionColumn="action"
+                            [permissionEdit]="permissionEdit" (onEditClick)="edit($event)"
+                            [permissionDelete]="permissionDelete" (onDeleteClick)="delete($event)"></base-list>
+                    </div>
+                    <div class="col-sm-12" *ngIf="listType === 1">
+                        <gallery #gallery [(galleryUrl)]="galleryUrl" [selectMode]="selectMode"
+                            (onSelectClick)="selectWebsite($event)"></gallery>
+                    </div>
+                </div>
+                <div *ngIf="isGranted('Pages.Event.Channel.Subscribe')">
+                    <div class="col-sm-12">
+                        <gallery #gallery [(galleryUrl)]="galleryUrl" [selectMode]="selectMode"
+                            (onSelectClick)="selectWebsite($event)"></gallery>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<selectBranchModal #selectBranchModal></selectBranchModal>
+<createOrEditEventGalleryModal #createOrEditEventGalleryModal (modalSave)="refresh()">
+</createOrEditEventGalleryModal>

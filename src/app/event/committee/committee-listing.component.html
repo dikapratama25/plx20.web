@@ -1,0 +1,119 @@
+<div bsModal #committeeModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="participantModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #committeeForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <span *ngIf="eventMode !== 'Evaluation'">{{"AddEditCommittee" | localize}}</span>
+                        <span *ngIf="eventMode === 'Evaluation'">{{"AddEditEvaluator" | localize}}</span>
+                    </h5>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <tabset *ngIf="eventMode !== 'Evaluation'" #mainTabs class="tab-container tabbable-line">
+                        <tab heading="{{'Commercial' | localize}}">
+                            <div class="form-group">
+                                <base-list #commercialBaseList [(gridUrl)]="commercialUrl" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="selectCommercial($event)">
+                                </base-list>
+                            </div>
+                        </tab>
+                        <tab heading="{{'Technical' | localize}}">
+                            <div class="form-group">
+                                <base-list #technicalBaseList [(gridUrl)]="technicalUrl" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="selectTechnical($event)">
+                                </base-list>
+                            </div>
+                        </tab>
+                    </tabset>
+                    <tabset *ngIf="eventMode === 'Evaluation'" #mainTabs class="tab-container tabbable-line">
+                        <tab heading="{{'Requester' | localize}}">
+                            <div class="form-group">
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-3 form-group">
+                                        <label for="name" class="control-label">{{'POno'|localize}}</label>
+                                        <input [(ngModel)]="poNoRequester" name="poNo" id="poNo" type="text" class="form-control" disabled>
+                                    </div>
+                                    <div class="col-5 form-group">
+                                        <label for="name" class="control-label">{{'Vendor'|localize}}</label>
+                                        <ng-select [(ngModel)]="selectedRequesterVendor" 
+                                        [disabled]="isVendorSelectDisabled" [items]="comboRequestedVendor" [closeOnSelect]="true"
+                                            bindLabel="Remark" bindValue="Code" id="requesterVendor" name="requesterVendor" placeholder="{{'PleaseSelectVendor' | localize}}"
+                                            (change)="onRequesterVendorChange($event)">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.Remark}} <br/>
+                                                <small>{{'AssignedParticipant' | localize}}: {{item.TotalAssigned}}</small>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                    <div class="col-4 form-group">
+                                        <label for="name" class="control-label">{{'Type'|localize}}</label>
+                                        <ng-select [(ngModel)]="selectedPaxMode" [disabled]="true"  [items]="comboPaxMode" [closeOnSelect]="true"
+                                            bindLabel="Remark" bindValue="Code" id="paxMode" name="paxMode"
+                                            (change)="onPaxModeChange($event)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <base-list #requesterBaseList [(gridUrl)]="requesterUrl" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="selectRequester($event)">
+                                </base-list>
+                            </div>
+                        </tab>
+                        <tab heading="{{'Buyer' | localize}}">
+                            <div class="form-group">
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-3 form-group">
+                                        <label for="name" class="control-label">{{'POno'|localize}}</label>
+                                        <input [(ngModel)]="poNoBuyer" name="poNoSecond" id="poNoSecond" type="text" class="form-control" disabled>
+                                    </div>
+                                    <div class="col-5 form-group">
+                                        <label for="name" class="control-label">{{'Evaluator'|localize}}</label>
+                                        <ng-select [(ngModel)]="selectedBuyerVendor" [disabled]="isVendorSelectDisabled" [items]="comboBuyerVendor" [closeOnSelect]="true"
+                                            bindLabel="Remark" bindValue="Code" id="buyerVendor" name="buyerVendor" placeholder="{{'PleaseSelectVendor' | localize}}"
+                                            (change)="onBuyerVendorChange($event)">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.Remark}} <br/>
+                                                <small>{{'AssignedParticipant' | localize}}: {{item.TotalAssigned}}</small>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <base-list #commercialBaseList [(gridUrl)]="commercialUrl" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="selectCommercial($event)">
+                                </base-list>
+                            </div>
+                        </tab>
+                        <tab *ngIf="isWithHSE" heading="{{'HSE' | localize}}">
+                            <div class="form-group">
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-3 form-group">
+                                        <label for="name" class="control-label">{{'POno'|localize}}</label>
+                                        <input [(ngModel)]="poNoHSE" name="poNoThird" id="poNoThird" type="text" class="form-control" disabled>
+                                    </div>
+                                    <div class="col-5 form-group">
+                                        <label for="name" class="control-label">{{'Evaluator'|localize}}</label>
+                                        <ng-select [(ngModel)]="selectedHSEVendor" [disabled]="isVendorSelectDisabled" [items]="comboHSEVendor" [closeOnSelect]="true"
+                                            bindLabel="Remark" bindValue="Code" id="hseVendor" name="hseVendor" placeholder="{{'PleaseSelectVendor' | localize}}"
+                                            (change)="onHSEVendorChange($event)">
+                                            <ng-template ng-option-tmp let-item="item">
+                                                {{item.Remark}} <br/>
+                                                <small>{{'AssignedParticipant' | localize}}: {{item.TotalAssigned}}</small>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <base-list #technicalBaseList [(gridUrl)]="technicalUrl" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="selectTechnical($event)">
+                                </base-list>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        (click)="close()">{{"Cancel" | localize}}</button>
+                    <button type="submit" class="btn btn-primary"
+                        [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+                        <span>{{"Save" | localize}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

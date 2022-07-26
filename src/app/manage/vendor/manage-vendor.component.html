@@ -1,0 +1,105 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+               
+                <div class="kt-subheader__main">
+                   
+                    <h3 class="kt-subheader__title">
+                        <span>{{ title }}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"VendorManagement" | localize}}</span>
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button *ngIf="(type == '1' && isGranted(permissionAddVendor)) || (type == '2' && isGranted(permissionAddCustomer))" (click)="update()" class="btn btn-primary">
+                            <i class="fa fa-plus"></i> {{"AddVendor" | localize}}
+                        </button>
+                        <!-- <button (click)="refresh()" *ngIf="isGranted(permissionView)"
+                                [disabled]="disableRefresh" class="btn btn-primary">
+                            <i class="fa flaticon-refresh"></i> {{"Refresh" | localize}}
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body" *ngIf="type == '1'">
+                    <base-list #baselistVendor [(gridUrl)]="gridUrl" [enableFilter]="true" actionColumn="action"
+                    [permissionEdit]="permissionEditVendor" (onEditClick)="editVendor($event)" [filterTemplate]="filterVendor"
+                    [permissionDelete]="permissionDeleteVendor" (onDeleteClick)="deleteVendor($event)">
+                        <!-- <view-container [template]="filter1"></view-container> -->
+                    </base-list>
+                    <ng-template #filterVendor>
+                        <div class="row filterContent">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <label class="col-form-label">{{"CompanyName" | localize}}</label>
+                                <ng-select [(ngModel)]="selectedVendor" [items]="comboVendor" [closeOnSelect]="true" bindValue="Parent" bindLabel="Remark" (change)="refreshFilter($event)">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <label class="col-form-label">{{"Country" | localize}}</label>
+                                <ng-select [(ngModel)]="selectedCountry" [items]="comboCountryName" [closeOnSelect]="true" bindValue="Code" bindLabel="Remark" (change)="refreshFilter($event)">
+                                </ng-select>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+
+                <div class="kt-portlet__body" *ngIf="type == '2'">
+                    <base-list #baselistCustomer [(gridUrl)]="gridUrl" [enableFilter]="true" actionColumn="action"
+                    [permissionEdit]="permissionEditCustomer" (onEditClick)="editCustomer($event)"
+                    [permissionDelete]="permissionDeleteCustomer" (onDeleteClick)="deleteCustomer($event)">
+                        <!-- <view-container [template]="filter1"></view-container> -->
+                    </base-list>
+                    <!-- <ng-template #filter1>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                    <div class="form-group m-form__group">
+                                        <label>{{"Affiliate" | localize}}</label>
+                                        <div>
+                                            <ng-select [(ngModel)]="selectedVendor" [items]="companyCombo" [closeOnSelect]="true"
+                                                bindLabel="Remark" placeholder="{{'AffiliatePlaceholder' | localize}}"
+                                                (change)="onCompanyChange($event)">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="col-sm-4 fullForm">
+                                <div class="" style="white-space: nowrap;">
+                                    <div class="labelMatrix">{{"Campaign" | localize}}</div>
+                                    <div class="valueMatrix">
+                                        <ng-select id="customerSelect" style="margin: 0;padding: 5px 0px 0px;" [(ngModel)]="SelectedCampaign"
+                                            [items]="campaignCombo" [closeOnSelect]="true" bindLabel="Description" placeholder="{{'CampaignPlaceholder' | localize}}"
+                                            (change)="onCampaignChange($event)">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 fullForm">
+                                <div class="" style="white-space: nowrap;">
+                                    <div class="dateTime" style="white-space: nowrap;">
+                                        <div class="labelMatrix">{{"Category" | localize}}</div>
+                                        <div class="valueMatrix">
+                                            <ng-select id="typeSelect" style="margin: 0;padding: 5px 0px 0px;"  [(ngModel)]="selectedCategoryType"
+                                                [items]="typeCombo" [closeOnSelect]="true" bindLabel="CodeDesc" bindValue="Code" placeholder="{{'CategoryPlaceholder' | localize}}"
+                                                (change)="onCategoryChange($event)">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<addVendorModal #addVendorModal (modalSave)="saveItem()"></addVendorModal>
+<editVendorCustomerModal #editVendorCustomerModal (modalSave)="reloadItem()"></editVendorCustomerModal>

@@ -1,0 +1,583 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <button type="button" style="margin-right:15px;" (click)="back()"
+                            class="btn btn-outline-metal back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{ title }}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{ subTitle }}</span>
+                    </span>
+                </div>
+
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn btn-success" (click)="save()" [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 0 || checkData == 2 || checkData == 4">
+                            <i class="far fa-save"></i>
+                            {{"Save" | localize}}
+                        </button>
+                    </div>
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn btn-success" (click)="update()" [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 1 || checkData == 3 || checkData == 5">
+                            <i class="far fa-save"></i>
+                            {{"Update" | localize}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body">
+                    <div class="portletPage">
+                        <form #campaignForm="ngForm" novalidate>
+                            <div id="voucherHeaderForm" class="">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"EventID" | localize}}</label>
+                                            </div>
+                                            <div class="campIDVal">
+                                                <input class="form-control" type="text" name="eventid" [value]="inputHelper.EventID" [disabled]="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"DocumentNo" | localize}}</label>
+                                            <input class="form-control" #Documentno="ngModel" type="text" name="documentno" [(ngModel)]="inputHelper.DocumentNo" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="Documentno"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"EventMode" | localize}}</label>
+                                                <select #EventTypeComboBox
+                                                        required
+                                                        [disabled]="inputHelper.EventStatus == 3"
+                                                        name="eventtype"
+                                                        id="eventtype"
+                                                        class="form-control"
+                                                        [(ngModel)]="inputHelper.EventType"
+                                                        (change)="eventTypeChange()"
+                                                        [attr.data-live-search]="true">
+                                                    <option *ngFor="let data of dataEventType" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-md-6" *ngIf="!isPOEvaluation">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"NameEvent" | localize}}</label>
+                                            <input class="form-control" #Name="ngModel" type="text" name="Title" [(ngModel)]="inputHelper.nameTitle" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="Name"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="!isPOEvaluation">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-6" *ngIf="checkData == 4 || checkData == 5">
+                                        <div class="form-group">
+                                            <div class="campIDLbl">
+                                                <div class="kt-checkbox-list">
+                                                    <label class="kt-checkbox">
+                                                        <input type="checkbox" (change)="selectHSE(withHSE)" [checked]="withHSE" [disabled]="inputHelper.EventStatus == 3">
+                                                        {{"IncludeHSE" | localize}}
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-md-4" *ngIf="isPOEvaluation">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"NameEvent" | localize}}</label>
+                                            <input class="form-control" #Name="ngModel" type="text" name="Title" [(ngModel)]="inputHelper.nameTitle" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="Name"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" *ngIf="isPOEvaluation">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"TransactionPercentage" | localize}}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" aria-describedby="basic-addon3" #TransactionPercentage="ngModel" type="number" name="TransactionPercentage" [(ngModel)]="inputHelper.TransactionPercentage" required [disabled]="inputHelper.EventStatus == 3">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon3">{{"%" | localize}}</span>
+                                                </div>
+                                            </div>
+                                            <validation-messages [formCtrl]="TransactionPercentage"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5" *ngIf="isPOEvaluation">
+                                        <label class="required">{{"TransactionPeriod" | localize}}</label>
+                                        <div class="input-daterange input-group">
+                                            <div class="form-group">
+                                                <p-calendar (onSelect)="selectPlannedBidStart($event)" [(ngModel)]="datePlannedBidStart" name="xx" [minDate]="transactionMinDate" [showTime]="true" [required] [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                            </div>
+
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" style="height: 35px;">
+                                                    <i class="la la-ellipsis-h"></i>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <p-calendar (onSelect)="selectPlannedBidEnd($event)" [(ngModel)]="datePlannedBidEnd" name="yy" [minDate]="inputHelper.PlannedBidStartTime" [showTime]="true" [required] [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" *ngIf="checkData == 2 || checkData == 3">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"Owner" | localize}}</label>
+                                            <input class="form-control" #owner="ngModel" type="text" name="owner" [(ngModel)]="inputHelper.Owner" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="owner"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"Description" | localize}}</label>
+                                            <textarea class="form-control" #description="ngModel" type="text" name="TitleDescription" [(ngModel)]="inputHelper.Description" required [disabled]="inputHelper.EventStatus == 3"></textarea>
+                                            <validation-messages [formCtrl]="description"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="checkData == 4 || checkData == 5">
+                                        <div class="form-group">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"QuestionSet" | localize}}</label>
+                                                <select #QuestionComboBox
+                                                        name="Question"
+                                                        id="Question"
+                                                        [disabled]="inputHelper.EventStatus == 3"
+                                                        class="form-control"
+                                                        (change)="populateQuestionItem()"
+                                                        [(ngModel)]="selectedQuestion"
+                                                        [attr.data-live-search]="true">
+                                                    <option *ngFor="let data of dataQuestion" [value]="data.QuizID">{{data.Description | uppercase}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="checkData == 4 || checkData == 5">
+                                        <div class="campIDLbl">
+                                            <label class="required">{{"QuestionItem" | localize}}</label>
+                                            <ng-select #QuestionDtlComboBox
+                                                       name="QuestionDtl"
+                                                       id="QuestionDtl"
+                                                       [disabled]="inputHelper.EventStatus == 3 || selectQuestionItem == false"
+                                                       [multiple]="true"
+                                                       bindLabel="Description"
+                                                       bindValue="SecNo"
+                                                       [(ngModel)]="questionItem"
+                                                       [attr.data-live-search]="true"
+                                                       [items]="dataQuestionDtl">
+                                                <!-- <option *ngFor="let data of dataQuestionDtl" [value]="data.SecNo">{{data.Description | uppercase}}</option> -->
+                                            </ng-select>
+                                        </div>
+                                        <!-- <div class="form-group">
+
+                                        </div> -->
+                                    </div>
+                                    <!-- <div class="col-md-6" *ngIf="checkData == 4 || checkData == 5">
+                                        <div class="form-group">
+                                            <div class="campIDLbl">
+                                                <label class="reqInput">{{"Owner" | localize}}</label>
+                                                <input class="form-control" #owner="ngModel" placeholder="Assign by System" type="text" name="owner" [(ngModel)]="inputHelper.Owner" disabled>
+                                                <validation-messages [formCtrl]="owner"></validation-messages>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group campID" *ngIf="checkData == 0 || checkData == 1">
+                                            <div class="campIDLbl">
+                                                <!-- <label class="required">{{"TestProject" | localize}}</label> -->
+                                                <div class="kt-checkbox-list">
+                                                    <label class="kt-checkbox">
+                                                        <input type="checkbox" [disabled]="inputHelper.EventStatus == 3">
+                                                        {{"TestProject" | localize}}
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" *ngIf="checkData == 0 || checkData == 1">
+                                            <label class="reqInput">{{"BaseLanguage" | localize}}</label>
+                                            <input class="form-control" #Baselanguage="ngModel" type="text" name="baseLanguage" [(ngModel)]="inputHelper.BaseLanguage" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="Baselanguage"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"Currency" | localize}}</label>
+                                            </div>
+                                            <div class="campIDVal">
+                                                <input class="form-control" type="text" placeholder="MYR" name="currency" [value]="Currency" [disabled]="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="checkData == 2 || checkData == 3">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"Currency" | localize}}</label>
+                                            </div>
+                                            <div class="campIDVal">
+                                                <input class="form-control" type="text" placeholder="MYR" name="currency" [value]="Currency" [disabled]="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"ProjectReason" | localize}}</label>
+                                                <select #ProjectReasonComboBox
+                                                        required
+                                                        [disabled]="inputHelper.EventStatus == 3"
+                                                        name="ProjectReason"
+                                                        id="ProjectReason"
+                                                        class="form-control"
+                                                        [(ngModel)]="inputHelper.ProjectReason"
+                                                        [attr.data-live-search]="true">
+                                                    <option *ngFor="let data of dataProjectReasons" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"Commodity" | localize}}</label>
+                                            <input class="form-control" #commodity="ngModel" type="text" name="Commodity" [(ngModel)]="inputHelper.Commodity" placeholder="Minimal 3 Character" minlength="3" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="commodity"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" *ngIf="checkData == 2 || checkData == 3">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"Commodity" | localize}}</label>
+                                            <input class="form-control" #commodity="ngModel" type="text" name="Commodity" [(ngModel)]="inputHelper.Commodity" placeholder="Minimal 3 Character" minlength="3" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="commodity"></validation-messages>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"BaselineSpend" | localize}}</label>
+                                            <input class="form-control" #Baselinespend="ngModel" type="number" name="BaselineSpend" [(ngModel)]="inputHelper.BaselineSpend" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="Baselinespend"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"ExecutionStrategy" | localize}}</label>
+                                                <select #ExecutionStrategyComboBox
+                                                        name="ExecutionStrategy"
+                                                        id="ExecutionStrategy"
+                                                        [disabled]="inputHelper.EventStatus == 3"
+                                                        class="form-control"
+                                                        [(ngModel)]="inputHelper.ExecutionStrategy"
+                                                        [attr.data-live-search]="true">
+                                                    <option *ngFor="let data of dataExecutionStrat" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4" *ngIf="checkData == 0 || checkData == 1">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"TargetSaving" | localize}} (%)</label>
+                                            <input class="form-control" #Targetsaving="ngModel" type="number" name="TargetSaving" min="0" max="100" [(ngModel)]="inputHelper.TargetSaving" required [disabled]="inputHelper.EventStatus == 3">
+                                            <validation-messages [formCtrl]="Targetsaving"></validation-messages>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="reqInput">{{"ContractDuration" | localize}}</label>
+                                            <div class="input-group">
+                                                <input class="form-control" aria-describedby="basic-addon2" #Contractduration="ngModel" type="number" name="ContractDuration" [(ngModel)]="inputHelper.ContractDuration" required [disabled]="inputHelper.EventStatus == 3">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon2">{{"Month" | localize}}</span>
+                                                </div>
+                                            </div>
+                                            <validation-messages [formCtrl]="Contractduration"></validation-messages>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="required">{{"EventPeriod" | localize}}</label>
+                                        <!-- <label class="required">{{"PeriodStart" | localize}}</label> -->
+                                        <!-- <label class="required">{{"PeriodEnd" | localize}}</label> -->
+                                        <div class="input-daterange input-group">
+                                            <div class="form-group">
+                                                <p-calendar (onSelect)="selectStart($event)" [(ngModel)]="dateStart" name="x" [minDate]="campaignMinDate" [showTime]="true" [required] [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                            </div>
+
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" style="height: 35px;">
+                                                    <i class="la la-ellipsis-h"></i>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <p-calendar (onSelect)="selectEnd($event)" [(ngModel)]="dateEnd" name="y" [minDate]="inputHelper.StartDate" [showTime]="true" [required] [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="checkData == 0 || checkData == 1">
+                                    <div class="col-md-4">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"PredecessorProject" | localize}}</label>
+                                                <ng-select name="PreProject"
+                                                           required
+                                                           [readonly]="statusValue"
+                                                           [items]="dataPredecProj"
+                                                           bindLabel="Name"
+                                                           bindValue="DocumentNo"
+                                                           (change)="projectChange($event)"
+                                                           [(ngModel)]="preProject">
+                                                    <ng-template ng-option-tmp let-item="item">
+                                                        {{item.Name}} <br />
+                                                        <small>{{item.DocumentNo}}</small>
+                                                    </ng-template>
+                                                </ng-select>
+                                                <!-- <select #PredecessorProjectComboBox
+                                                        name="PredecessorProject"
+                                                        id="PredecessorProject"
+                                                        [disabled]="inputHelper.EventStatus == 3"
+                                                        class="form-control"
+                                                        [(ngModel)]="inputHelper.PredecessorProject"
+                                                        [attr.data-live-search]="true">
+                                                    <option *ngFor="let data of dataPredecProj" [value]="data.DocumentNo">{{data.DocumentNo | uppercase}} | {{data.Name | uppercase}}</option>
+                                                </select> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group campID">
+                                            <div class="campIDLbl">
+                                                <label class="required">{{"OfficerName" | localize}}</label>
+                                            </div>
+                                            <div class="campIDVal">
+                                                <input class="form-control" type="text" name="eventid" placeholder="MYRES" [value]="OfficerName" [disabled]="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="checkData == 2 || checkData == 3"><span><b>{{"SiteBriefingVisitation" | localize}}</b></span></div>
+                                <div *ngIf="checkData == 2 || checkData == 3">
+                                    <div class="lineSplitter"></div>
+                                    <div class="row"><span><b>1. {{"SiteBriefing" | localize}}</b></span></div>
+                                    <div class="lineSplitter"></div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group campID">
+                                                <div class="campIDLbl">
+                                                    <!-- <label class="required">{{"TestProject" | localize}}</label> -->
+                                                    <div class="kt-checkbox-list">
+                                                        <label class="kt-checkbox">
+                                                            <input type="checkbox" [disabled]="inputHelper.EventStatus == 3">
+                                                            {{"Mandatory" | localize}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group campID">
+                                                <div class="campIDLbl">
+                                                    <label class="required">{{"Venue" | localize}}</label>
+                                                    <select #VenueComboBox
+                                                            name="Venue"
+                                                            id="Venue"
+                                                            [disabled]="inputHelper.EventStatus == 3"
+                                                            class="form-control"
+                                                            [(ngModel)]="inputHelper.Venue"
+                                                            [attr.data-live-search]="true">
+                                                        <option *ngFor="let data of dataVenue" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group campID">
+                                                <div class="campIDLbl">
+                                                    <label class="required">{{"PIC" | localize}}</label>
+                                                    <select #PICComboBox
+                                                            name="Venue"
+                                                            id="Venue"
+                                                            [disabled]="inputHelper.EventStatus == 3"
+                                                            class="form-control"
+                                                            [(ngModel)]="inputHelper.PIC"
+                                                            [attr.data-live-search]="true">
+                                                        <option *ngFor="let data of dataPIC" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="required">{{"EventPeriod" | localize}}</label>
+                                            <!-- <label class="required">{{"PeriodStart" | localize}}</label> -->
+                                            <!-- <label class="required">{{"PeriodEnd" | localize}}</label> -->
+                                            <div class="input-daterange input-group">
+                                                <div class="form-group">
+                                                    <p-calendar (onSelect)="selectBriefingStart($event)" [(ngModel)]="dateStartBriefing" name="x" [minDate]="campaignMinDate" [showTime]="true" [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                                </div>
+
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" style="height: 35px;">
+                                                        <i class="la la-ellipsis-h"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p-calendar (onSelect)="selectBriefingEnd($event)" [(ngModel)]="dateEndBriefing" name="y" [minDate]="inputHelper.DateBriefingStart" [showTime]="true" [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="checkData == 2 || checkData == 3">
+                                    <div class="row"><span><b>2. {{"SiteVisitation" | localize}}</b></span></div>
+                                    <div class="lineSplitter"></div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group campID">
+                                                <div class="campIDLbl">
+                                                    <!-- <label class="required">{{"TestProject" | localize}}</label> -->
+                                                    <div class="kt-checkbox-list">
+                                                        <label class="kt-checkbox">
+                                                            <input type="checkbox" [disabled]="inputHelper.EventStatus == 3">
+                                                            {{"Mandatory" | localize}}
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group campID">
+                                                <div class="campIDLbl">
+                                                    <label class="required">{{"Venue" | localize}}</label>
+                                                    <select #VenueComboBox
+                                                            name="Venue"
+                                                            id="Venue"
+                                                            [disabled]="inputHelper.EventStatus == 3"
+                                                            class="form-control"
+                                                            [(ngModel)]="inputHelper.Venue"
+                                                            [attr.data-live-search]="true">
+                                                        <option *ngFor="let data of dataVenue" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group campID">
+                                                <div class="campIDLbl">
+                                                    <label class="required">{{"PIC" | localize}}</label>
+                                                    <select #PICComboBox
+                                                            name="Venue"
+                                                            id="Venue"
+                                                            [disabled]="inputHelper.EventStatus == 3"
+                                                            class="form-control"
+                                                            [(ngModel)]="inputHelper.PIC"
+                                                            [attr.data-live-search]="true">
+                                                        <option *ngFor="let data of dataPIC" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="required">{{"EventPeriod" | localize}}</label>
+                                            <!-- <label class="required">{{"PeriodStart" | localize}}</label> -->
+                                            <!-- <label class="required">{{"PeriodEnd" | localize}}</label> -->
+                                            <div class="input-daterange input-group">
+                                                <div class="form-group">
+                                                    <p-calendar (onSelect)="selectVisitationStart($event)" [(ngModel)]="dateStartVisitation" name="x" [minDate]="campaignMinDate" [showTime]="true" [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                                </div>
+
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" style="height: 35px;">
+                                                        <i class="la la-ellipsis-h"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p-calendar (onSelect)="selectVisitationEnd($event)" [(ngModel)]="dateEndVisitation" name="y" [minDate]="inputHelper.DateVisitationStart" [showTime]="true" [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="checkData == 2 || checkData == 3">
+                                    <div class="row"><span><b>{{"ParticipantInformationFee" | localize}}</b></span></div>
+                                    <div class="lineSplitter"></div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="reqInput">{{"TenderDocumentFee" | localize}}</label>
+                                                <input class="form-control" #tenderDocumentFee="ngModel" type="text" name="TenderDocumentFee" [(ngModel)]="inputHelper.tenderDocumentFee" [disabled]="inputHelper.EventStatus == 3">
+                                                <validation-messages [formCtrl]="tenderDocumentFee"></validation-messages>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="reqInput">{{"TenderEstimate" | localize}}</label>
+                                                <input class="form-control" #tenderEstimate="ngModel" type="text" name="TenderEstimate" [(ngModel)]="inputHelper.tenderEstimate" [disabled]="inputHelper.EventStatus == 3">
+                                                <validation-messages [formCtrl]="tenderEstimate"></validation-messages>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="required">{{"SalePeriod" | localize}}</label>
+                                            <!-- <label class="required">{{"PeriodStart" | localize}}</label> -->
+                                            <!-- <label class="required">{{"PeriodEnd" | localize}}</label> -->
+                                            <div class="input-daterange input-group">
+                                                <div class="form-group">
+                                                    <p-calendar (onSelect)="selectSaleStart($event)" [(ngModel)]="dateSaleStart" name="x" [minDate]="campaignMinDate" [showTime]="true" [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                                </div>
+
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" style="height: 35px;">
+                                                        <i class="la la-ellipsis-h"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <p-calendar (onSelect)="selectSaleEnd($event)" [(ngModel)]="dateSaleEnd" name="y" [minDate]="inputHelper.DateSaleStart" [showTime]="true" [disabled]="inputHelper.EventStatus == 3"></p-calendar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Form with all Validation -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

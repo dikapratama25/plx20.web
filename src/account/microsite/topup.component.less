@@ -1,0 +1,181 @@
+:root{
+    --contrastMain : #007eff;
+}
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.maxWrp{
+    width:100%;
+    max-width:500px;
+    padding:20px;
+    box-sizing: border-box;
+    margin:0 auto;
+}
+#bannerSection{
+    margin: -20px;
+    margin-bottom: 0;
+}
+#bannerSection > img{
+    width:100%;
+}
+#voucerDetail{
+    text-align: center;
+}
+#titleVoucher{
+    padding: 1em 0;
+    font-size: 21px;
+    font-weight: 700;
+}
+#howToClaim{
+    padding: 15px;
+    /* background-color: #252525; */
+    margin-bottom: 0px;
+    /* color:#fff; */
+    /* margin-left: -20px;
+    margin-right: -20px; */
+    /* border-top:2px solid #000; */
+    padding-top:0;
+}
+#formData > div{
+    padding-bottom:14px;
+}
+#phnNum{
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #007eff;
+}
+#voucerDetail{
+    background-color: #efefef;
+    color: #252525;
+    border: 1px solid #dedede;
+}
+select, input[type="text"]{
+    outline: none;
+}
+#mobilePhone{
+    margin-top: 10px;
+    width: 250px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border-color: #cdcdcd;
+}
+#providerName{
+    margin-top: 10px;
+    width: 250px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    border-color: #cdcdcd;
+}
+#voucherSteps li{
+    list-style-type: none;
+}
+#howToClaim h2{
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+#howToClaim h2 + p
+{
+    font-size: 0.9em;
+    color: #7d7d7d;
+}
+.small_Separator{
+    max-width: 320px;
+    width: 90%;
+    height: 2px;
+    background-color: black;
+    margin: 1em auto;
+    margin-top: 0;
+}
+.displayFlex{
+    display: flex;
+}
+.iconWrp{
+    width: 55px;
+    height: 55px;
+}
+.iconWrp img{
+    width:100%;
+}
+.textDesc{
+    margin: auto 10px;
+    text-align: left;
+    flex:1;
+    font-size: 14px;
+}
+#rewardAmt{
+    margin-bottom:0.5em;
+}
+#voucherSteps > ul{
+    padding: 0;
+    display: block;
+    width: 350px;
+    margin: 0 auto;
+}
+.stepTxt{
+    font-weight: 600;
+    line-height: 2;
+    font-size: 1.1em;
+}
+#voucherSteps{
+    margin-top: 2.5em;
+}
+.promoEnd
+{
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 600;
+}
+.emphasisText{
+    color:var(--contrastMain);
+    font-size: 0.9em;
+}
+.btnReward{
+    width: 250px;
+    box-sizing: border-box;
+    padding: 0.5em;
+    border-color: transparent;
+    color: #fff;
+    background-color: var(--contrastMain);
+    border-radius: 1em;
+}
+#footerT_C{
+    min-height: 10vh;
+    width:calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom:-20px;
+    background-color: #252525;
+    color:#fff;
+}
+#tcReward{
+    padding-top:2em;
+    padding-bottom:2em;
+}
+#tcReward li{
+    text-align: left;
+    padding: 15px 25px;
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+#btnReward[disabled]
+{
+    background-color: transparent;
+    color: #e88100;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+/*------------------- standard to hide unecessary elements ----------------------*/
+#kt_login > div:first-child > div:first-child,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__signup-label,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__head
+{
+    display: none;
+}
+#kt_login > div:first-child > div:nth-child(2){
+    padding:0;
+}

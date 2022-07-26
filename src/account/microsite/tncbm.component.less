@@ -1,0 +1,35 @@
+:root{
+    --contrastMain : #007eff;
+}
+
+body{
+    margin:0;
+    // font-size: 15px;
+}
+.maxWrp{
+    width:100%;
+    max-width:500px;
+    box-sizing: border-box;
+    margin:0 auto;
+    padding:20px;
+ }
+ .tncTitle{
+     font-weight: 600;
+     font-size: 1.2em;
+     text-decoration: underline;
+ }
+ .tncTitle + ol > li{
+     margin-bottom:0.5em;
+ }
+
+/*------------------- standard to hide unecessary elements ----------------------*/
+#kt_login > div:first-child > div:first-child,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__signup-label,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__head
+{
+    display: none;
+}
+#kt_login > div:first-child > div:nth-child(2){
+    padding:0;
+}
+/*-------------------- End -------------------------------------------------------*/

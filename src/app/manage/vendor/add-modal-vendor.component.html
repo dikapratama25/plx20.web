@@ -1,0 +1,52 @@
+<div bsModal #addVendorModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addVendorModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 900px;">
+        <form #tenantCreateForm="ngForm" name="tenderForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+           <h4 class="modal-title">
+               <span>{{"AddVendor" | localize}}</span>
+           </h4>
+            <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body noUlLine">
+            <div class="form-group col-sm-12">
+                <div class="modal-body">
+                    <base-list #baselistVendorModal [(gridUrl)]="gridUrl" [enableFilter]="true" actionColumn="checkbox" (onSelectedChange)="onSelectedChange($event)" (click)="refresh()"></base-list>
+                </div>
+                <!-- <div class="col-md-12">
+                    <div class="form-group campID">
+                        <div class="campIDLbl">
+                            <label class="required">{{"CodeTYpe" | localize}}</label>
+                            <select #type
+                                        required
+                                        name="type"
+                                        id="type"
+                                        class="form-control"
+                                        [(ngModel)]="inputHelper.type"
+                                        [attr.data-live-search]="true">
+                                    <option *ngFor="let data of dataType" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="modal-footer">
+                    <button class="btn btn-primary" (click)="save()"><i class="flaticon2-plus"></i>{{"Save" | localize}}</button>
+                </div>
+                <!-- <div class="form-group">
+                    <span>{{"Item" | localize}}</span>
+                    <ng-select #itemCombobox name="item" [(ngModel)]="affiliateItem" [items]="affiliateList" [multiple]="true"
+                        [closeOnSelect]="false" [hideSelected]="true" bindValue="Code" bindLabel="Remark"
+                        placeholder="Select items">
+                    </ng-select>
+                </div> -->
+            </div>
+        </div>
+        </form> 
+        </div>
+    </div>
+</div>
+
+

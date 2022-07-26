@@ -1,0 +1,235 @@
+<div [@routerTransition]>
+	<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+		<div class="kt-subheader   kt-grid__item" id="kt_subheader" style="background-color: #ffffff; margin-top: 0px; padding-top: 10px; padding-bottom: 10px">
+			<div [class]="containerClass">
+				<div class="kt-subheader__main">
+					<h3 class="kt-subheader__title">
+						{{"MyBilling" | localize}}
+					</h3>
+				</div>
+			</div>
+		</div>
+		<!-- Content -->
+		<div [class]="containerClass">
+			<div class="kt-portlet">
+				<div class="kt-portlet__head" style="border-bottom: none;">
+					<div class="kt-portlet__head-label">
+						<h3 class="kt-portlet__head-title">{{"BillingInformation" | localize}}</h3>
+					</div>
+					<div class="kt-portlet__head-toolbar">
+						<button type="button" class="btn btn-sm btn-primary btn-wide" (click)="saveBillingInfo()" [disabled]="billingInfoForm.form.status!='VALID'">{{"Save" | localize}}</button>
+					</div>
+				</div>
+				<div class="kt-portlet__body kt-padding-t-0">
+						<div class="row kt-margin-b-0">
+							<div class="col-md-12">
+									<form #billingInfoForm="ngForm" name="billingInfoForm" id="billing_info">
+										<div class="row kt-font-dark">
+											<div class="col-md-12">
+												<label class="kt-checkbox kt-checkbox--tick kt-checkbox--brand kt-font-bolder kt-margin-b-30">
+													<input type="checkbox" (change)="changeUseProfile()" [(ngModel)]="checkUseProfile" [ngModelOptions]="{standalone: true}" [checked]="checkUseProfile">{{"UseMyProfileInfo" | localize}}
+													<span></span>
+												</label>
+												<div class="row">
+													<div class="col-lg-5">
+														<div class="form-group">
+															<label>{{"Name" | localize}}</label>
+															<input
+																#name="ngModel"
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																type="text"
+																id="name"
+																name="Name"
+																class="form-control"
+																[(ngModel)]="inputHelper.Name"
+																required>
+															<validation-messages [formCtrl]="name"></validation-messages>
+														</div>
+													</div>
+													<div class="col-lg-7">
+														<div class="row">
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label>{{"Mobile" | localize}}</label>
+																	<input
+																		#mobile="ngModel"
+																		style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																		type="text"
+																		id="mobile"
+																		name="Mobile"
+																		class="form-control"
+																		[(ngModel)]="inputHelper.Mobile"
+																		required>
+																	<validation-messages [formCtrl]="mobile"></validation-messages>
+																</div>
+															</div>
+															<div class="col-lg-8">
+																<div class="form-group">
+																	<label>{{"EmailAddress" | localize}}</label>
+																	<input
+																		#emailAddress="ngModel"
+																		style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																		type="email"
+																		id="emailaddress"
+																		name="EmailAddress"
+																		class="form-control"
+																		[(ngModel)]="inputHelper.EmailAddress"
+																		required>
+																	<validation-messages [formCtrl]="emailAddress"></validation-messages>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="form-group">
+															<label>{{"BillingAddress" | localize}}</label>
+															<input
+																#address1="ngModel"
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																type="text"
+																id="address1"
+																class="form-control"
+																name="Address1"
+																[(ngModel)]="inputHelper.Address1"
+																required>
+															<validation-messages [formCtrl]="address1"></validation-messages>
+															<input
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																type="text"
+																id="address2"
+																name="Address2"
+																class="form-control kt-margin-t-10"
+																[(ngModel)]="inputHelper.Address2">
+															<input
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																type="text"
+																id="address3"
+																name="Address3"
+																class="form-control kt-margin-t-10"
+																[(ngModel)]="inputHelper.Address3">
+														</div>
+													</div>
+												</div>
+												<div class="row">
+														<div class="form-group col-md-4">
+															<label for="Country">{{"Country" | localize}}</label>
+															<select #Country required name="Country"
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																id="Country" class="form-control"
+																[(ngModel)]="inputHelper.Country"
+																(change)="populateStateList()"
+																[attr.data-live-search]="true">
+																<option *ngFor="let data of countryList"
+																	[value]="data.Code">
+																	{{data.Remark | uppercase}}</option>
+															</select>
+														</div>
+														<div class="form-group col-md-4">
+															<label for="City">{{"City" | localize}}</label>
+															<select #City name="City"
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																id="City" class="form-control"
+																[(ngModel)]="inputHelper.City"
+																[attr.data-live-search]="true">
+																<option *ngFor="let data of cityList"
+																	[value]="data.Code">
+																	{{data.Remark | uppercase}}</option>
+															</select>
+														</div>
+														<div class="form-group col-md-4">
+															<label for="State">{{"State" | localize}}</label>
+															<select #State name="State"
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																id="State" class="form-control"
+																[(ngModel)]="inputHelper.State"
+																(change)="populateCityList()"
+																[attr.data-live-search]="true">
+																<option *ngFor="let data of stateList"
+																	[value]="data.Code">
+																	{{data.Remark | uppercase}}</option>
+															</select>
+														</div>
+														<div class="form-group col-md-4">
+															<label>{{"PostCode" | localize}}</label>
+															<input
+																#postalCode="ngModel"
+																style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px"
+																type="text"
+																id="postal"
+																name="PostalCode"
+																class="form-control"
+																[(ngModel)]="inputHelper.PostalCode"
+																onkeydown="return ( event.ctrlKey || event.altKey
+                                                                                           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                                || (95<event.keyCode && event.keyCode<106)
+                                                                                || (event.keyCode==8) || (event.keyCode==9)
+                                                                                || (event.keyCode>34 && event.keyCode<40)
+                                                                                || (event.keyCode==46) )"
+																minlength="5" maxlength="5" required>
+															<validation-messages [formCtrl]="postalCode"></validation-messages>
+														</div>
+												</div>
+											</div>
+										</div>
+									</form>
+							</div>
+						</div>
+						<div class="kt-separator kt-separator--dashed" style="border-style: solid; border-width: thin; border-color: #AEAFB0"></div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="kt-portlet__body">
+									<div class="kt-callout__body">
+										<div class="kt-callout__content">
+											<div class="form-group kt-margin-b-10">
+												<label  class=" kt-font-dark">{{"AvailableAgoraCredit" | localize}}</label>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<h1 class="">{{creditLimit | number:'.2-2'}} {{creditCurrency}}</h1>
+												</div>
+												<div class="col-md-6">
+													<a href="javascript:;" (click)="redirectTopUp()" class="btn btn-wide btn-bold btn-font-sm btn-dark kt-pull-right" style="border-radius: 5px">{{"TopUp" | localize}}</a>
+												</div>
+											</div>
+											<!-- <p class="kt-callout__desc">
+												We are charging your account RM 0.1 for 2 users daily
+											</p> -->
+											<a href="javascript:;" (click)="redirectBillingHistory()" class="kt-callout__desc kt-font-bold">
+												<i class="flaticon-file-2"></i> {{"BillingHistory" | localize}}
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="kt-portlet__body">
+									<div class="kt-callout__body">
+										<div class="kt-callout__content">
+											<form class="kt-form-group" id="form_promo">
+												<div class="form-group">
+													<label  class=" kt-font-dark">{{"PromotionCode" | localize}}</label>
+														<div class="row kt-margin-t-10">
+															<div class="col-md-9">
+																<input style="background-color: #F4F6FA; border-color: #AEAFB0 !important; outline-color: #AEAFB0; border-radius: 5px" id="promo" type="text" class="form-control">
+															</div>
+															<div class="col-md-3">
+																<a href="#" class="btn btn-wide btn-bold btn-font-sm btn-dark" style="border-radius: 5px">{{"Apply" | localize}}</a>
+															</div>
+														</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="kt-separator" style="border-style: 1px solid; border-width: thin; border-color: #AEAFB0"></div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>

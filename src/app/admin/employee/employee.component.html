@@ -1,0 +1,185 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Employee" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        {{"EmployeeHeaderInfo" | localize}}
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="downloadSelected()" *ngIf="canDownload"
+                            class="btn btn-primary"><i class="fa fa-file-download"></i> {{"Download" | localize}}</button>
+
+                        <div class="btn-group" dropdown>
+                            <button dropdownToggle type="button" class="btn btn-outline-success dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-file-excel"></i> {{"ExcelOperations" | localize}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-excel-operations" *dropdownMenu>
+                                <a class="dropdown-item" id="ExportUsersToExcelButton" (click)="exportToExcel()"
+                                    href="javascript:;">
+                                    <i class="fa fa-download" style="font-size: 1rem;"></i>
+                                    {{'ExportToExcel' | localize}}
+                                </a>
+                                <a href="javascript:;" *ngIf="'Pages.Administration.Employees.Create' | permission"
+                                    class="no-padding">
+                                    <span class="fileinput-button">
+                                        <p-fileUpload customUpload="true" name="ExcelFileUpload" #ExcelFileUpload
+                                            maxFileSize="10000000" auto="auto" accept=".csv,.xls,.xlsx"
+                                            (uploadHandler)="onExcelChange($event)"
+                                            (onError)="onUploadExcelError()" [multiple]="false"
+                                            chooseLabel="{{'ImportFromExcel' | localize}}">
+                                        </p-fileUpload>
+                                    </span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <span class="dropdown-item-text text-muted pl-3" href="#">
+                                    <small [innerHTML]="l('ImportToExcelSampleFileDownloadInfo', '<a href=assets/sampleFiles/ImportEmployeesSampleFile.xlsx>' + l('ClickHere') + '</a>')"></small>
+                                </span>
+                            </div>
+                        </div>
+
+                        <button (click)="createEmployee()" *ngIf="'Pages.Administration.Employees.Create' | permission"
+                            class="btn btn-primary"><i class="fa fa-plus"></i> {{"CreateNewEmployee" | localize}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="row">
+                <!-- <div class="col-lg-3" (click)="onPanelClick('')">
+                <div class="kt-portlet statBox">
+                    <div class="kt-portlet__body" style="padding: 10px 30px;">
+                        <div class="kt-section" style="margin: 0;">
+                            <div class="row">
+                            <div class="col-10 kt-section__title" style="margin-bottom: 0px;">
+                                {{"Last30Days" | localize}}
+                            </div>
+                            <div class="col-2 kt-section__title" style="margin-bottom: 0px; text-align: right;">
+                                <h4>{{panel.monthly.Total}}</h4>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="kt-separator-fit"></div>
+                        <div class="kt-section" style="margin: 0;">
+                            <div class="row">
+                            <div class="col-10 kt-section__desc" style="margin-bottom: 0px;">
+                                {{"Total" | localize}}
+                            </div>
+                            <div class="col-2 kt-section__desc" style="margin-bottom: 0px; text-align: right;">
+                                {{panel.overall.Total}}
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-3" (click)="onPanelClick('0')">
+                <div class="kt-portlet statBox">
+                    <div class="kt-portlet__body" style="padding: 10px 30px;">
+                        <div class="kt-section" style="margin: 0;">
+                            <div class="row">
+                            <div class="col-10 kt-section__title" style="margin-bottom: 0px;">
+                                {{"Last30Days" | localize}}
+                            </div>
+                            <div class="col-2 kt-section__title"
+                                style="color:var(--info); margin-bottom: 0px; text-align: right;">
+                                <h4>{{panel.monthly.Pending}}</h4>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="kt-separator-fit"></div>
+                        <div class="kt-section" style="margin: 0;">
+                            <div class="row">
+                            <div class="col-10 kt-section__desc" style="margin-bottom: 0px;">
+                                {{"Submitted" | localize}}
+                            </div>
+                            <div class="col-2 kt-section__desc"
+                                style="color:var(--info); margin-bottom: 0px; text-align: right;">
+                                {{panel.overall.Pending}}
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-3" (click)="onPanelClick('1')">
+                <div class="kt-portlet statBox">
+                    <div class="kt-portlet__body" style="padding: 10px 30px;">
+                        <div class="kt-section" style="margin: 0;">
+                            <div class="row">
+                            <div class="col-10 kt-section__title" style="margin-bottom: 0px;">
+                                {{"Last30Days" | localize}}
+                            </div>
+                            <div class="col-2 kt-section__title"
+                                style="color:var(--success); margin-bottom: 0px; text-align: right;">
+                                <h4>{{panel.monthly.Completed}}</h4>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="kt-separator-fit"></div>
+                        <div class="kt-section" style="margin: 0;">
+                            <div class="row">
+                            <div class="col-10 kt-section__desc" style="margin-bottom: 0px;">
+                                {{"Completed" | localize}}
+                            </div>
+                            <div class="col-2 kt-section__desc"
+                                style="color:var(--success); margin-bottom: 0px; text-align: right;">
+                                {{panel.overall.Completed}}
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="table-data kt-margin-t-30">
+                <div class="kt-portlet kt-portlet--mobile">
+                   <div class="kt-portlet__body  kt-padding-2">
+                      <div class="form-group">
+                         <base-list #baseList [enableFilter]="true" [filterTemplate]="filter" [actionTemplate]="customAction" 
+                         actionColumn="all" [permissionDelete]="permissionDelete" [permissionEdit]="permissionEdit"
+                         (onEditClick)="editEmployee($event)" (onDeleteClick)="deleteEmployee($event)" (onSelectedChange)="select($event)"></base-list>
+                            <ng-template #customAction let-rowData="rowData" let-columns="columns">
+                                <li>
+                                    <a href="javascript:;" (click)="downloadQR(rowData)">{{'Download' | localize}}</a>
+                                </li>
+                            </ng-template>
+                            <ng-template #filter>
+                                <div class="row filterContent">
+                                    <!-- <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <label class="col-form-label">{{"Status" | localize}}</label>
+                                        <ng-select [(ngModel)]="selectedStatus" [items]="comboStatusModel" [closeOnSelect]="true"
+                                            bindValue="Code" bindLabel="CodeDesc" (change)="refreshFilter($event)">
+                                        </ng-select>
+                                    </div> -->
+                                    <div class="col-sm-12">
+                                        <label class="col-form-label">{{"Branch" | localize}}</label>
+                                        <ng-select [(ngModel)]="selectedBranch" [items]="comboBranch" [closeOnSelect]="true"
+                                            bindValue="Code" bindLabel="Remark" placeholder="Select Branch" 
+                                            (clear)="reloadPage()" (change)="reloadPage()">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </ng-template>
+                      </div>
+                   </div>
+                </div>
+             </div>
+        </div>
+
+        <createOrEditEmloyeeModal #createOrEditEmployeeModal (modalSave)="reloadPage()"></createOrEditEmloyeeModal>
+        <manage-entity-dynamic-parameter-values-modal #dynamicParametersModal>
+        </manage-entity-dynamic-parameter-values-modal>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"ManageAnswerOption" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        {{"ManageAnswerOption" | localize}}
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="create($event)" *ngIf="isGranted(permissionCreate)" class="btn btn-primary">
+                            <i class="fa fa-plus"></i> {{"CreateNewAnswerOption" | localize}}
+                        </button>
+                        <!-- <button (click)="refresh()" *ngIf="isGranted(permissionView)"
+                                [disabled]="disableRefresh" class="btn btn-primary">
+                            <i class="fa flaticon-refresh"></i> {{"Refresh" | localize}}
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body filterSpecial">
+                    <div class="row">
+                        <div class="form-group">
+                            <base-list #answerOptComponent [(gridUrl)]="gridUrl" actionColumn="action"
+                                [permissionDelete]="permissionEdit" (onDeleteClick)="edit($event)"
+                                [permissionDelete]="permissionDelete" (onDeleteClick)="delete($event)"
+                                [enableFilter]="false">
+                            </base-list>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,127 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+       <div class="kt-subheader kt-grid__item">
+          <div [class]="containerClass">
+             <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">
+                   {{"Orders" | localize}}
+                </h3>
+                <div class="kt-subheader__breadcrumbs">
+                   <a href="#" class="kt-subheader__breadcrumbs-home">
+                      <i class="flaticon2-shelter"></i>
+                   </a>
+                   <span class="kt-subheader__breadcrumbs-separator"></span>
+                   <a
+                      class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">{{"Order List" | localize}}</a>
+                </div>
+             </div>
+             
+             <!-- <div class="kt-subheader__toolbar">
+                     <div class="kt-subheader__wrapper">
+                         <button (click)="goBack()" class="btn btn-bold btn-md btn-font-md btn-label-warning">
+                             <i class="fa fa-arrow-circle-left"></i> {{"Back" | localize}}
+                         </button> 
+                         <button (click)="createBranch()" class="btn btn-primary"><i class="fa fa-plus"></i>
+                             {{"CreateNewBranch" | localize}}</button>
+                     </div>
+                 </div> -->
+          </div>
+       </div>
+ 
+       <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+          <div class="row">
+             <div class="col-lg-3">
+                <div class="kt-portlet">
+                   <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                         <h1 class="kt-portlet__head-title">Total</h1>
+                      </div>
+                      <div class="kt-portlet__head-toolbar">
+                         <h4>{{panel.Total}}</h4>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-3">
+                <div class="kt-portlet kt-portlet--solid-info">
+                   <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                         <h1 class="kt-portlet__head-title">Pending Submitted</h1>
+                      </div>
+                      <div class="kt-portlet__head-toolbar">
+                         <h4>{{panel.Pending}}</h4>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-lg-3">
+                <div class="kt-portlet kt-portlet--solid-success">
+                   <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                         <h1 class="kt-portlet__head-title">Completed</h1>
+                      </div>
+                      <div class="kt-portlet__head-toolbar">
+                         <h4>{{panel.Completed}}</h4>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+ 
+       <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+          <div class="kt-portlet kt-portlet--mobile kt-portlet--height-fluid">
+             <div class="kt-portlet__body kt-portlet__body--fullheight">
+                <!-- <base-list #baseList [gridUrl]="gridUrl" actionColumn="none"></base-list> -->
+                <base-list #baseList [gridUrl]="gridUrl" [enableFilter]="true" [filterTemplate]="filter" actionColumn="none"></base-list>
+                <ng-template #filter>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label class="col-form-label">{{"Status" | localize}}</label>
+                            <ng-select [(ngModel)]="selectedStatus" [items]="comboStatusModel" [closeOnSelect]="true" bindValue="Code" bindLabel="Status" (change)="refreshFilter($event)">
+                            </ng-select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label class="col-form-label">From</label>
+                            <div class="input-group date">
+                                <div class="input-group">
+                                    <input id="startDate" (dateChange)="refreshFilter($event)" type="text"
+                                        #processFilterStartPicker
+                                        name="startDate" class="form-control"
+                                        [(ngModel)]="startDate"
+                                        datePickerMomentModifier bsDatepicker
+                                        [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"
+                                            id="basic-addon2">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <label class="col-form-label">To</label>
+                            <div class="input-group date">
+                                <div class="input-group">
+                                    <input id="endDate" (dateChange)="refreshFilter($event)" type="text"
+                                        #processFilterStartPicker
+                                        name="endDate" class="form-control"
+                                        [(ngModel)]="endDate"
+                                        datePickerMomentModifier bsDatepicker
+                                        [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"
+                                            id="basic-addon2">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+             </div>
+          </div>
+       </div>
+    </div>

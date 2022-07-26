@@ -1,0 +1,93 @@
+<div bsModal #createModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+     aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content" *ngIf="Loading">
+
+            <form #tenantCreateForm="ngForm" role="form" novalidate class="form-validation" *ngIf="active">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span>{{modalTitle | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-4"> 
+                        <div class="form-group">
+                            <label for="GalleryRemark">{{"DocCode" | localize}}</label>
+                            <input type="text" [disabled]="true" name="doccode" id="doccode" class="form-control" [(ngModel)]="inputHelper.DocCode">
+                        </div>
+                        </div>
+                        
+                        <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="GalleryRemark">{{"Description" | localize}}</label>
+                            <input type="text" name="description" id="description" class="form-control" [(ngModel)]="inputHelper.Description">
+                        </div>
+                        </div> 
+                        
+                    </div>
+
+                        <div class="row">   
+                            <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>{{"Type" | localize}}</label>
+                                        <input type="text" [disabled]="true" name="type" id="type" class="form-control" [(ngModel)]="inputHelper.type">
+                                    </div>
+                            </div> 
+                            
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                <!-- <label for="GalleryRemark">{{"Dimension" | localize}}</label>
+                                    <input type="text" name="height" id="height" class="form-control" [(ngModel)]="inputHelper.CodeRemark"> -->
+                                    <label>{{"Dimension (width x height)" | localize}}</label>
+                                    <select #dimensionCombobox
+                                            name="dimension"
+                                            id="dimension"
+                                            class="form-control"
+                                            [(ngModel)]="inputHelper.Code"
+                                            (change)="filterdimension()"
+                                            [attr.data-live-search]="true">
+                                            <option *ngFor="let data of dimensionlist" [value]="data.Code">{{data.Dimension | uppercase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                             <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>{{"Maxsize" | localize}}</label>
+                                <div class="input-group">
+                                        <input type="text" [disabled]="true" name="size" id="size" class="form-control" [(ngModel)]="inputHelper.size">
+                                        <div class="input-group-append"><span class="input-group-text" id="basic-addon3">KB</span></div>
+                                     </div> 
+                                </div>
+                            </div>
+                            
+                             
+                        </div>
+                    
+                    <div class="form-group">
+                        <div [ngStyle]="{'width.px': inputHelper.width}"></div>
+                            <div class="col-sm-12">
+                                <div class="cbp-item-wrapper">
+                                    <div class="cbp-caption">
+                                        <div class="cbp-caption-defaultWrap" >
+                                            <img src="{{DocPath}}" width="100%" height="75%" alt=""> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" [disabled]="saving" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+                    <button type="button" [disabled]="saving" class="btn btn-primary" (click)="save()">{{"Save" | localize}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

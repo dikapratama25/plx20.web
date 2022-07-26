@@ -1,0 +1,104 @@
+.kt-header-mobile .kt-header__brand-logo-default {
+  height: 52px !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cc-window {
+  background-color: #282a3a;
+}
+
+.cc-btn {
+  background-color: #5867dd;
+  border-color: #5867dd;
+  color: #ffffff;
+}
+
+.cc-message {
+  color: #fefefe;
+}
+
+.kt-badge.kt-badge--inline {
+  border-radius: 0px;
+}
+
+.kt-user-card .kt-user-card__name {
+  color: #6c7293 !important;
+}
+
+.kt-header__topbar .subscription-warning {
+  padding-top: 24px;
+}
+
+.kt-header__topbar .subscription-warning span {
+  color: #fff;
+}
+
+.unread-notification-count {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+  font-size: 1.0rem !important;
+}
+
+.menuSearchBarContainer {
+  width: calc(100% - 20px);
+  margin: 0 10px;
+}
+
+.menuSearchBarInput {
+  background-color: rgb(18, 18, 30) !important;
+  border: 1px solid rgb(44, 45, 68) !important;
+  color: #9899ac !important;
+  width: calc(100% - 20px);
+}
+
+.menuSearchBarInput:focus {
+  border-color: #7380fc !important;
+  color: #fff !important;
+}
+
+.kt-content {
+  background-color: #EDEFF3 !important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item > .kt-menu__heading .kt-menu__link-text, .kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item > .kt-menu__link .kt-menu__link-text {
+  color: #ffffff !important;
+}
+
+.kt-aside__brand {
+  background-color: #F4F6FA !important;
+}
+
+#kt_aside_toggler > span {
+  background: #484f66 !important;
+}
+
+.kt-aside, .kt-aside-menu {
+  /* background-color: #929292 !important; */
+  background-color: #025EA8 !important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-icon, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-icon {
+  color: #AEAFB0;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-text, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-text {
+  color: #AEAFB0 !important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__heading, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__heading:hover, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active > .kt-menu__link:hover, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--open > .kt-menu__heading, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--open > .kt-menu__link {
+  background-color: #EDEFF3 !important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__heading, .kt-aside-menu .kt-menu__nav > .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__link {
+  background-color: #EDEFF3 !important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item.kt-menu__item--active > .kt-menu__heading, .kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item.kt-menu__item--active > .kt-menu__link {
+  background-color: #AEAFB0 !important;
+}
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__submenu .kt-menu__subnav > .kt-menu__item > .kt-menu__link:hover, .kt-menu__toggle:hover {
+  /* background-color: #ccc !important; */
+  background-color: #AEAFB0 !important;
+}

@@ -1,0 +1,416 @@
+<div>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div class="kt-container kt-container--fluid">
+
+                <div class="kt-subheader__main">
+
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Home" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"Home" | localize}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid">
+
+        <div *ngIf="isFreeBiz" class="row">
+            <div *ngIf="isMaintenance" class="col-lg-12">
+               <div class="kt-portlet kt-bg-warning" style="color:#000;border-radius: 5px;">
+                  <div class="kt-portlet__head kt-hide">
+                     <div class="kt-portlet__head-label"></div>
+                     <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions"></div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body" style="display:block;">
+                     <div class="kt-block-inline" style="width:30px">
+                        <span style="font-size:1.5em">
+                        <i class="flaticon-alert-2"></i>
+                        </span>
+                     </div>
+                     <div class="kt-block-inline" style="flex:1;font-size:1.3em;">
+                        <p>There will be system maintenance on 22/02/2021 from 8:00 AM to 8:00 PM </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-12">
+               <div class="titleHead">
+                  <h3>Congratulation,</h3>
+                  <p>Now it's time for higher level, please complete these steps to get the full benefits of our offer</p>
+               </div>
+            </div>
+            <div class="col-lg-12">
+               <div class="kt-portlet kt-portlet--height-fluid" style="color:#000;border-radius: 5px;">
+                  <div class="kt-portlet__head kt-hide">
+                     <div class="kt-portlet__head-label"></div>
+                     <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions"></div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body" style="display:block;">
+                     <div id="greetingSection" style="display: flex;height: 100%;">
+                        <div class="row" style="margin:0;">
+                           <div class="col-lg-12">
+                              <div id="companyLogo" class="kt-block-inline"></div>
+                              <div id="greetingUser" class="kt-block-inline">
+                                 <h3>Welcome {{userName}}</h3>
+                                 <p>You may check the overview or latest notification.</p>
+                              </div>
+                           </div>
+                           <div class="col-lg-6">
+                              <div id="companyInfo">
+                                 <div id="companyName" style="font-size: 1.3em;font-weight: 500;">{{companyName}}</div>
+                                 <div id="companyAddress">
+                                    <div id="streetName"><span *ngIf="companyAddress1">{{companyAddress1}}</span> <span *ngIf="companyAddress2">{{companyAddress2}}</span> <span *ngIf="companyAddress3">{{companyAddress3}}</span></div>
+                                    <div id="stateName">{{companyCity}} {{companyState}} {{companyCountry}}</div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-lg-6" style="text-align: right;">
+                              <img style="width:210px;display: inline-block;" src="assets/dpl/images/procurement.png">
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- <div class="col-lg-4">
+               <div class="kt-portlet kt-portlet--height-fluid" style="border-radius: 5px;">
+                  <div class="kt-portlet__head">
+                     <div class="kt-portlet__head-label">
+                        <h5>Latest Activity</h5>
+                     </div>
+                     <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions"></div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                     <div class="kt-timeline-v2">
+                        <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
+                           <div class="kt-timeline-v2__item">
+                              <span class="kt-timeline-v2__item-time">10:00</span>
+                              <div class="kt-timeline-v2__item-cricle">
+                                 <i class="fa fa-genderless kt-font-danger"></i>
+                              </div>
+                              <div class="kt-timeline-v2__item-text  kt-padding-top-5">Your subscription no sbs.001.327.21 - Procurement is expired, please <a href="#" style="color:rgb(19, 102, 226);font-weight: 600;text-decoration: none;">manage</a> your subscription </div>
+                           </div>
+                           <div class="kt-timeline-v2__item">
+                              <span class="kt-timeline-v2__item-time">11:00</span>
+                              <div class="kt-timeline-v2__item-cricle">
+                                 <i class="fa fa-genderless kt-font-brand"></i>
+                              </div>
+                              <div class="kt-timeline-v2__item-text kt-padding-top-5">You are invited to attend a new tender event on 22/02/2021. Please <a href="#" style="color:rgb(19, 102, 226);font-weight: 600;text-decoration: none;">review</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div> -->
+            <div class="col-lg-8">
+               <div class="kt-portlet kt-portlet--height-fluid" style="box-shadow: none;background-color: transparent;">
+                  <div class="kt-portlet__head" style="font-size: 1.3em;">
+                     <div class="kt-portlet__head-label" style="font-weight: 600;">My Subscription</div>
+                     <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions"><a href="#" style="color:rgb(19, 102, 226);text-decoration: none;">View All</a></div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body kt-padding-0">
+                    <div class="row">
+                        <div class="col-lg-12 kt-padding-l-20 kt-padding-r-20">
+							<div class="kt-portlet kt-portlet--height-fluid">
+								<div class="form-group">
+									<base-list #subscriptiongrid [(gridUrl)]="gridUrl" [detail]="true" (onDetailClick)="viewCurrentDetail($event)" (onButtonClick)="startService($event)" [indexing]="true" [enableFilter]="false">
+									</base-list>
+								</div>
+							</div>
+						</div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="kt-portlet kt-portlet--height-fluid" style="box-shadow: none;">
+                  <div class="kt-portlet__head" style="font-size: 1.3em;">
+                     <div class="kt-portlet__head-label"></div>
+                     <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions" style="font-weight: 600;">Available Credit</div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body kt-padding-t-0">
+                     <p style="text-align: right;">
+                        Agora Credit Enables you to subscribe or participate in available service and features
+                     </p>
+                     <div style="background-color:#fff;border:1px solid #333;border-radius:5px;text-align: right;box-sizing: border-box;width:100%;padding:20px;">
+                        <div id="currencyCredit" style="font-size: 1.3em;font-weight: 600;">{{creditCurrency}}</div>
+                        <div id="agoraCreditAmt" style="font-size:2em;">{{creditLimit | number:'.2-2'}}</div>
+                        <div id="transactionHistory"><a href="#" style="color:rgb(7, 116, 40);font-weight: 600;text-decoration: none;">Transaction History</a></div>
+                     </div>
+                     <div style="text-align: right;">
+                        <a href="javascript:;" (click)="redirectTopUp()" class="btn btn-linkedin kt-block-inline kt-margin-t-20"> Top Up</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+        <div *ngIf="isFreePub" class="row">
+            <div *ngIf="isMaintenance" class="col-lg-12">
+                <div class="kt-portlet kt-bg-warning" style="color:#000;border-radius: 5px;">
+                    <div class="kt-portlet__head kt-hide">
+                        <div class="kt-portlet__head-label"></div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions"></div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body" style="display:block;">
+                        <div class="kt-block-inline" style="width:30px">
+                            <span style="font-size:1.5em">
+                                <i class="flaticon-alert-2"></i>
+                            </span>
+                        </div>
+                        <div class="kt-block-inline" style="flex:1;font-size:1.3em;">
+                            <p>There will be system maintenance on 22/02/2021 from 8:00 AM to 8:00 PM </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="titleHead">
+                    <h3>Congratulation {{userName}},</h3>
+                    <p>Now it's time for higher level, please complete these steps to get the full benefits of our offer</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="kt-portlet kt-portlet--height-fluid" style="color:#000;border-radius: 5px;">
+                    <div class="kt-portlet__head kt-hide">
+                        <div class="kt-portlet__head-label"></div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions"></div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div id="firstRegister" class="row" style="height:100%;">
+                            <div class="col-lg-4">
+                                <div class="kt-portlet kt-portlet--height-fluid">
+                                    <div class="kt-portlet__head kt-hide">
+                                        <div class="kt-portlet__head-label"></div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-actions"></div>
+                                        </div>
+                                    </div>
+                                    <div  class="kt-portlet__body" >
+                                        <div class="boxFirst">
+                                            <div class="iconWrp">
+                                                <img style="width:125px;display:block;margin:0 auto;" src="assets/dpl/images/Group 592.png" />
+                                            </div>
+                                            <div class="textWrp" style="text-align: center;padding: 20px 0;">Complete Account Info</div>
+                                            <div class="actionBox" style="text-align:center;padding: 10px;">
+                                                <div class="kt-block-inline">
+                                                    <span style="font-size: 1.3em;color:rgb(3, 94, 3)" class="flaticon2-check-mark"></span>
+                                                </div>
+                                                <div class="kt-block-inline">It's Complete</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-portlet kt-portlet--height-fluid">
+                                    <div class="kt-portlet__head kt-hide">
+                                        <div class="kt-portlet__head-label"></div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-actions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body" >
+                                        <div class="boxFirst">
+                                            <div class="iconWrp">
+                                                <img style="width:110px;display:block;margin:0 auto;" src="assets/dpl/images/Group 526.png" />
+                                            </div>
+                                            <div class="textWrp" style="text-align: center;padding: 20px 0;">Complete Workspace Info</div>
+                                            <div class="actionBox" style="text-align: center;">
+                                                <button type="button"
+                                                class="btn btn-outline-success btn-pill kt-block-inline"
+                                                (click)="CompleteWorkspaceOnClick()">Let's Complete It</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-portlet kt-portlet--height-fluid">
+                                    <div class="kt-portlet__head kt-hide">
+                                        <div class="kt-portlet__head-label"></div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-actions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body" >
+                                        <div class="boxFirst">
+                                            <div class="iconWrp">
+                                                <img style="width:110px;display:block;margin:0 auto;" src="assets/dpl/images/Group 455.png" />
+                                            </div>
+                                            <div class="textWrp" style="text-align: center;padding: 20px 0;">Browse Service</div>
+                                            <div class="actionBox" style="text-align: center;">
+                                                <button type="button" class="btn btn-outline-success btn-pill kt-block-inline noEnable" disabled>Browse Services</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-lg-4">
+                <div class="kt-portlet kt-portlet--height-fluid" style="border-radius: 5px;">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label"><h5>Latest Activity</h5></div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions"></div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div class="kt-timeline-v2">
+                            <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
+
+                                <div class="kt-timeline-v2__item">
+                                    <span class="kt-timeline-v2__item-time">10:00</span>
+                                    <div class="kt-timeline-v2__item-cricle">
+                                        <i class="fa fa-genderless kt-font-danger"></i>
+                                    </div>
+                                    <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                                        Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
+                                        incididunt ut labore et dolore magna
+                                    </div>
+                                </div>
+
+                                <div class="kt-timeline-v2__item">
+                                    <span class="kt-timeline-v2__item-time">11:00</span>
+                                    <div class="kt-timeline-v2__item-cricle">
+                                        <i class="fa fa-genderless kt-font-brand"></i>
+                                    </div>
+                                    <div class="kt-timeline-v2__item-text kt-padding-top-5">
+                                        Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
+                                        incididunt ut labore et dolore magna elit enim at minim<br>
+                                        veniam quis nostrud
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-lg-8">
+                <div class="kt-portlet kt-portlet--height-fluid" style="box-shadow: none;">
+                    <div class="kt-portlet__head" style="font-size: 1.3em;">
+                        <div class="kt-portlet__head-label" style="font-weight: 600;">Available Services</div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions"><a href="#" style="color:rgb(19, 102, 226);font-weight: 600;text-decoration: none;">View All</a></div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body" >
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-portlet kt-portlet--height-fluid" style="border-bottom: 15px solid #987cce;">
+                                    <div class="kt-portlet__head kt-hide">
+                                        <div class="kt-portlet__head-label"></div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-actions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body borderStd radiusStd">
+                                        <div class="boxFirst kt-padding-t-20" style="position: relative;">
+                                            <div class="limitedTrial" style="position: absolute;top:-20px;right:-20px;border-radius:5px;background-color: tomato;color:#fff;padding: 5px 10px;">Free Trial</div>
+                                            <div class="iconWrp">
+                                                <img style="width:80px;display:block;margin:0 auto;" src="assets/dpl/images/Group (5).png">
+                                            </div>
+                                            <div class="textWrp" style="    text-align: center;padding: 20px 0;font-size: 1.4em;font-weight: 600;">Procurement</div>
+                                            <div class="actionBox" style="text-align: center;">
+                                                <button type="button" class="btn btn-outline-brand btn-pill kt-block-inline" disabled>View Detail</button>
+                                                <!-- <a href="#" style="color:rgb(19, 102, 226);font-weight: 600;text-decoration: none;display: block;margin-top:15px;">Start Service</a> --
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-portlet kt-portlet--height-fluid" style="border-bottom: 15px solid #ff9b1f;">
+                                    <div class="kt-portlet__head kt-hide">
+                                        <div class="kt-portlet__head-label"></div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-actions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body borderStd radiusStd">
+                                        <div class="boxFirst kt-padding-t-20">
+                                            <div class="iconWrp">
+                                                <img style="width:80px;display:block;margin:0 auto;" src="assets/dpl/images/Group (4).png">
+                                            </div>
+                                            <div class="textWrp" style="    text-align: center;padding: 20px 0;font-size: 1.4em;font-weight: 600;">E-Bidding</div>
+                                            <div class="actionBox" style="text-align: center;">
+                                                <button type="button" class="btn btn-outline-brand btn-pill kt-block-inline" disabled>View Detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-portlet kt-portlet--height-fluid" style="border-bottom: 15px solid #ce4b9a;">
+                                    <div class="kt-portlet__head kt-hide">
+                                        <div class="kt-portlet__head-label"></div>
+                                        <div class="kt-portlet__head-toolbar">
+                                            <div class="kt-portlet__head-actions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-portlet__body borderStd radiusStd">
+                                        <div class="boxFirst kt-padding-t-20">
+                                            <div class="iconWrp">
+                                                <img style="width:80px;display:block;margin:0 auto;" src="assets/dpl/images/Group (3).png">
+                                            </div>
+                                            <div class="textWrp" style="    text-align: center;padding: 20px 0;font-size: 1.4em;font-weight: 600;">E-Tendering</div>
+                                            <div class="actionBox" style="text-align: center;">
+                                                <button type="button" class="btn btn-outline-brand btn-pill kt-block-inline" disabled>View Detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-lg-4">
+                <div class="kt-portlet kt-portlet--height-fluid" style="box-shadow: none;">
+                    <div class="kt-portlet__head" style="font-size: 1.3em;">
+                        <div class="kt-portlet__head-label"></div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="kt-portlet__head-actions" style="font-weight: 600;">Available Credit</div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-padding-t-0">
+                        <p style="text-align: right;">
+                            Agora Credit Enables you to subscribe or participate in available service and features
+                        </p>
+                        <div style="background-color:#fff;border:1px solid #333;border-radius:5px;text-align: right;box-sizing: border-box;width:100%;padding:20px;">
+                            <div id="currencyCredit" style="font-size: 1.3em;font-weight: 600;">{{creditCurrency}}</div>
+                            <div id="agoraCreditAmt" style="font-size:2em;">{{creditLimit | number:'.2-2'}}</div>
+                            <div id="transactionHistory"><a href="#" style="color:rgb(7, 116, 40);font-weight: 600;text-decoration: none;">Transaction History</a></div>
+                        </div>
+                        <div style="text-align: right;">
+                            <a href="javascript:;" (click)="redirectTopUp()" class="btn btn-linkedin kt-block-inline kt-margin-t-20"> Top Up</a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>

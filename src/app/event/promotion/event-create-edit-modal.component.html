@@ -1,0 +1,24 @@
+<div bsModal #eventCreateEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 900px;">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>{{"ChannelGallery" | localize}}</span>
+            </h4>
+            <div class="buttons">
+                <button type="button" (click)="save()" [disabled]="saving" class="btn btn-danger"><i class="fa fa-save"></i><span>{{"Save" | localize}}</span></button>
+                <button type="button" (click)="close()" [disabled]="saving" class="btn btn-danger"><i class="fa fa-close"></i> <span>{{"X" | localize}}</span></button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="portletPage">
+                <div class="col-sm-12">
+                    <gallery #gallery [(galleryUrl)]="galleryUrl" [selectMode]="selectMode"
+                             (onSelectClick)="selectWebsite($event)"></gallery>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+</div>

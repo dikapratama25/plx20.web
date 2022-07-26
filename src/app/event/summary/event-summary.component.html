@@ -1,0 +1,381 @@
+<div [@routerTransition]>
+  <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+      <div class="kt-subheader kt-grid__item">
+          <div [class]="containerClass">
+              <div class="kt-subheader__main">
+                  <h3 class="kt-subheader__title">
+                      <span>{{"Summary" | localize}}</span>
+                  </h3>
+                  <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                  <span class="kt-subheader__desc">
+                      {{"EventSummary" | localize}}
+                  </span>
+              </div>
+              <div class="kt-subheader__toolbar">
+                  <div class="kt-subheader__wrapper">
+                      <button (click)="publish()"
+                          [disabled]="inputHelper.EventStatus == 3"
+                          class="btn btn-primary"> {{"Publish" | localize}}</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+        <!-- Overview -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"Overview" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"ID" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="ID" value="{{inputHelper.id}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"Name" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="Name" value="{{inputHelper.name}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"Description" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="Description" value="{{inputHelper.description}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"EventType" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="EventType" value="{{inputHelper.eventtype}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"TestProject" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="TestProject" value="{{inputHelper.testproject}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"LastModified" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="LastModified" value="{{inputHelper.lastmodified | momentFormat:'YYYY-MM-DD HH:mm'}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"Commodity" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="Commodity" value="{{inputHelper.commodity}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"Currency" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="Currency" value="{{inputHelper.currency}}" [disabled]="true">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"ContractMonths" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="ContractMonths" value="{{inputHelper.contractmonths}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"ContractEffectiveDate" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="ContractEffectiveDate" value="{{inputHelper.contracteffectivedate | momentFormat:'YYYY-MM-DD HH:mm'}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"BaselineSpend" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="BaselineSpend" value="{{inputHelper.baselinespend}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"TargetSaving" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="TargetSaving" value="{{inputHelper.targetSaving}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"CreationDate" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="CreationDate" value="{{inputHelper.creationdate | momentFormat:'YYYY-MM-DD HH:mm'}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"ProjectReason" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="ProjectReason" value="{{inputHelper.projectreason}}" [disabled]="true">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-4 col-form-label">{{"Owner" | localize}}</label>
+                          <div class="col-8">
+                              <input class="form-control" type="text" id="Owner" value="{{inputHelper.owner}}" [disabled]="true">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End Overview -->
+
+        <!-- Timing Rule -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"TimingRule" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"CanPlaceBidDuringPreview" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="CanPlaceBidDuringPreviewPeriod" value="{{inputHelper.canplacebidduringpreview}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"SpecifyBidBeginEnd" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="SpecifyBidBeginEnd" value="{{inputHelper.specifybidbeginend}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"PlannedStartTime" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="PlannedStartTime" value="{{inputHelper.plannedstarttime | momentFormat:'YYYY-MM-DD HH:mm'}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"PlannedBidStartTime" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="PlannedBidStartTime" value="{{inputHelper.plannedbidstarttime | momentFormat:'YYYY-MM-DD HH:mm'}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"RunTimeFirstLot" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="RunTimeFirstLot" value="{{inputHelper.runtimefirstlot}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"TimeBetweenClosing" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="TimeBetweenClosing" value="{{inputHelper.timebetweenclosing}}" [disabled]="true">
+                        </div>
+                      </div><div class="form-group row">
+                        <label class="col-4 col-form-label">{{"AllowBidOvertime" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="AllowBidOvertime" value="{{inputHelper.allowbidovertime}}" [disabled]="true">
+                        </div>
+                      </div><div class="form-group row">
+                        <label class="col-4 col-form-label">{{"BidRankTriggerOvertime" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="BidRankTriggerOvertime" value="{{inputHelper.bidranktriggerovertime}}" [disabled]="true">
+                        </div>
+                      </div><div class="form-group row">
+                        <label class="col-4 col-form-label">{{"StartOvertimeBidSubmit" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="StartOvertimeBidSubmit" value="{{inputHelper.startovertimebidsubmit}}" [disabled]="true">
+                        </div>
+                      </div><div class="form-group row">
+                        <label class="col-4 col-form-label">{{"OvertimePeriod" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="OvertimePeriod" value="{{inputHelper.overtimeperiod}}" [disabled]="true">
+                        </div>
+                      </div><div class="form-group row">
+                        <label class="col-4 col-form-label">{{"EstimatedAwardDate" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="EstimatedAwardDate" value="{{inputHelper.estimatedawarddate | momentFormat:'YYYY-MM-DD HH:mm'}}" [disabled]="true">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End Timing Rule -->
+
+        <!-- Bidding Rules -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"BiddingRules" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"ImproveBidAmount" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="ImproveBidAmount" value="{{inputHelper.improvebidamount}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"CanSubmitTieBids" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="CanSubmitTieBids" value="{{inputHelper.cansubmittiebids}}" [disabled]="true">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End Bidding Rules -->
+
+        <!-- Currency Rule -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"CurrencyRule" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"AllowSelectBidCurrency" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="AllowSelectBidCurrency" value="{{inputHelper.allowselectbidcurrency}}" [disabled]="true">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End Currency Rule -->
+
+        <!-- Market Feedback -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"MarketFeedback" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <div class="col-md-12">
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"SpecityViewMarketInfo" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="SpecityViewMarketInfo" value="{{inputHelper.specityviewmarketinfo}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"ShowLeadBid" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="ShowLeadBid" value="{{inputHelper.showleadbid}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"CanSeeRanks" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="CanSeeRanks" value="{{inputHelper.canseeranks}}" [disabled]="true">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4 col-form-label">{{"IndicateValueSpecified" | localize}}</label>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="IndicateValueSpecified" value="{{inputHelper.indicatevaluespecified}}" [disabled]="true">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End Market Feedback -->
+
+        <!-- Invited Participant -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"InvitedParticipant" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                    <div class="kt-portlet__body">
+                      <base-list #participantListComponent [(gridUrl)]="participantURL" [enableFilter]="false"></base-list>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End Invited Participant -->
+
+        <!-- All Content -->
+        <div class="kt-portlet kt-portlet--height-fluid">
+          <div class="kt-portlet__body kt-portlet__body--fit">
+              <div class="kt-portlet kt-portlet--height-fluid">
+                  <div class="kt-portlet__head">
+                      <div class="kt-portlet__head-label">
+                          <h3 class="kt-portlet__head-title">
+                              <span class="caption-subject kt-font-dark font-bold uppercase">{{"AllContent" | localize}}</span><br />
+                          </h3>
+                      </div>
+                      <div class="kt-portlet__wrapper flex-center">
+                          
+                      </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                    <base-list #allContentListComponent [(gridUrl)]="allContentURL" [enableFilter]="false"></base-list>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- End All Content -->
+      </div>
+  </div>
+</div>

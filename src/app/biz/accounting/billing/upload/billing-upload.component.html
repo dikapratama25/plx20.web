@@ -1,0 +1,233 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                
+                <div class="kt-subheader__main">
+                    <button type="button" style="margin-right:15px;" (click)="back()"
+                            class="btn btn-outline-metal back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{"CreateInvoice" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"InvoiceSubmission" | localize}}</span>
+                    </span>
+                </div>
+              
+                <!-- <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button (click)="goBack()" class="btn btn-bold btn-md btn-font-md btn-label-warning">
+                            <i class="fa fa-arrow-circle-left"></i> {{"Back" | localize}}
+                        </button> 
+                        <button (click)="createBranch()" class="btn btn-primary"><i class="fa fa-plus"></i>
+                            {{"CreateNewBranch" | localize}}</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="row">
+                <div class="col-lg-5">
+                    <form #invoiceForm="ngForm" class="kt-form kt-form--label-right" #registerForm="ngForm"
+                        method="post" novalidate (ngSubmit)="save()">
+                        <div class="kt-portlet">
+                            <div class="kt-portlet__head">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                        {{"OrderDetail" | localize}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <!--begin::Form-->
+
+                            <div class="kt-portlet__body">
+                                <div class="form-group row">
+                                    <label class="required col-4 col-form-label">{{"PONo" | localize}}</label>
+                                    <div class="col-8">
+                                        <p-inputMask #orderNo="ngModel" name="orderNo" required type="text"
+                                            autocomplete="off" mask="{{poMask}}" slotChar="_"
+                                            [(ngModel)]="inputHelper.OrderNo" [disabled]="saving"
+                                            styleClass="form-control"></p-inputMask>
+                                        <validation-messages [formCtrl]="orderNo"></validation-messages>
+                                        <div *ngIf="orderNo.invalid && (orderNo.dirty || orderNo.touched)" class="kt-font-danger kt-font-md">{{'PleaseEnterAtLeastNCharacter' | localize: 10}}</div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="required col-4 col-form-label">{{"CompanyName" | localize}}</label>
+                                    <div class="col-8">
+                                        <ng-select #branchCombobox="ngModel" name="branch" required
+                                            [(ngModel)]="inputHelper.CustomerID" [items]="branchList"
+                                            [closeOnSelect]="true" bindValue="Code" bindLabel="Remark">
+                                        </ng-select>
+                                        <validation-messages [formCtrl]="branchCombobox"></validation-messages>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="required col-4 col-form-label">{{"PODate" | localize}}</label>
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <input #orderDate="ngModel" class="form-control" required type="text"
+                                                autocomplete="off" name="orderDate" [(ngModel)]="inputHelper.OrderDate"
+                                                datePickerMomentModifier bsDatepicker
+                                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}"
+                                                [disabled]="saving">
+                                            <div class="input-group-append"><span class="input-group-text"
+                                                    id="orderdate"><i class="la la-calendar-check-o"></i></span></div>
+                                        </div>
+                                        <validation-messages [formCtrl]="orderDate"></validation-messages>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="kt-portlet">
+                            <div class="kt-portlet__head">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                        {{"InvoiceDetail" | localize}}
+                                    </h3>
+                                </div>
+                            </div>
+                            <!--begin::Form-->
+
+                            <div class="kt-portlet__body">
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">{{"InvoiceNo" | localize}}</label>
+                                    <div class="col-8">
+                                        <input #invoiceNo="ngModel" name="invoiceNo" required type="text"
+                                            autocomplete="off" [(ngModel)]="inputHelper.BillNo" class="form-control"
+                                            aria-describedby="invoiceNo" [disabled]="saving">
+                                        <validation-messages [formCtrl]="invoiceNo"></validation-messages>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">{{"InvoiceDate" | localize}}</label>
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <input #invoiceDate="ngModel" required class="form-control" type="text"
+                                                autocomplete="off" name="invoiceDate"
+                                                [(ngModel)]="inputHelper.TransDate" datePickerMomentModifier
+                                                bsDatepicker
+                                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}"
+                                                [disabled]="saving">
+                                            <div class="input-group-append"><span class="input-group-text"
+                                                    id="invoiceDate"><i class="la la-calendar-check-o"></i></span></div>
+                                        </div>
+                                        <validation-messages [formCtrl]="invoiceDate"></validation-messages>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">{{"NetAmounts" | localize}}</label>
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <div [hidden]="!(inputHelper.Currency.length < 3)"
+                                                class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    id="invoiceNet">{{inputHelper.Currency}}</span>
+                                            </div>
+                                            <input #invoiceNet="ngModel" name="invoiceNet" required
+                                                [(ngModel)]="inputHelper.TransAmtOrg" step='0.01' min="0.00"
+                                                type="number" autocomplete="off" class="form-control"
+                                                style="text-align: right;" [disabled]="saving">
+                                            <div [hidden]="inputHelper.Currency.length < 3" class="input-group-append">
+                                                <span class="input-group-text"
+                                                    id="invoiceNet">{{inputHelper.Currency}}</span>
+                                            </div>
+                                        </div>
+                                        <validation-messages [formCtrl]="invoiceNet"></validation-messages>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">{{"TotalAmounts" | localize}}</label>
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <div [hidden]="!(inputHelper.Currency.length < 3)"
+                                                class="input-group-prepend">
+                                                <span class="input-group-text"
+                                                    id="invoiceTotal">{{inputHelper.Currency}}</span>
+                                            </div>
+                                            <input #invoiceTotal="ngModel" name="invoiceTotal" required
+                                                [(ngModel)]="inputHelper.TransAmt" step='0.01' min="0.00" type="number"
+                                                autocomplete="off" class="form-control" style="text-align: right;"
+                                                [disabled]="saving">
+                                            <div [hidden]="inputHelper.Currency.length < 3" class="input-group-append">
+                                                <span class="input-group-text"
+                                                    id="invoiceTotal">{{inputHelper.Currency}}</span>
+                                            </div>
+                                        </div>
+                                        <validation-messages [formCtrl]="invoiceTotal"></validation-messages>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="kt-portlet__foot">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-12 kt-align-right">
+                                        <button type="button" class="btn btn-secondary"
+                                            (click)="clear()">{{"Cancel" | localize}}</button>
+                                        <button type="submit" class="btn btn-success"
+                                            [disabled]="!registerForm.form.valid" [buttonBusy]="saving"
+                                            [busyText]="l('SavingWithThreeDot')"><i class="fa fa-check"></i>
+                                            {{"Submit" | localize}}</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="kt-portlet kt-portlet--mobile kt-portlet--height-fluid">
+                        <div id="previewWrp" class="kt-portlet__body kt-portlet__body--fullheight">
+                            <file-upload #fileupload [multiple]="false" [preview]="true" [accept]="uploadExt"
+                                [maxFileSize]="maxFileSize" [showUploadButton]="false" [APIUrl]="uploadURL"
+                                nameParam="files" (onSelect)="onSelected($event)" (onUpload)="onUploadComplete($event)">
+                            </file-upload>
+                            <p *ngIf="selectedFiles.length == 0" class="kt-align-center" style="font-weight:500;">Please
+                                upload only the following file types. Max Size: {{maxFileSize | fileSize}}</p>
+                            <div *ngIf="selectedFiles.length == 0" id="allowedFileFormat" class="displayFlex">
+                                <div class="ctrType">
+                                    <div class="ctrImg">
+                                        <img src="./assets/dpl/images/pdf.png" />
+                                    </div>
+                                    <div class="ctrText">
+                                        pdf
+                                    </div>
+                                </div>
+                                <div class="ctrType">
+                                    <div class="ctrImg">
+                                        <img src="./assets/dpl/images/jpg.png" />
+                                    </div>
+                                    <div class="ctrText">
+                                        jpg
+                                    </div>
+                                </div>
+                                <!-- <div class="ctrType">
+                                        <div class="ctrImg">
+                                            <img src="./assets/dpl/images/gif.png" />
+                                        </div>
+                                        <div class="ctrText">
+                                            gif
+                                        </div>
+                                    </div> -->
+                                <div class="ctrType">
+                                    <div class="ctrImg">
+                                        <img src="./assets/dpl/images/png.png" />
+                                    </div>
+                                    <div class="ctrText">
+                                        png
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

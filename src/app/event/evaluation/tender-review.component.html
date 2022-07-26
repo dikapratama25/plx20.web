@@ -1,0 +1,132 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+   <!-- begin:: Subheader -->
+   <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+      <div class="kt-container  kt-container--fluid ">
+         <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">{{"TenderReview" | localize}}</h3>
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+               <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+               <span class="kt-subheader__breadcrumbs-separator"></span>
+               <a href="" class="kt-subheader__breadcrumbs-link">{{"Award" | localize}}</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- end:: Subheader -->
+
+   <!-- begin:: Content -->
+   <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="kt-portlet">
+               <div class="kt-portlet__head">
+                  <div class="kt-portlet__head-label">
+                     <div class="" style="
+                            padding: 1.5em 0;
+                            ">
+                        <h1 class="kt-portlet__head-title kt-font-dark" style="
+                               font-size: 1.5em;
+                               ">{{EventName}}</h1>
+                        <div style="
+                               padding-top: 6px;
+                               ">{{DocNo}}</div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__head-toolbar">
+                     <div class="kt-portlet__head-actions">
+                     </div>
+                  </div>
+               </div>
+               <div class="kt-portlet__body">
+                  <div class="kt-section kt-section--first">
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid"
+                              style="padding: 0;">
+
+                              <card-list #cardList [(gridUrl)]="gridUrl" [cardTemplate]="card"></card-list>
+                              <ng-template #card let-item="item">
+                                 <tender-review-card [item]="item" (onDetailClick)="detailBoard($event)" >
+                                 </tender-review-card>
+                              </ng-template>
+                           </div>
+                        </div>
+                        
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="form-group">
+                           <base-list #baselist [(gridUrl)]="gridUrlBase" [enableFilter]="false"
+                           [rowExpandTemplate]="rowExpand" [rowExpand]="true" rowKey="LotID" rowExpandMode="single"
+                           ></base-list>
+                           <ng-template #rowExpand let-rowData="rowData" let-columns="columns">
+                              <tr>
+                                  <td colspan="5"> <!-- ColSpan == total columns displayed on the parent list -->
+                                      <base-list #baseListExpanded [gridUrl]="gridUrlBaseLine + 'campId='+CampID+'&bizregid='+ rowData.BizRegID + '&bizlocid='+ rowData.BizLocID + '&lotid='+ rowData.LotID + '&'" 
+                                          [enableFilter]="false" [enablePaginator]="false">
+                                      </base-list>
+                                  </td>
+                              </tr>
+                          </ng-template>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-lg-10">
+                        <div class="kt-portlet kt-callout" style="
+                               background-color: #e6e7e8;
+                               padding: 0;
+                               ">
+                           <div class="kt-portlet__body" style="
+                                  /* padding: 15px; */
+                                  ">
+                              <div class="kt-callout__body">
+                                 <div class="kt-callout__content" style="
+                                        flex: 1;
+                                        ">
+                                    <h3 class="kt-callout__title">Attention</h3>
+                                    <p class="kt-callout__desc">Please enter your authentication to confirm award
+                                       process</p>
+                                 </div>
+                                 <div class="kt-callout__action" style="
+                                        /* flex: 2; */
+                                        ">
+                                    <div class="row" style="
+                                           width: 100%;
+                                           ">
+                                       <div class="col-lg-12">
+                                          <div class="">
+                                             <label>Please enter the authentication code</label>
+                                             <div class="row">
+                                                <div class="col-lg-8"><input type="email" class="form-control "
+                                                      placeholder="" style="
+                                                       /* height: 100%; */
+                                                       ">
+                                                   <a href="#" style="
+                                                          display: block;
+                                                          padding-top: 8px;
+                                                          ">i have not receive the code yet</a>
+                                                </div>
+                                                <div class="Col-lg-4"><button type="button"
+                                                      class="btn btn-success btn-pill" style="
+                                                       min-width: 100px;
+                                                       ">Proceed to Award</button></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

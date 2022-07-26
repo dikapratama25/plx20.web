@@ -1,0 +1,23 @@
+<div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid" style="padding: 0;">
+    <p-accordion [multiple]="true">
+        <ng-container *ngFor="let header of editionsWithFeatures; let i = index;">
+            <p-accordionTab header="{{header.app}}" [cache]="true" [(selected)]="activeState[i]">
+
+                <!-- <ng-template pTemplate="content"> -->
+                    <div class="p-grid p-justify-start">
+                        <ng-container *ngFor="let item of header.items">
+                            <div class="p-col-fixed" style="flex:1">
+                                <ng-container [ngTemplateOutlet]="card" [ngTemplateOutletContext]="{item: item}"></ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                <!-- </ng-template> -->
+                
+            </p-accordionTab>
+        </ng-container>
+    </p-accordion>
+    
+    <ng-template #card let-item="item">
+        <package-card [item]="item" [features]="editionsSelectOutput.allFeatures" (onButtonClick)="onClick($event)"></package-card>
+    </ng-template>
+</div>

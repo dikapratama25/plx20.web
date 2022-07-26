@@ -1,0 +1,155 @@
+<div bsModal #modalRef="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" [busyIf]="isBusy">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{"ChannelGallery" | localize}}</span>
+                </h4>
+                <div class="buttons">
+                    <button type="button" (click)="close()" [disabled]="saving" class="btn btn-danger"><i class="fa fa-close"></i> <span>{{"X" | localize}}</span></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form class="kt-form kt-form--label-right">
+                    <div class="row" *ngIf="set !== 'preview'">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">{{"AffiliatePartner" | localize}}</label>
+                                <div class="col-8">
+                                    <input class="form-control" type="text" id="AffiliatePartner" value="{{item.AffiliatePartner}}" disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label">{{"Website" | localize}}</label>
+                                <a href="{{item.Website}}" target="_blank">
+                                    <label class="col-10 col-form-label">{{item.Website}}</label>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="set !== 'preview'">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">{{"EventTitle" | localize}}</label>
+                                <div class="col-8">
+                                    <input class="form-control" type="text" id="Banner" value="{{item.Banner}}" disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">{{"Type" | localize}}</label>
+                                <div class="col-8">
+                                    <input class="form-control" type="text" id="Type" value="{{item.Type}}" disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="kt-badge kt-badge--inline kt-badge--warning" *ngIf="item.Status === 0">{{"PendingAdminApproval" | localize}}</span>
+                            <span class="kt-badge kt-badge--inline kt-badge--warning" *ngIf="item.Status === 1">{{"PendingManagerApproval" | localize}}</span>
+                            <span class="kt-badge kt-badge--inline kt-badge--success" *ngIf="item.Status === 2">{{"Approved" | localize}}</span>
+                            <span class="kt-badge kt-badge--inline kt-badge--danger" *ngIf="item.Status === 99">{{"Rejected" | localize}}</span>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="set !== 'preview'">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">{{"UniqueID" | localize}}</label>
+                                <div class="col-8">
+                                    <input class="form-control" type="text" id="LineCode" value="{{item.LineCode}}" disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">{{"Width" | localize}}</label>
+                                <div class="col-8">
+                                    <input class="form-control" type="text" id="Width" value="{{item.Width}} px" disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">{{"Height" | localize}}</label>
+                                <div class="col-8">
+                                    <input class="form-control" type="text" id="Height" value="{{item.Height}} px" disabled="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center" *ngIf="set !== 'preview'">
+                            <div class="col-md-12">
+                                <!-- <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(bannerDoc + item.PathRef" alt="img" style="width: inherit;"> -->
+                                <!-- <img [src]="item.PathRef" style="width: inherit;"> -->
+                                <img src="{{item.DocPath}}" alt="" style="width: inherit;">
+                            </div>
+                    </div>
+                    <!--Only Preveiw-->
+                    <div class="row align-items-center" *ngIf="set === 'preview'">
+                            <div class="col-md-12">
+                                <!-- <img [src]="_DomSanitizationService.bypassSecurityTrustUrl(bannerDoc + item.PathRef" alt="img" style="width: inherit;"> -->
+                                <!-- <img [src]="item.PathRef" style="width: inherit;"> -->
+                                <img src="{{image}}" alt="" style="width: inherit;">
+                            </div>
+                    </div>
+                    <div class="m-separator m-separator--dashed" style="margin-bottom: 20px;"></div>
+                    <div class="col-md-12" *ngIf="item.Status === 2 && item.ItemDesc_B !== '' && set !== 'preview'">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>{{"ChannelCopyToClipboard" | localize}}</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea #title="ngModel" class="form-control" rows="5" name="script" [(ngModel)]="item.ItemDesc_B" [disabled]="true"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: right;">
+                                <button type="button" (click)="copytoclipboard(item.ItemDesc_B)" class="btn btn-secondary"><i class="fa fa-copy"></i> <span>{{"CopyToClipboard" | localize}}</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="set !== 'preview'">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="required">{{"PriceCI" | localize}}</label>
+                                    <input type="number" name="priceci" [(ngModel)]="item.UnitPriceReq_C" class="form-control" [disabled]="setPriceDisabled()">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="required">{{"PriceCK" | localize}}</label>
+                                    <input type="number" name="priceck" [(ngModel)]="item.TotalPriceBase" class="form-control" [disabled]="setPriceDisabled()">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="required">{{"PriceCTR" | localize}}</label>
+                                    <input type="number" name="pricectr" [(ngModel)]="item.UnitPriceRef" class="form-control" [disabled]="setPriceDisabled()">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="required">{{"PriceAPV" | localize}}</label>
+                                    <input type="number" name="priceapv" [(ngModel)]="item.UnitPriceReqVar" class="form-control" [disabled]="setPriceDisabled()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="btnHidediv()">
+                            <div class="col-md-12" style="text-align: right;">
+                                <button type="button" (click)="galleryApprove(99)" class="btn btn-secondary"><i class="fa fa-close"></i> <span>{{"Reject" | localize}}</span></button>
+                                <button type="button" (click)="galleryApprove(1)" class="btn btn-secondary"><i class="fa fa-check"></i> <span>{{"Approve" | localize}}</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

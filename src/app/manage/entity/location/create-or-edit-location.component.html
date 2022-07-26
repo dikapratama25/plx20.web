@@ -1,0 +1,114 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+  <div class="modal-dialog modal-lg">
+    <!-- <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"> -->
+    <div class="modal-content">
+      <form *ngIf="active" #branchCreateForm="ngForm" novalidate (ngSubmit)="save()">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <span>{{modalTitle}} - {{modalSubTitle}}</span>
+          </h4>
+          <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div *ngIf="locationType === locTypeEnum.Country">
+            <div class="form-group">
+              <label for="CountryCode">{{"CountryCode" | localize}} *</label>
+              <input id="CountryCode" #countryCodeInput="ngModel" class="form-control" type="text" name="CountryCode" [(ngModel)]="inputHelper.CountryCode" required maxlength="2" [disabled]="isView">
+              <validation-messages [formCtrl]="countryCodeInput"></validation-messages>
+            </div>
+
+            <div class="form-group">
+              <label for="CountryDesc">{{"CountryDesc" | localize}} *</label>
+              <input id="CountryDesc" #countryDescInput="ngModel" class="form-control" type="text" name="CountryDesc" [(ngModel)]="inputHelper.CountryDesc" required maxlength="100" [disabled]="isView">
+              <validation-messages [formCtrl]="countryDescInput"></validation-messages>
+            </div>
+          </div>
+          
+          <div *ngIf="locationType !== locTypeEnum.Country">
+            <div class="form-group required">
+              <label>{{'Country' | localize }} :</label>
+              <ng-select #country="ngModel" name="countryCombo" [(ngModel)]="selectedCountry"
+                  [items]="countryList" [closeOnSelect]="true" id="countryCombo" bindValue="Code" 
+                  bindLabel="Remark" (change)="onCountryChanged()" [disabled]="isView" required>       
+              </ng-select>
+              <validation-messages [formCtrl]="country"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType !== locTypeEnum.Country && locationType !== locTypeEnum.State">
+            <div class="form-group required">
+              <label>{{'State' | localize }} :</label>
+              <ng-select #state="ngModel" name="stateCombo" [(ngModel)]="selectedState"
+                  [items]="stateList" [closeOnSelect]="true" id="stateCombo" bindValue="Code" 
+                  bindLabel="Remark" (change)="onStateChanged()" [disabled]="isView" required>       
+              </ng-select>
+              <validation-messages [formCtrl]="state"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType !== locTypeEnum.Country && locationType !== locTypeEnum.State && locationType !== locTypeEnum.City">
+            <div class="form-group required">
+              <label>{{'City' | localize }} :</label>
+              <ng-select #city="ngModel" name="cityCombo" [(ngModel)]="selectedCity"
+                  [items]="cityList" [closeOnSelect]="true" bindValue="Code"
+                  bindLabel="Remark" (change)="onCityChanged()" [disabled]="isView" required>        
+              </ng-select>
+              <validation-messages [formCtrl]="city"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType === locTypeEnum.State">
+            <div class="form-group">
+              <label for="StateCode">{{"StateCode" | localize}} *</label>
+              <input id="StateCode" #stateCodeInput="ngModel" class="form-control" type="text" name="StateCode" [(ngModel)]="inputHelper.StateCode" required maxlength="2" [disabled]="isView">
+              <validation-messages [formCtrl]="stateCodeInput"></validation-messages>
+            </div>
+
+            <div class="form-group">
+              <label for="StateDesc">{{"StateDesc" | localize}} *</label>
+              <input id="StateDesc" #stateDescInput="ngModel" class="form-control" type="text" name="StateDesc" [(ngModel)]="inputHelper.StateDesc" required maxlength="100" [disabled]="isView">
+              <validation-messages [formCtrl]="stateDescInput"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType === locTypeEnum.City">
+            <div class="form-group">
+              <label for="CityCode">{{"CityCode" | localize}} *</label>
+              <input id="CityCode" #cityCodeInput="ngModel" class="form-control" type="text" name="CityCode" [(ngModel)]="inputHelper.CityCode" required maxlength="2" [disabled]="isView">
+              <validation-messages [formCtrl]="cityCodeInput"></validation-messages>
+            </div>
+
+            <div class="form-group">
+              <label for="CityDesc">{{"CityDesc" | localize}} *</label>
+              <input id="CityDesc" #cityDescInput="ngModel" class="form-control" type="text" name="CityDesc" [(ngModel)]="inputHelper.CityDesc" required maxlength="100" [disabled]="isView">
+              <validation-messages [formCtrl]="cityDescInput"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType === locTypeEnum.Area">
+            <div class="form-group">
+              <label for="AreaCode">{{"AreaCode" | localize}} *</label>
+              <input id="AreaCode" #areaCodeInput="ngModel" class="form-control" type="text" name="AreaCode" [(ngModel)]="inputHelper.AreaCode" required maxlength="2" [disabled]="isView">
+              <validation-messages [formCtrl]="areaCodeInput"></validation-messages>
+            </div>
+
+            <div class="form-group">
+              <label for="AreaDesc">{{"AreaDesc" | localize}} *</label>
+              <input id="AreaDesc" #areaDescInput="ngModel" class="form-control" type="text" name="AreaDesc" [(ngModel)]="inputHelper.AreaDesc" required maxlength="100" [disabled]="isView">
+              <validation-messages [formCtrl]="areaDescInput"></validation-messages>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{"Cancel" | localize}}</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!branchCreateForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="row kt-margin-r-60 kt-margin-t-20 kt-margin-l-20">
+	<div class="col-lg-12">
+	   <div class="kt-portlet">
+		  <div class="kt-portlet__head">
+			 <div class="kt-portlet__head-label">
+				<div class="" style="padding: 1.5em 0;">
+				   <h1 class="kt-portlet__head-title kt-font-dark" style="font-size: 1.5em;">{{eventName}}</h1>
+				   <div style="padding-top: 6px;">{{eventID}}</div>
+				</div>
+			 </div>
+			 <div class="kt-portlet__head-toolbar">
+				<div class="kt-portlet__head-actions">
+				   <div class="" style="padding: 1em;text-align: right;">
+					  <h4 class="kt-portlet__head-title kt-font-primary" style="font-size: 1.5em;color: var(--orange) !important;">
+						<countdown #cd [config]="{leftTime: 1800, format: 'HH:mm:ss'}" (event)="incrementTimer($event)"></countdown>
+					  </h4>
+					  <div>{{'OpeningValidation' | localize}}</div>
+				   </div>
+				</div>
+			 </div>
+		  </div>
+		  <div class="kt-portlet__body">
+			 <div class="kt-section kt-section--first">
+				<div class="row">
+				   <div class="col-md-3">
+					  <div class="form-group">
+						 <label>{{'EventClosingDate' | localize}}</label>
+						 <input type="text" class="form-control clTheme" disabled="" [value]="eventCloseDate">
+					  </div>
+				   </div>
+				   <div class="col-md-3">
+					  <div class="form-group">
+						 <label>{{'ReviewerType' | localize}}</label>
+						 <input type="tetx" class="form-control clTheme" disabled="" [(ngModel)]="reviewerType">
+					  </div>
+				   </div>
+				   <div class="col-md-3">
+					  <div class="form-group">
+						 <label>{{'OpeningStatus' | localize}}</label>
+						 <input type="text" class="form-control clTheme" disabled="" [(ngModel)]="openingStatus">
+					  </div>
+				   </div>
+				</div>
+				<div class="row" *ngIf="isCommitteeWitness">
+				   <div class="col-lg-12">
+					  <div class="kt-portlet kt-callout" style="background-color: #e6e7e8;padding: 0;">
+						 <div class="kt-portlet__body" >
+							<div class="kt-callout__body">
+							   <div class="kt-callout__content" style="flex: 1;">
+								  <h3 class="kt-callout__title">{{'Attention' | localize}}</h3>
+								  <p class="kt-callout__desc">{{'OpeningEnvelopeNote' | localize}}</p>
+							   </div>
+							   <div class="kt-callout__action" >
+								  <div class="row" style="width: 100%;">
+									 <div class="col-lg-12">
+										<div class="">
+										   <label>{{'EnterAuthCodeNote' | localize}}</label>
+										   <div class="row">
+											    <div id="otpWrp" class="col-lg-8">
+											  		<ng-otp-input #otp (onInputChange)="onOtpChange($event)" [config]="{length:6, allowNumbersOnly: true}"></ng-otp-input>
+												</div>
+												<div class="col-lg-4">
+													<button class="btn btn-custom btn-bold btn-upper btn-font-sm" [disabled]="isCheckIn || !isCommitteeWitness" (click)="sendCheckIn()" style="border-radius: 50px;background-color: var(--success);color: #fff;min-width: 120px;padding: 0.8em;">{{'CheckIn' | localize}}</button>
+											   </div>
+											</div>
+										   <div class="row">
+											   <div class="col-lg-8">
+													<button class="bg-transparent border-0" style="display: block;padding-top: 8px;margin-top:1em; color: #007ad9" (click)="sendAuthCode()" [disabled]="isResendOtp || isCheckIn || !isCommitteeWitness">{{'SendAuthCodeNote' | localize}}</button>
+													<countdown [hidden]="true" #cdResend [config]="{leftTime: 180, format: 'mm:ss', demand: true}" (event)="resendOtpCount($event)"></countdown>
+											   </div>
+										   </div>
+										</div>
+									 </div>
+								  </div>
+							   </div>
+							</div>
+						 </div>
+					  </div>
+				   </div>
+				</div>
+				<div class="row">
+				   <div class="col-lg-12">
+					  <div>
+						<tabset #mainTabs class="nav nav-tabs nav-tabs-line nav-tabs-line-2x nav-tabs-line-success clTheme">
+							<tab heading="{{'Attendees' | localize}}">
+								<div class="form-group">
+									<base-list #baselistTabAttendList [(gridUrl)]="gridAttendUrl" detailAligment="left"
+										[enableFilter]="false" [indexing]="true" (onLoadFinished)="onAttendLoadFinished()">
+									</base-list>
+								</div>
+							</tab>
+							<tab heading="{{'Participants' | localize}}" *ngIf="isDoneOpening">
+								<div class="form-group">
+									<base-list #baselistTabParticipantList [(gridUrl)]="gridParticipantUrl" detailAligment="left"
+										[enableFilter]="false" [indexing]="true">
+									</base-list>
+								</div>
+							</tab>
+						</tabset>
+					  </div>
+				   </div>
+				</div>
+			 </div>
+		  </div>
+	   </div>
+	</div>
+ </div>

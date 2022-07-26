@@ -1,0 +1,188 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+
+        <!-- begin:: Subheader -->
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div [class]="containerClass">
+
+                <div class="kt-subheader__main">
+                    <button type="button" style="margin-right:15px;" (click)="goBack()"
+                        class="btn btn-outline-metal back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Questionnaire" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{(mode == 0 ? "Preview" : mode == 1 ? "SubmitQuestionnaire" :
+                            "ReviewQuestionnaire") | localize}}</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- end:: Subheader -->
+
+        <div [class]="containerClass">
+            <div class="kt-portlet kt-portlet--mobile">
+
+                <div class="kt-portlet__head">
+                    <div class="row col-md-11 col-sm-10">
+                        <div class="kt-portlet__head-label col-md-6">
+                            <h5>{{companyName}}</h5>
+                        </div>
+                        <div class="kt-portlet__head-label col-md-6 kt-align-right">
+                            <span class="col-md-4 kt-font-bold kt-label-font-color-3">{{section.TotalAmt + ' of ' +
+                                section.TotalQty}}
+                            </span>
+                            <ng-select class="col-md-8" [(ngModel)]="section" [items]="options" [closeOnSelect]="true"
+                                bindLabel="remark" [searchable]="false" [clearable]="false" (change)="getQuestion()">
+                                <ng-template ng-label-tmp let-item="item">
+                                    <h3 class="kt-portlet__head-title">{{item.SecDesc}}</h3>
+                                </ng-template>
+                                <ng-template ng-option-tmp let-item="item">
+                                    {{item.SecDesc}}<br />
+                                    <small>{{item.TotalAmt + ' of ' + item.TotalQty + ' Completed'}}</small>
+                                </ng-template>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div style="background: rgba(44, 119, 244, 0.1); border-color: transparent; padding: 18px;"
+                        class="kt-portlet__head-label kt-portlet__wrapper flex-center">
+                        <label style="color: #2c77f4;" class="kt-portlet__head-title">{{totalAnswered +' / '+
+                            totalQuestion}}</label>
+                    </div>
+                </div>
+
+                <div class="kt-portlet__body">
+
+                    <div class="kt-grid__item kt-grid__item--fluid">
+                        <!--begin: Form Wizard Form-->
+                        <form class="kt-form" id="kt_form">
+                            <div class="kt-portlet__head-label displayFlex" style="padding:2em;padding-bottom: 0;">
+                                <span class="kt-portlet__head-icon" style="padding-right:1em;">
+                                    <i class="flaticon-file-2"></i>
+                                </span>
+                                <h5 class="kt-portlet__head-title headTitleEvt">{{campID}} - {{eventName}}</h5>
+                            </div>
+                            <div class="row" style="float:right;margin-bottom:30px;" *ngIf="showLegend===true">
+                                <div class="col-md-2 col-md-offset-1">
+                                    <div class="card text-center" style="width:'100px';height: 70px;">
+                                        <div class="card-body">
+                                            <p class="card-title"><b>Excellent</b></p>
+                                            <p class="card-text">5</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card text-center" style="width:'100px';height: 70px;">
+                                        <div class="card-body">
+                                            <p class="card-title"><b>Good</b></p>
+                                            <p class="card-text">4 </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card text-center" style="width:'100px';height: 70px;">
+                                        <div class="card-body">
+                                            <p class="card-title"><b>Fair</b></p>
+                                            <p class="card-text">3 </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card text-center" style="width:'100px';height: 70px;">
+                                        <div class="card-body">
+                                            <p class="card-title"><b>Poor</b></p>
+                                            <p class="card-text">2 </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="card text-center" style="width:'100px';height: 70px;">
+                                        <div class="card-body">
+                                            <p class="card-title"><b>Very Poor</b></p>
+                                            <p class="card-text">1 </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--begin: Form Wizard Step 1-->
+                            <div *ngFor="let item of questionList;">
+                                <div class="col-md-12">
+                                    <div *ngIf="item.SeqNo === 1 && item.GrpNo !== 0" class="kt-heading kt-heading--md">
+                                        {{ romanize(item.GrpNo) + '. ' + item.GrpDesc}}</div>
+                                    <div class="kt-form__section kt-form__section--first">
+                                        <div class="col-md-12">
+
+                                            <questionnaire-field
+                                                id="{{item.SecNo + '-' + item.GrpNo + '-' + item.SeqNo}}"
+                                                [answerValue]="item.Value" [remarkValue]="item.Remark"
+                                                [options]=item.Opt [questionNo]="item.SeqNo" [question]="item.SeqDesc"
+                                                (onSelect)="onSelect($event, item)" [mode]="mode"
+                                                (onRemarkChange)="onRemarkChange($event, item)"
+                                                (onRemarkClear)="onRemarkClear(item)"
+                                                (onRemarkBlur)="onRemarkBlur($event, item)"></questionnaire-field>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <!--end: Form Wizard Form-->
+                    </div>
+
+                </div>
+
+                <!-- <div class="kt-portlet__foot">
+                    <div class="kt-form__actions">
+                        <div class="row text-right">
+                            <div class="col-12">
+                                <button *ngIf="section.No != 0"
+                                    class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                    (click)="onPrev()" type="button">{{"Previous" | localize}}</button>&nbsp;
+                                <button *ngIf="section.No < (options.length - 1)"
+                                    class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                    (click)="onNext()" type="button">{{"Next" | localize}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="kt-portlet__foot">
+                    <div class="row align-items-center">
+                        <div class="col-md-8 kt-portlet__foot-label m--valign-middle">
+                            <div *ngIf="mode == 3" class="row">
+                                <div class="col-md-5 input-group">
+                                    <span class="col-md-4">{{'Response' | localize }}</span>
+                                    <ng-select class="col-md-8" [(ngModel)]="section.ResponseOptID"
+                                        [items]="responseOptions" [closeOnSelect]="true" bindLabel="ResponseText"
+                                        bindValue="ResponseOptID" (change)="onSelectedResponse($event)">
+                                    </ng-select>
+                                </div>
+                                <textarea class="col-md-6" rows="1" spellcheck="true" placeholder="Add Remark.."
+                                    [(ngModel)]="section.Remark" (blur)="saveResponse()">{{section.Remark}}</textarea>
+                                <span class="col-md-1 kt-font-bold kt-label-font-color-3">{{section.TotalAmt + ' of ' +
+                                    section.TotalQty}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 kt-align-right">
+                            <button *ngIf="section.No != 0"
+                                class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                (click)="onPrev()" type="button">{{"Previous" | localize}}</button>&nbsp;
+                            <button *ngIf="section.No < (options.length - 1)"
+                                class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                                (click)="onNext()" type="button">{{"Next" | localize}}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+
+
+                           <!--Begin::Portlet-->
+                           <div class="kt-portlet kt-portlet--height-fluid">
+                              <div class="kt-portlet__head kt-portlet__head--noborder">
+                                 <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                    </h3>
+                                 </div>
+                                 <div class="kt-portlet__head-toolbar">
+
+                                 </div>
+                              </div>
+                              <div class="kt-portlet__body">
+                                 <!--begin::Widget -->
+                                 <div class="kt-widget kt-widget--user-profile-2">
+                                    <div class="kt-widget__head">
+                                       <div class="kt-widget__media">
+                                          <div class="counterLot">
+                                             <div class="textCounter btn-success" style="
+                                                   padding: 1.5rem;
+                                                   line-height: 1.7rem;
+                                                   border-radius: 10px;
+                                                   text-align: right;
+                                                   ">
+                                                <div class="textCtr" style="
+                                                      font-size: 2.7rem;
+                                                      ">{{item.Total}}</div>
+                                                <div class="lblCtr">Lot</div>
+                                             </div>
+                                          </div>
+                                          <div
+                                             class="kt-widget__pic kt-widget__pic--success kt-font-success kt-font-boldest kt-hidden">
+                                             ChS
+                                          </div>
+                                       </div>
+                                       <div class="kt-widget__info">
+                                          <a href="#" class="kt-widget__username">{{item.Remark}}</a>
+                                          <span class="kt-widget__desc">{{item.BizLocID}}</span>
+                                       </div>
+                                    </div>
+                                    <div class="kt-widget__body">
+                                       <div class="kt-widget__item kt-margin-t-30">
+                                          <div class="kt-widget__contact">
+                                             <span class="kt-widget__label">{{"Email" | localize}} :</span>
+                                             <a href="#" class="kt-widget__data">{{item.Email}}</a>
+                                          </div>
+                                          <div class="kt-widget__contact">
+                                             <span class="kt-widget__label">{{"TelNo" | localize}} :</span>
+                                             <a href="#" class="kt-widget__data">{{item.TelNo}}</a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                       <button type="button" (click)="detail(item)" class="btn btn-label-brand btn-lg btn-upper">View
+                                          Detail</button>
+                                    </div>
+                                 </div>
+                                 <!--end::Widget -->
+                              </div>
+                           </div>
+                           <!--End::Portlet-->
+                        

@@ -1,0 +1,293 @@
+<div class="kt-login__form" [@routerTransition]>
+   <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-padding-0">
+       <div class="kt-container kt-container--fluid  kt-grid__item kt-grid__item--fluid kt-padding-0">
+           <div class="kt-portlet__body">
+               <div class="maxWrp">
+                  <div class="siteWrp">
+                     <form #installmentForm="ngForm" name="installmentForm" id="installment">
+                        <div id="headerSite" style="display: block;">
+                           <!-- <img src="img/TM unifi.png"/> -->
+                           <div id="companyID">BORANG PERMOHONAN PEMBIAYAAN</div>
+                           <div id="formName" class="displayFlex">
+                              <div class="formName">NO: </div>
+                              <input type="text" name="inputName" id="inputName" [(ngModel)]="transNo" disabled="">
+                           </div>
+                           <div class="footNote">Sila baca boring permohonan ini dengan teliti sebelum dilengkapkan. Sila isi dengan jelas dan nyata</div>
+                        </div>
+                        <div id="contentSlide">
+                           <div id="formSection">
+                              <div class="rowItem">
+                                 <h3>PEMOHON</h3>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="sectionTitle">1.	KETERANGAN PERIBADI</div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Nama Penuh</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.FullName" type="text" name="FullName" id="FullName" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">No IC</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.NRICNo" type="number" name="NRICNo" id="NRICNo" maxlength="16" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">Tarikh Lahir</div>
+                                 <div class="inputWrp">
+                                    <input class="form-control" [disabled]="mode === 2" [value]="inputProfile.DOB | date:'yyyy-MM-dd'" (input)="changeDob($event.target.value)" type="date" name="DOB" id="DOB" required>
+                                 </div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">No Gaji</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.PayNo" type="number" name="PayNo" id="PayNo" maxlength="16" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">No Anggota</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.MemberNo" type="number" name="MemberNo" id="MemberNo" maxlength="16" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">Nama Bank</div>
+                                 <div class="inputWrp">
+                                    <select [(ngModel)]="inputProfile.BankName" name="BankName" id="BankName" [disabled]="mode === 2">
+                                       <option disabled selected="selected">Sila pilih satu</option>
+                                       <option value="cimb">CIMB</option>
+                                       <option value="maybank">Maybank</option>
+                                       <option value="pbb">Public Bank Berhad</option>
+                                       <option value="rhb">RHB Bank</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">No Akaun Bank</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.BankAccountNo" type="number" name="BankAccountNo" id="BankAccountNo" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">Alamat Rumah</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.Address1" type="text" name="Address1" id="Address1" required></div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.Address2" type="text" name="Address2" id="Address2"></div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.Address3" type="text" name="Address3" id="Address3"></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">Postkod</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.PostalCode" type="number" name="PostalCode" id="PostalCode" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">No HP</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.MobileNo" type="text" name="MobileNo" id="MobileNo" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">Status Kediaman</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputProfile.ResidenceStatus" type="text" name="ResidenceStatus" id="ResidenceStatus" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="sectionTitle">2.	MAJIKAN</div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Nama Jabatan</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" type="text" [(ngModel)]="inputCompany.DepartmentName" name="DepartmentName" id="DepartmentName" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Bahagian/Unit</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" type="text" [(ngModel)]="inputCompany.Organization" name="Organization" id="Organization" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Alamat (Jabatan)</div>
+                                 <div class="inputWrp">
+                                    <input [disabled]="mode === 2" [(ngModel)]="inputCompany.Address1" type="text" name="AddressC1" id="AddressC1" required>
+                                    <input [disabled]="mode === 2" [(ngModel)]="inputCompany.Address2" type="text" name="AddressC2" id="AddressC2">
+                                    <input [disabled]="mode === 2" [(ngModel)]="inputCompany.Address3" type="text" name="AddressC3" id="AddressC3">
+                                 </div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Poskod</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputCompany.PostalCode" type="number" name="PostalCodeC" id="PostalCodeC" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">No Tel</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputCompany.ContactTelNo" type="text" name="ContactTelNoC" id="ContactTelNoC" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Sambungan</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputCompany.Extension" type="number" name="Extension" id="Extension" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Jawatan</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputCompany.Position" type="text" name="Position" id="Position" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Gaji Pokok (RM)</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputCompany.Salary" type="number" name="Salary" id="Salary" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Tahun Berkhidmat</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputCompany.OpStartDate" type="number" name="OpStartDate" id="OpStartDate" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Taraf Jawatan</div>
+                                 <div class="inputWrp">
+                                    <input [disabled]="mode === 2" [checked]="inputCompany.TarafJawatan === 'fixed'" type="radio" id="fixed" name="taraf" value="fixed" (click)="changeTaraf('fixed')">
+                                    <label for="fixed">Tetap</label><br>
+                                    <input [disabled]="mode === 2" [checked]="inputCompany.TarafJawatan === 'contract'" type="radio" id="contract" name="taraf" value="contract" (click)="changeTaraf('contract')">
+                                    <label for="contract">Kontrak</label>
+                                 </div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Saya memohon Pembayaran sebanyak RM</div>
+                                 <div class="inputWrp"><input [disabled]="mode === 2" [(ngModel)]="inputItem.Amount" type="number" name="Amount" id="Amount" required></div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label ">Tempoh Ansuran</div>
+                                 <div class="inputWrp">
+                                    <select [disabled]="mode === 2" [(ngModel)]="inputItem.Duration" name="Duration" id="Duration">
+                                       <option disabled selected="selected">Sila pilih satu</option>
+                                       <option value="1">1</option>
+                                       <option value="2">2</option>
+                                       <option value="3">3</option>
+                                       <option value="4">4</option>
+                                       <option value="5">5</option>
+                                       <option value="6">6</option>
+                                       <option value="7">7</option>
+                                       <option value="8">8</option>
+                                       <option value="9">9</option>
+                                       <option value="10">10</option>
+                                       <option value="11">11</option>
+                                       <option value="12">12</option>
+                                       <option value="13">13</option>
+                                       <option value="14">14</option>
+                                       <option value="15">15</option>
+                                       <option value="16">16</option>
+                                       <option value="17">17</option>
+                                       <option value="18">18</option>
+                                       <option value="19">19</option>
+                                       <option value="20">20</option>
+                                       <option value="21">21</option>
+                                       <option value="22">22</option>
+                                       <option value="23">23</option>
+                                       <option value="24">24</option>
+                                       <option value="25">25</option>
+                                       <option value="26">26</option>
+                                       <option value="27">27</option>
+                                       <option value="28">28</option>
+                                       <option value="29">29</option>
+                                       <option value="30">30</option>
+                                       <option value="31">31</option>
+                                       <option value="32">32</option>
+                                       <option value="33">33</option>
+                                       <option value="34">34</option>
+                                       <option value="35">35</option>
+                                       <option value="36">36</option>
+                                    </select>
+                                 </div>
+                              </div>
+                              <div class="rowItem">
+                                 <div class="label">Jenis Pembiayaan</div>
+                                 <div class="inputWrp">
+                                    <select [disabled]="mode === 2" [(ngModel)]="inputItem.Pembiayaan" name="Pembiayaan" id="Pembiayaan">
+                                       <option value="barangan" selected="selected">Barangan</option>
+                                       <option value="tunaiBersih">Tunai Bersih</option>
+                                       <option value="kecemasan">Kecemasan</option>
+                                       <option value="bertindih">Bertindih</option>
+                                       <option value="pendidikan">Pendidikan</option>
+                                       <option value="motorsikal">Motorsikal</option>
+                                       <option value="yuran90">90% Yuran</option>
+                                       <option value="umrahTravel">Umrah/Travel</option>
+                                       <option value="umrahTravel">Takaful</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="checkBoxWrp" *ngIf="mode === 1">
+                              <div class="checkWrp">
+                                 <span><input [(ngModel)]="checkAgree1" (click)="checkedAgree1()" id="sliCheckBox1" type="checkbox"/></span><span>I agree to SLI's <a href="https://www.questil.com/esharemicrosite/termncondition.html">Terms and Conditions</a></span>
+                              </div>
+                              <div class="checkWrp">
+                                 <span><input [(ngModel)]="checkAgree2" (click)="checkedAgree2()" id="sliCheckBox2" type="checkbox" /></span><span>I agree to the Terms and Conditions for participating in the <a href="https://malaysia.iqos.com/en/termsofuse?utm_source=angkasa&utm_medium=referral&utm_campaign=angkasa">IQOS Care Plus Program</a></span>
+                              </div>
+                              <div class="checkWrp">
+                                 <span><input [(ngModel)]="checkAgree3" (click)="checkedAgree3()" id="sliCheckBox3" type="checkbox" /></span><span>I agree to PMI's <a href="https://www.pmiprivacy.com/en/consumer">Consumer Privacy Notice</a></span>
+                              </div>
+                              <!-- <div class="checkWrp">
+                                 <span><input id="sliCheckBox3" type="checkbox" onclick="myFunction()"/></span><span>I agree to PMI's <a href="https://www.pmiprivacy.com/en/consumer">Consumer Privacy Notice</a></span>
+                              </div> -->
+                           </div>
+                           <div id="koperasiApply" *ngIf="mode === 1">
+                              <button id="btnKoperasi" [disabled]="!(checkAgree1 && checkAgree2 && checkAgree3) || installmentForm.form.status!='VALID'" class="btnProceedUnify" (click)="proceed()">Proceed</button>
+                              <!-- <input id="btnKoperasi" class="btnProceedUnify" type="submit" value="Proceed"> -->
+                           </div>
+                        </div>
+                     </form>
+                     <div id="disclaimerSection" *ngIf="mode === 2">
+                        <div class="borderedWrp">
+                           <h4>Dengan ini Saya/Kami mengaku bahwa</h4>
+                           <ol>
+                              <li>Kami dengan ini mengaku menjadi penjamin kepada pembiayaan tersebut dan sesungguhnya faham tanggungan Kami sekiranya Pelanggan mungkin Janji, dan Kami berpuashati yang pembiyaan ini digunakan bagi maksud di atas.</li>
+                              <li>Kami yang bertandatangan di bawah ini bersama-sama bertalian dan kesemuanya bersetuju jika sekiranya Pelanggan ingkar atau gagal membayar membayar pembiayaan yang di perolehnya atau sebarang ansuran pembiayaan yang tercicir baginya sepertimana yang tercatat di atas, Kami akan diminta dengan segera bersama-sama bertalian dan kesemuanya membayar pembiyaan tersebut atau ansuran pembiayaan sepertimana dipersetujui kepada koperasi ini atau Wakilnya.</li>
+                              <li>Seterusnya Kami dengan ini bersama-sama bertalian dan kesemuanya bersetuju, sekiranya kami gagal untuk menjelaskan pembiyaan tersebut atau sebarang ansuran pembiyaan yang tercicir baginya, maka Anggota Lembaga Koperassi bolehlah menuntut jumlah hutang - hutang kami dengan cra memotong dari gaji - gaji kami sepertimana yang tersirat atas tuntutan pembiyaan mengikut Kaedah-Kaedah Undang-Undang Kecil Koperasi.</li>
+                              <li>Saya, dengan ini juga memberi kuasa ketua Jabatan Saya atu Pegawai yang diberi kuasa memotong gaji saya untuk amaun pembiayaan mulai dari bulan pembiayaan diberi sehingga pembiayaan ini selesai dibayar.</li>
+                              <li>Dengan ini saya mengaku tidak akan berhenti daripada perkhidmatan Jabatn sehingga pembiayaan ini selesai dibayar, dan sekiranya tiada potongan dibuat daripada gaji saya dalam tempoh 2 bulan daripada tarikh pembiayaan ini diambil, saya akan membayar sendiri ke Pejabat Koperasi ini.</li>
+                              <li>Segala maklumat yang diberikan adalah benar dan betul. Saya/Kami tidak menyembunyikan sebarang fakta penting.</li>
+                              <li>Saya/Kami bukan seorang yang bankrap (muflis) dan tiada sebarang tindakan guaman diambil ke atas Saya/Kami.</li>
+                              <li>Saya/Kami faham bahawa Koperasi mempunyai hak untuk menolak permohonan ini tanpa memberi sebarang sebab.</li>
+                           </ol>
+                        </div>
+                        <div>
+                           <div class="pringatan">
+                              <h4>Peringatan</h4>
+                              <p>Sila Kemungkinan 1 Salinan Kad Pengenalan dan Slip Gaji Terbaru yang di sahkan bagi pemohon dan setiap penjamin</p>
+                           </div>
+                           <div class="pringatan">
+                              <h4>Taraf Kontrak</h4>
+                              <p>Sila Kemukakan salinan kontrak perkhidmatan</p>
+                           </div>
+                        </div>
+                        <div class="borderedWrp">
+                           <div class="rowItem">
+                              <div class="label ">Tarikh</div>
+                              <div class="inputWrp"><input type="date" [value]="inputProfile.DOB | date:'yyyy-MM-dd'" (input)="changeDob($event.target.value)" name="DOB3" id="DOB3"></div>
+                           </div>
+                           <div class="rowItem">
+                              <div class="label ">No Baucer</div>
+                              <div class="inputWrp"><input type="number" name="noVoucher" id="noVoucher"></div>
+                           </div>
+                           <div class="rowItem">
+                              <div class="label ">No Check</div>
+                              <div class="inputWrp"><input type="number" name="noCheck" id="noCheck"></div>
+                           </div>
+                           <div class="rowItem">
+                              <div class="label ">Jumlah</div>
+                              <div class="inputWrp"><input type="number" name="totPrice" id="totPrice"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div id="headerSite1" style="display: block;" *ngIf="mode === 2">
+                        <!-- <img src="img/TM unifi.png"/> -->
+                        <div id="companyID1" style="margin-top: 1em;">BAYARAN INTERNET BANKING</div>
+                        <div id="formName1" class="displayFlex">
+                           <div class="formName">NO: </div>
+                           <input [(ngModel)]="transNo" style="margin-left:1em; border:1px solid #ccc;" type="text" name="inputName" id="inputName">
+                        </div>
+                        <div class="footNote">Dengan ini saya mengesahkan dan memohon segala pembayaran di buat atas akaun bank  ini.</div>
+                     </div>
+                     <div id="contentSlide1" style="margin-top: 1em;" *ngIf="mode === 2">
+                        <div class="rowItem">
+                           <div class="label ">Nama</div>
+                           <div class="inputWrp"><input [(ngModel)]="inputProfile.FullName" type="text" name="fullName1" id="fullName1" disabled></div>
+                        </div>
+                        <div class="rowItem">
+                           <div class="label ">No IC</div>
+                           <div class="inputWrp"><input [(ngModel)]="inputProfile.NRICNo" type="number" name="noIC1" id="noIC1" disabled></div>
+                        </div>
+                        <div class="rowItem">
+                           <div class="label ">No Telepon HP</div>
+                           <div class="inputWrp"><input [(ngModel)]="inputProfile.MobileNo" type="number" name="noHP1" id="noHP1" disabled></div>
+                        </div>
+                        <div class="rowItem">
+                           <div class="label ">Email</div>
+                           <div class="inputWrp"><input [(ngModel)]="inputProfile.EmailAddress" type="email" name="email1" id="email1" disabled></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+       </div>
+   </div>
+</div>

@@ -1,0 +1,109 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form *ngIf="active" #branchCreateForm="ngForm" novalidate (ngSubmit)="save()">
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <span>{{modalTitle}}</span>
+          </h4>
+          <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="BranchName">{{"BranchName" | localize}} *</label>
+            <input id="BranchName" #branchNameInput="ngModel" class="form-control" type="text" name="BranchName" [(ngModel)]="inputHelper.BranchName" required maxlength="100" [disabled]="isView">
+            <validation-messages [formCtrl]="branchNameInput"></validation-messages>
+          </div>
+
+          <div class="form-group required">
+            <label for="Address1">{{"Address1" | localize }}</label>
+            <input id="Address1" #address1="ngModel" id="address1" type="text" name="Address1" class="form-control" [(ngModel)]="inputHelper.Address1" required [disabled]="isView">
+            <validation-messages [formCtrl]="address1"></validation-messages>
+            <input id="Address2" type="text" name="Address2" class="form-control kt-margin-t-15" [(ngModel)]="inputHelper.Address2" [disabled]="isView">
+            <input id="Address3" type="text" name="Address3" class="form-control  kt-margin-t-15" [(ngModel)]="inputHelper.Address3" [disabled]="isView">
+          </div>
+
+          <div class="form-group">
+            <label for="ContactPerson">{{"ContactPerson" | localize}} *</label>
+            <input id="ContactPerson" #contactPersonInput="ngModel" class="form-control" type="text" name="ContactPerson" [(ngModel)]="inputHelper.ContactPerson" required maxlength="100" [disabled]="isView">
+            <validation-messages [formCtrl]="contactPersonInput"></validation-messages>
+          </div>
+
+          <div class="form-group">
+            <label for="EmailAddress">{{"EmailAddress" | localize}} *</label>
+            <input id="EmailAddress" #emailAddressInput="ngModel" type="email" name="EmailAddress" class="form-control" [(ngModel)]="inputHelper.Email" required maxlength="256" email [disabled]="isView" />
+            <validation-messages [formCtrl]="emailAddressInput"></validation-messages>
+          </div>
+
+          <!-- <div class="form-group">
+            <label for="PhoneNumber">{{"PhoneNumber" | localize}}</label>
+            <input id="PhoneNumber" type="text" name="PhoneNumber" class="form-control" [(ngModel)]="inputHelper.phoneNumber" maxlength="32">
+          </div> -->
+
+          <div class="form-group required">
+            <label>{{'TelNo' | localize }} :</label>
+            <input #companyTelNo="ngModel" id="businessTelNo" type="text" name="businessTelNo" 
+            onkeydown="return ( event.ctrlKey || event.altKey
+                || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                || (95<event.keyCode && event.keyCode<106)
+                || (event.keyCode==8) || (event.keyCode==9)
+                || (event.keyCode>34 && event.keyCode<40)
+                || (event.keyCode==46) || (event.keyCode==189) )"
+            maxlength="12" class="form-control" [(ngModel)]="inputHelper.Tel" required [disabled]="isView">
+            <validation-messages [formCtrl]="companyTelNo"></validation-messages>
+          </div>
+
+          <div class="form-group required">
+            <label>{{'Country' | localize }} :</label>
+            <ng-select #branchCountry="ngModel" name="branchCountryCombo" [(ngModel)]="selectedBranchCountry"
+                [items]="countryList" [closeOnSelect]="true" id="branchCountryCombo" bindValue="Code" 
+                bindLabel="Remark" (change)="onBranchCountryChanged()" required [disabled]="isView">       
+            </ng-select>
+            <validation-messages [formCtrl]="branchCountry"></validation-messages>
+          </div>
+
+          <div class="form-group required">
+            <label>{{'State' | localize }} :</label>
+            <ng-select #branchState="ngModel" name="branchStateCombo" [(ngModel)]="selectedBranchState"
+                [items]="stateList" [closeOnSelect]="true" id="branchStateCombo" bindValue="Code" 
+                bindLabel="Remark" (change)="onBranchStateChanged()" required [disabled]="isView">       
+            </ng-select>
+            <validation-messages [formCtrl]="branchState"></validation-messages>
+          </div>
+
+          <div class="form-group required">
+            <label>{{'City' | localize }} :</label>
+            <ng-select #branchCity="ngModel" name="branchCityCombo" [(ngModel)]="selectedBranchCity"
+                [items]="cityList" [closeOnSelect]="true" bindValue="Code"
+                bindLabel="Remark" (change)="onBranchCityChanged()" required [disabled]="isView">        
+            </ng-select>
+            <validation-messages [formCtrl]="branchCity"></validation-messages>
+          </div>
+
+          <div class="form-group required">
+            <label>{{'Area' | localize }} :</label>
+            <ng-select #branchArea="ngModel" name="brancAreaCombo" [(ngModel)]="selectedBranchArea"
+                [items]="areaList" [closeOnSelect]="true" bindValue="Code"
+                bindLabel="Remark" required [disabled]="isView">        
+            </ng-select>
+            <validation-messages [formCtrl]="branchArea"></validation-messages>
+          </div>
+
+          <!-- <div class="form-group">
+            <label for="UserName">{{"UserName" | localize}} *</label>
+            <input id="UserName" #userNameInput="ngModel" type="text" name="UserName" class="form-control" [(ngModel)]="inputHelper.userName" required maxlength="256">
+            <validation-messages [formCtrl]="userNameInput"></validation-messages>
+          </div> -->
+        </div>
+
+        <div class="modal-footer">
+          <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{"Cancel" | localize}}</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!branchCreateForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

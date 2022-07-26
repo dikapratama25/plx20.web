@@ -1,0 +1,109 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div [class]="containerClass">                
+                <div class="kt-subheader__main">
+              
+                    <h3 class="kt-subheader__title">
+                        <span>{{"MySubscription" | localize}}</span>
+                    </h3>
+                    <!-- <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"Service" | localize}}</span>
+                    </span> -->
+                </div>
+                <!-- <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn" style="background-color: #FF9332;color: #ffffff;" (click)="save()" [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 0 || checkData == 2 || checkData == 4">
+                            <i class="fa fa-search"></i>
+                            {{"BrowseService" | localize}}
+                        </button>
+                    </div>
+                    <div class="kt-subheader__wrapper">
+                        <button class="btn btn-primary" (click)="update()" [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 1 || checkData == 3 || checkData == 5">
+                            <i class="fa fa-plus"></i>
+                            {{"AddSubscription" | localize}}
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div *ngIf="appId != undefined" [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="row col-lg-12 kt-margin-t-20">
+                <div class="col-md-8">
+                    <div class="kt-widget kt-widget--user-profile-1">
+                        <div class="kt-widget__head">
+                            <div class="kt-widget__media">
+                                <div class="kt-avatar" id="kt_user_avatar">
+                                    <div class="kt-avatar__holder" style="background-image: url(assets/dpl/images/Comp.png)"></div>
+                                    
+                                </div>
+                            </div>
+                            <div class="kt-widget__content">
+                                <div class="kt-widget__section">
+                                    <a href="#" class="kt-widget__username">
+                                        {{appName}} 
+                                        <!-- <i class="kt-font-success">Active</i> -->
+                                        <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill kt-badge--rounded kt-margin-l-20" style="border-radius: 5px; background-color: #28961E">Active</span>
+                                    </a>
+                                    <span class="kt-widget__subtitle">
+                                        {{subscriptionName}}
+                                    </span>
+                                    <div class="row kt-margin-t-20">
+                                        <!-- <div class="col-md-6">
+                                            <span class="kt-widget__subtitle">
+                                                Registration Date
+                                                <br>
+                                                01/02/2021
+                                            </span>
+                                        </div> -->
+                                        <div class="col-md-12">
+                                            <span class="kt-widget__subtitle">
+                                                Expired Date
+                                                <br>
+                                                {{subscriptionEndDate}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row kt-block-center" id="edit">
+                        <button (click)="startService()" type="button" class="btn btn-primary btn-wide kt-block-center kt-margin-r-20" style="border-radius: 5px; background-color: transparent; border: 1px solid #AEAFB0; color: #6F6F6F">Start Service</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet kt-portlet--tabs"  style="border-radius: 5px;background-color: #fff;">
+                <div class="kt-portlet__head" style="border-bottom: 1px solid #AEAFB0;">
+                    <div class="kt-portlet__head-toolbar">
+                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-line-2x" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#kt_portlet_base_demo_1_2_tab_content" role="tab">
+                                    {{"SubscriptionPlan" | localize}}
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab">
+                                    Vendor Plan
+                                </a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="kt-container kt-container--fluid kt-grid__item kt-grid__item--fluid" style="padding: 0;">
+                        <select-package #servicepackage [appId]="appId" selectedIndex="0"></select-package>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- end:: Content -->
+    </div>
+</div>
+<!-- <previewBillingModal #previewBillingModal></previewBillingModal> -->

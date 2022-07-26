@@ -1,0 +1,145 @@
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <!-- <h3 class="kt-subheader__title">{{"Event" | localize}}</h3> -->
+                <h3 class="kt-subheader__title">Required Document</h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">Envelope</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Subheader -->
+  
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="filter d-flex justify-content-between">
+            <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Filter
+            </button> -->
+            <a href="" class="kt-subheader__breadcrumbs-link hideThis">{{eventID}} - {{eventName}}</a>
+            <div class="edit-event hideThis">
+              <button type="button" class="btn btn-primary">Next</button>
+            </div>
+        </div>
+  
+
+        <div class="table-data kt-margin-t-30">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__head displayFlex">
+                    <div class="kt-portlet__head-label">
+                        <span class="kt-portlet__head-icon" style="padding-right:1em;"><i class="flaticon-file-2"></i></span>
+                    
+                        <h3  class="kt-portlet__head-title headTitleEvt">{{eventID}} - {{eventName}}</h3>
+                    </div>
+                    <div class="displayFlex" style="justify-content: flex-end;">
+                        <countdown #cd [config]="{leftTime: 27750, format: 'HH:mm:ss'}"></countdown>
+                    </div>
+                </div>
+                <div class="kt-portlet__body  kt-padding-2">
+                   
+
+                    <div id="envelopeWrp" class="displayFlex" >
+                        <!-- <div id="fileUploadEnvWrp">
+                            <div class="tabSetWrp displayFlex">
+                                    <div *ngIf="(mode=='1') || (mode=='0')">
+                                        <div class="tabCtr selected"  openTarget="commercialEnv">Commercial</div>
+                                    </div>
+                                    <div *ngIf="(mode=='2') || (mode=='0')">
+                                        <div class="tabCtr" [ngClass]="(mode=='1')? 'hideThis': ((mode=='0') ? '' : 'selected')" openTarget="technicalEnv">Technical</div>
+                                    </div>
+                            </div>
+                           
+                            <div *ngIf="(mode=='1') || (mode=='0')">
+                                <div id="commercialEnv" class="boxTableFile displayFlex activeTabTarget" >
+                                    <div class="form-group">
+                                        <base-list [permissionDelete]="permissionDelete" actionColumn="actionFlag" #baselistTabA [(gridUrl)]="urlTabA" 
+                                        downloadDoc="downloadFlag" downloadDocAlignment="right" downloadDocLabel="Download" (onDownloadDocClick)="onDownloadClick($event)" 
+                                        [enableFilter]="false" (onDeleteClick)="delete($event)">
+                                            
+                                        </base-list>
+                                    </div>
+                                </div>
+                             </div>
+                             <div *ngIf="(mode=='2') || (mode=='0')">
+                                <div id="technicalEnv" class="boxTableFile displayFlex" [ngClass]="(mode=='1')  ? 'hideThis' : ((mode=='0') ? '' : 'activeTabTarget')" >
+                                    <div class="form-group">
+                                        <base-list [permissionDelete]="permissionDelete" (onDeleteClick)="delete($event)" actionColumn="actionFlag" [(gridUrl)]="urlTabTechnical" 
+                                        downloadDoc="downloadFlag" downloadDocAlignment="right" downloadDocLabel="Download" (onDownloadDocClick)="onDownloadClick($event)" 
+                                        #baselistTabTechnical 
+                                    [enableFilter]="false"> 
+                                            
+                                        </base-list>
+                                    </div>
+                                </div>
+                             </div>
+                        </div> -->
+                        <div id="fileUploadEnvWrp">
+                            <tabset #mainTabs class="tab-container tabbable-line">
+                                <tab heading="{{'Technical' | localize}}" *ngIf="(mode=='2') || (mode=='0')">
+                                    <div class="form-group">
+                                        <base-list [permissionDelete]="permissionDelete" (onDeleteClick)="delete($event)" [actionColumn]="actionFlag" [(gridUrl)]="urlTabTechnical" 
+                                        [downloadDoc]="downloadFlag" downloadDocAlignment="right" downloadDocLabel="Download" (onDownloadDocClick)="onDownloadClick($event)" 
+                                        #baselistTabTechnical 
+                                    [enableFilter]="false"> 
+                                            
+                                        </base-list>
+                                    </div>
+                                </tab>
+                                <tab heading="{{'Commercial' | localize}}" *ngIf="(mode=='1') || (mode=='0')">
+                                    <div class="form-group">
+                                        <base-list [permissionDelete]="permissionDelete" [actionColumn]="actionFlag" #baselistTabA [(gridUrl)]="urlTabA" 
+                                        [downloadDoc]="downloadFlag" downloadDocAlignment="right" downloadDocLabel="Download" (onDownloadDocClick)="onDownloadClick($event)" 
+                                        [enableFilter]="false" (onDeleteClick)="delete($event)">
+                                            
+                                        </base-list>
+                                    </div>
+                                </tab>
+                              
+                            </tabset>
+                        </div>
+                        <div id="uploadUIWrp" *ngIf="campId!==undefined">
+                            <div class="form-group" *ngIf="isGranted('Pages.Event.Envelope.Upload') && (mode=='0')">
+                                <!-- <p-fileUpload #fileUploadInput class="file-upload-container" [multiple]="false" id="fileUploadInput"
+                                [customUpload]="true" name="DefaultFileUploadFileInput[]" [url]="uploadUrl" [accept]="accept"
+                                [maxFileSize]="10000000" (uploadHandler)="uploadHandler($event)"
+                                (onUpload)="onUploadComplete($event)" (onBeforeSend)="onBeforeSend($event)" [showCancelButton]="false"
+                                [chooseLabel]="l('DropZone')" [showUploadButton]="false" (onSelect)="dealWithFiles($event,fileUploadInput)">
+                                <ng-template let-file pTemplate="file" style="width: 100%;">
+                                    </ng-template> 
+                                </p-fileUpload> -->
+                                
+                                <file-upload #fileUploadInput ng-disabled="!uploadedAll" [multiple]="false" id="fileUploadInput"
+                                [customUpload]="true" name="DefaultFileUploadFileInput[]" [APIUrl]="uploadUrl" [accept]="accept"
+                                [maxFileSize]="10000000" [showChoosenUpload]="false" [showUploaded]="false" [showCancelButton]="false"
+                                [chooseLabel]="DropZone"  [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
+                                </file-upload> 
+
+                            </div>
+                            <div id="statUpload">
+                                <div class="statGraph">
+                                </div>
+                                <div class="displayFlex"><div class="lblStat">Total Commercial :</div><div class="valStat">{{totalCommercialFilled}} / {{totalCommercial}}</div></div>
+                                <div class="displayFlex"><div class="lblStat">Total Technical : </div> <div class="valStat">{{totalTechnicalFilled}} / {{totalTechnical}}</div></div>
+                            </div>
+                        </div>
+                    </div>   
+
+                </div>
+            </div>
+        </div>
+
+     
+
+    </div>
+    <!-- end:: Content -->
+  </div>
+
+
+  <selectDoctypeModal #selectDoctypeModal (modalSave)="uploadHandlers($event)"></selectDoctypeModal>

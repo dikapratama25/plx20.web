@@ -1,0 +1,97 @@
+<div appBsModal #createOrEditModal="bs-modal" (onShown)="onShown()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #userForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="profile.upfID">{{"EditEmployee" | localize}}: {{profile.firstName}} {{profile.lastName}}</span>
+                        <span *ngIf="!profile.upfID">{{"CreateNewEmployee" | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <tabset>
+                        <tab heading="{{'EmployeeInformation' | localize}}">
+                            <div class="row">
+                                <div class="col-sm-3 text-center mb-5 mt-5">
+                                    <img src="{{profilePicture}}" width="128" height="128" class="img-thumbnail img-rounded" />
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="form-group">
+                                        <label for="FirstName">{{"FirstName" | localize}} *</label>
+                                        <input id="FirstName" #firstnameInput="ngModel" class="form-control" type="text" name="FirstName" [(ngModel)]="profile.firstName" required maxlength="64">
+                                        <validation-messages [formCtrl]="firstnameInput"></validation-messages>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="LastName">{{"LastName" | localize}} *</label>
+                                        <input id="LastName" #lastnameInput="ngModel" type="text" name="LastName" class="form-control" [(ngModel)]="profile.lastName" required maxlength="64">
+                                        <validation-messages [formCtrl]="lastnameInput"></validation-messages>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ReferralID">{{"ReferralID" | localize}}</label>
+                                <input id="ReferralID" type="text" name="ReferralID" class="form-control" [(ngModel)]="profile.referralID" maxlength="32">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Salutation">{{"Salutation" | localize}}</label>
+                                <select id="Salutation" name="Salutation" class="form-control" [(ngModel)]="profile.salutation">
+                                    <option value="MR">{{'MR'|localize}}</option>
+                                    <option value="MRS">{{'MRS'|localize}}</option>
+                                    <option value="MS">{{'MS'|localize}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Sex">{{"Sex" | localize}}</label>
+                                <select id="Sex" name="Sex" class="form-control" [(ngModel)]="profile.sex">
+                                    <option value="F">{{'Female'|localize}}</option>
+                                    <option value="M">{{'Male'|localize}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Designation">{{"Designation" | localize}}</label>
+                                <input id="Designation" type="text" name="Designation" class="form-control" [(ngModel)]="profile.designation">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="EmailAddress">{{"EmailAddress" | localize}}</label>
+                                <input id="EmailAddress" #emailAddressInput="ngModel" type="email" name="EmailAddress" class="form-control" [(ngModel)]="profile.emailAddress" maxlength="256" email />
+                                <validation-messages [formCtrl]="emailAddressInput"></validation-messages>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DirectNo">{{"DirectNumber" | localize}}</label>
+                                <input id="DirectNo" type="text" name="DirectNo" class="form-control" [(ngModel)]="profile.directNo" maxlength="32">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="MobileNo">{{"MobileNumber" | localize}}</label>
+                                <input id="MobileNo" type="text" name="MobileNo" class="form-control" [(ngModel)]="profile.mobileNo" maxlength="32">
+                            </div>
+
+                            <div class="form-group">
+                                <div class="right">
+                                    <label for="BranchList">{{"Branch" | localize}}</label>
+                                    <ng-select #branchList id="BranchList" name="BranchList" [(ngModel)]="profile.bizLocID" bindValue="Code" 
+                                    [items]="branchlistModel" [closeOnSelect]="true" bindLabel="Remark"
+                                    placeholder="Select Branch" (change)="branchListChange($event)">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{"Cancel" | localize}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

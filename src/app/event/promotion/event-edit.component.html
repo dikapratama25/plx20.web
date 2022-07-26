@@ -1,0 +1,45 @@
+<div bsModal #editModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width: 900px;">
+    <form #tenantCreateForm="ngForm" name="tenderForm" role="form" novalidate class="form-validation">
+    <div class="modal-header">
+       <h4 class="modal-title">
+           <span>{{"EditCampaign" | localize}}</span>
+       </h4>
+        <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body noUlLine">
+        <div class="form-group col-sm-6">
+                <label class="required">{{"PriceCI" | localize}}</label>
+                <input type="number" name="priceci" pattern="^\d+(?:\.\d{1,2})?$" min="0" [(ngModel)]="item.UnitPriceReq_C" placeholder="{{'InsertValue' | localize}}" class="form-control" required>
+        </div>
+        <div class="form-group col-sm-6">
+                <label class="required">{{"PriceCK" | localize}}</label>
+                <input type="number" name="priceck" pattern="^\d+(?:\.\d{1,2})?$" min="0" [(ngModel)]="item.TotalPriceBase" placeholder="{{'InsertValue' | localize}}" class="form-control" required>
+        </div>
+        <div class="form-group col-sm-6">
+                <label class="required">{{"PriceCTR" | localize}}</label>
+                <input type="number" name="pricectr" pattern="^\d+(?:\.\d{1,2})?$" min="0" [(ngModel)]="item.UnitPriceRef" placeholder="{{'InsertValue' | localize}}" class="form-control" required>
+        </div>
+        <div class="form-group col-sm-6">
+                <label class="required">{{"PriceAPV" | localize}}</label>
+                <input type="number" name="priceapv" pattern="^\d+(?:\.\d{1,2})?$" min="0" [(ngModel)]="item.UnitPriceReqVar" placeholder="{{'InsertValue' | localize}}"  class="form-control" required>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" 
+        [disabled]="saving"
+        (click)="close()">{{'Close' | localize}}</button>
+        <button type="button" class="btn btn-primary" type="submit" 
+        class="btn btn-primary" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')" [disabled]="!tenantCreateForm.form.valid"
+        (click)="save()" ng-disabled="tenderForm.$invalid">{{'Save' | localize}}</button>
+    </div> 
+    </form> 
+    </div> 
+</div>
+</div>

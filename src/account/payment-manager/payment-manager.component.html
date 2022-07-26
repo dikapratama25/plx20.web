@@ -1,0 +1,302 @@
+<div [@routerTransition]>
+  <div [busyIf]="isPageLoading">
+    <div class="m-subheader">
+      <div class="d-flex align-items-center">
+        <div class="mr-auto col-xs-6">
+          <h3 class="m-subheader__title m-subheader__title--separator">
+            <span>{{"Payment" | localize}}</span>
+          </h3>
+          <!-- <span class="m-section__sub">
+            {{"PaymentSubTitle" | localize}}
+          </span> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="m-content">
+      <div class="row">
+        <div id="paymentSummaryWrp" class="col-sm-4">
+          <div id="paymentSummaryTotal" class="m-form m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+              <div class="paymentTransNoWrp">
+                <span>{{"TransactionNo" | localize}}</span>
+                <span><a href="#">{{transHelper.PaymentTransID}}</a></span>
+              </div>
+              <div class="paymentTransDtl">
+                <div id="paymentSummaryTbl" class="wrpInner">
+                  <table cellpadding="10" cellspacing="0">
+                    <tr>
+                      <th>{{"Description" | localize}}</th>
+                      <th>{{"Amount" | localize}}</th>
+                    </tr>
+                    <tr>
+                      <td>{{"TravelPackagePayment" | localize}}</td>
+                      <td class="currAlignRight">{{transHelper.TransTotalAmt | number:'.2-2'}}
+                        {{transHelper.TransCurrency}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{"Voucher" | localize}}</td>
+                      <td class="currAlignRight">{{"0.00" | number:'.2-2'}} {{transHelper.TransCurrency}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{"Tax" | localize}}</td>
+                      <td class="currAlignRight">{{"0.00" | number:'.2-2'}} {{transHelper.TransCurrency}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{"Total" | localize}}</td>
+                      <td class="currAlignRight">{{transHelper.TransTotalAmt | number:'.2-2'}}
+                        {{transHelper.TransCurrency}}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="paymentMethodWrp" class="col-sm-8">
+          <div class="m-form m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+              <div id="paymentMethodHdr">
+                <div class="mainTitle">{{"PaymentMethod" | localize}}</div>
+                <div class="supTitle">{{"ChooseaWaytoPay" | localize}}</div>
+              </div>
+
+              <div id="payementMethodCtrl">
+                <label class="m-radio m-radio--bold">
+                  <input id="payTT" class="selectPay" name="payMethod" type="radio" targetOpen="payTTBox"
+                    [checked]="selectedPaymentMethod==paymentMethod.PayFPX" [value]="paymentMethod.PayFPX"
+                    (change)="onPaymentMethodChange(paymentMethod.PayFPX)" />{{"OnlineBankingFPX" | localize}}
+                </label>
+                <label class="m-radio m-radio--bold">
+                  <input id="payCC" class="selectPay" name="payMethod" type="radio" targetOpen="payCCBox"
+                    [checked]="selectedPaymentMethod==paymentMethod.PayCC" [value]="paymentMethod.PayCC"
+                    (change)="onPaymentMethodChange(paymentMethod.PayCC)" />{{"CreditDebitCard" | localize}}
+                </label>
+                <label class="m-radio m-radio--bold">
+                  <input id="payAG" class="selectPay" name="payMethod" type="radio" targetOpen="payAGBox"
+                    [checked]="selectedPaymentMethod==paymentMethod.PayAG" [value]="paymentMethod.PayAG"
+                    (change)="onPaymentMethodChange(paymentMethod.PayAG)" />{{"AgentCredit" | localize}}
+                </label>
+              </div>
+
+              <div id="paymentDetailMethod">
+                <!------------------------------------------------------------------------------------ FPX Section -------------------------------------------------------------------------->
+                <div id="payTTBox" class="boxMethodDtl" *ngIf="selectedPaymentMethod==paymentMethod.PayFPX">
+                  <div class="wrpInner">
+                    <div class="row">
+                      <div class="payBoxLvl2">{{"PaymentInformation" | localize}}</div>
+                    </div>
+                    <div class="row">
+                      <div id="fpxBankPayment" class="col-sm-12 noPadLeft">
+                        <label class="m-radio m-radio--bold">
+                          <input class="selectPay" id="payTT" name="payFPX" type="radio" value="0"
+                            (click)="selectBank('02')">{{"CorporateBank" | localize}}
+                        </label>
+                        <label class="m-radio m-radio--bold">
+                          <input class="selectPay" id="payTT" name="payFPX" targetopen="payTTBox" type="radio" value="0"
+                            (click)="selectBank('01')">{{"PersonalBank" | localize}}
+                        </label>
+                      </div>
+                      <div class="col-sm-6 noPadLeft">
+                        <!-- <select id="bankFPXList" class="form-control" disabled>
+                            <option disabled selected>{{"SelectBank" | localize}}</option>
+                          </select> -->
+                        <ng-select *ngIf="bankListShow" id="bankTypeList" [(ngModel)]="inputHelper.buyerBankID"
+                          [items]="bankListModel" [closeOnSelect]="true" bindLabel="bankdisplayname"
+                          placeholder="Select Bank" [loading]="bankLoading" (change)="bankListChange($event)">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!------------------------------------------------------------------------------- End of FPX Section ------------------------------------------------------------------------>
+
+                <!------------------------------------------------------------------------------------- CC Section -------------------------------------------------------------------------->
+                <div id="payCCBox" class="boxMethodDtl" *ngIf="selectedPaymentMethod==paymentMethod.PayCC">
+                  <div class="wrpInner">
+                    <div class="row">
+                      <div class="payBoxLvl2">{{"PaymentInformation" | localize}}</div>
+                    </div>
+                    <div class="row noPadLeftEven" style="margin-bottom:15px">
+                      <div id="noteCCTop">
+                        <span class="m--font-grey">Please be aware that procesing fees would be added to Your credit
+                          card payment.</span>
+                        <h6 class="m--font-grey">{{"TotalProcessingFee" | localize}}</h6>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"CardType" | localize}}</label>
+                          <select id="cardType" class="col-sm-8 form-control">
+                            <option value="" disabled selected>{{"SelectCardType" | localize}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4 ">{{"CardNumber" | localize}}</label>
+                          <input class="form-control m-input col-sm-8" type="text">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"CardHolderNumber" | localize}}</label>
+                          <input class="form-control m-input col-sm-8" type="text">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"CardExpiryDate" | localize}}</label>
+                          <div class="col-sm-8" style="display: -webkit-inline-box; padding-right:0;padding-left:0">
+                            <div class="ng-tns-c3-0" style="width: 20%">
+                              <input class="form-control m-input" type="number" maxlength="2">
+                            </div>
+                            <div class="ng-tns-c3-0" style="padding-left: 10px; width: 40%">
+                              <input class="form-control m-input" type="number" maxlength="4">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"CVVCIDNumber" | localize}}</label>
+                          <input class="form-control m-input col-sm-8" type="text">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"CardIssuer" | localize}}</label>
+                          <input class="form-control m-input col-sm-8" type="text">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"CardIssuingCountry" | localize}}</label>
+                          <select id="issuingCountry" class="col-sm-8 form-control">
+                            <option value="" disabled selected>{{"SelectIssuingCountry" | localize}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="" style="display: -webkit-inline-box; padding-top: 10px;">
+                        <h6 class="m--font-grey" style="line-height: 1.5;">{{"Note" | localize}}</h6>
+                        <span class="m--font-grey">: </span>
+                        <span class="m--font-grey">Expired on unsupported bank cards will not be listed during payment
+                          process</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="payBoxLvl2">{{"BillingInformation" | localize}}</div>
+                    </div>
+                    <div class="row noPadLeftEven">
+                      <div>
+                        <span class="m--font-grey">This address must be identical to your credit card billing address.
+                          Please enter
+                          the first 20 characters of your billing address.</span>
+                      </div>
+
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required  col-sm-4">{{"Address" | localize}}</label>
+                          <div class="col-sm-8" style="padding:0">
+                            <input class="form-control m-input" type="text" style="margin-bottom: 10px;">
+                            <input class="form-control m-input" type="text">
+                          </div>
+
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"Town/City" | localize}}</label>
+                          <select id="townCity1" class="col-sm-8 form-control">
+                            <option value="" disabled selected>{{"SelectTown/City" | localize}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"Country" | localize}}</label>
+                          <select id="townCity2" class="col-sm-8 form-control">
+                            <option value="" disabled selected>{{"SelectCountry" | localize}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 content-top-padding">
+                        <div class="row">
+                          <label class="required col-sm-4">{{"PostalCode" | localize}}</label>
+                          <div class="col-sm-8" style="display: -webkit-inline-box; padding-left: 0;padding-right: 0;">
+                            <div class="ng-tns-c3-0" style="width: 60%">
+                              <select id="townCity3" class="col-sm-8 form-control">
+                                <option value="" disabled selected>{{"SelectState" | localize}}</option>
+                              </select>
+                            </div>
+                            <div class="ng-tns-c3-0" style="padding-left: 10px; width: 40%">
+                              <select id="townCity4" class="col-sm-8 form-control">
+                                <option value="" disabled selected>{{"SelectPostalCode" | localize}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="noteCCbottom" class="">
+                        <div style="padding-top: 20px;">
+                          <span class="m--font-grey">Please be advised that credit card issuing banks may impose
+                            additional charges on
+                            all CROSS BORDER transactions. CROSS BORDER transactions are defined as transactions
+                            whereby the country of the cardholder's bank differs from that of the merchant.</span>
+                        </div>
+                        <div style="padding-top: 20px;">
+                          <span class="m--font-grey">Please note that the additional charge is not imposed by AirAsia
+                            and neither do we
+                            benefit from it. You are advised to seek further clarification from your credit
+                            card issuing bank should a CROSS BORDER charge be applied to this transaction.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!------------------------------------------------------------------------------- End of CC Section ------------------------------------------------------------------------->
+
+                <!----------------------------------------------------------------------------------- AG Section ---------------------------------------------------------------------------->
+                <div id="payAGBox" class="boxMethodDtl" *ngIf="selectedPaymentMethod==paymentMethod.PayAG">
+                  <div class="wrpInner">
+                    <div class="row">
+                      <div class="payBoxLvl2">{{"PaymentInformation" | localize}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4 labelAG noPadLeft">{{"AvailableAGCredit" | localize}}</div>
+                      <div class="col-sm-8 m--font-red m--font-align-right">
+                        <h5 id="availAGCredit" class="m--font-red" style="text-align:right;width:100%">580,500.00
+                          {{transHelper.TransCurrency}}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-------------------------------------------------------------------------------- End of AG Section ------------------------------------------------------------------------>
+
+                <div class="lineSplitter"></div>
+
+                <div id="proceedMethodBox">
+                  <div class="row">
+                    <div class="termConditionWrp col-sm-9">
+                      <label class="m-radio m-radio--bold stdCheckRadio">
+                        <input id="proceedPay" class="selectPay" [(ngModel)]="termCheck" name="proceedPay" type="checkbox" value="false" (change)="termCheckChanged()"
+                          targetOpen="payAGBox" />
+                        <!-- <div>Please accept term condition by selecting the checkbox</div> -->
+                        <div>{{'PaymentAcceptTermCond' | localize}}</div>
+                      </label>
+                    </div>
+                    <div id="proceedBtnPaymentWrp" class="col-sm-3">
+                      <button class="btn btn-primary blue" type="submit" (click)="proceed()" [disabled]="(payButton === false && termCheck === false)"
+                        [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')">
+                        <span class="ng-tns-c3-0">{{"Proceed" | localize}}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            
+            <div class="kt-subheader__main">
+               
+               <h3 class="kt-subheader__title">
+                   <span>{{"Event" | localize}}</span>
+               </h3>
+               <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+               <span class="kt-subheader__desc">
+                   <span class="kt-subheader__desc">{{"ReviewEvent" | localize}}</span>
+               </span>
+           </div>
+        </div>
+    </div>
+
+    <!-- end:: Subheader -->
+
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+        <div class="kt-portlet kt-portlet--bordered" style="border-radius: 10px">
+
+            <div class="kt-portlet__body">
+
+                <!--begin::Portlet-->
+                <!-- <div class="kt-portlet kt-portlet--bordered"> -->
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            {{"ReviewEvent" | localize}}
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{"ReviewerID" | localize}}</label>
+                                <input type="text" class="form-control clTheme" [(ngModel)]="empModel.EmployeeID" disabled="">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{"ReviewerName" | localize}}</label>
+                                <input type="text" class="form-control clTheme" [(ngModel)]="empModel.FullName" disabled="">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{"ReviewerType" | localize}}</label>
+                                <input type="text" class="form-control clTheme" [(ngModel)]="roleName" disabled="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!isVMS" class="kt-widget kt-widget--user-profile-3 clTheme" style="flex: 1;">
+                        <div class="kt-widget__bottom kt-margin-t-0 tblCounter" style="border: none;">
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <!-- <div class="kt-widget__icon">
+                                <i class="flaticon-pie-chart"></i>
+                            </div> -->
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"OnGoing" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-primary">{{countModel.ongoing}}</span>
+                                </div>
+                            </div>
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <!-- <div class="kt-widget__icon">
+                                <i class="flaticon-file-2"></i>
+                            </div> -->
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"PendingOpening" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-warning">{{countModel.pendingOpening}}</span>
+                                </div>
+                            </div>
+
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <!-- <div class="kt-widget__icon">
+                                <i class="flaticon-file-2"></i>
+                            </div> -->
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"OnReview" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-success">{{countModel.onReview}}</span>
+                                </div>
+                            </div>
+
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <!-- <div class="kt-widget__icon">
+                                <i class="flaticon-file-2"></i>
+                            </div> -->
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"FinalReview" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-info">{{countModel.finalReview}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isVMS" class="kt-widget kt-widget--user-profile-3 clTheme" style="flex: 1;">
+                        <div class="kt-widget__bottom kt-margin-t-0 tblCounter" style="border: none;">
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"OnGoing" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-primary">{{countModel.ongoing}}</span>
+                                </div>
+                            </div>
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"Pending" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-warning">{{countModel.pendingOpening}}</span>
+                                </div>
+                            </div>
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"In Progress" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-info">{{countModel.onReview}}</span>
+                                </div>
+                            </div>
+                            <div class="kt-widget__item kt-padding-t-0">
+                                <div class="kt-widget__details">
+                                    <span class="kt-widget__title">{{"Submitted" | localize}}</span>
+                                    <span class="kt-widget__value kt-align-right kt-font-success">{{countModel.finalReview}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                {{"EventList" | localize}}
+                            </h3>
+                        </div>
+                    </div>
+                    <!-- <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Event ID</th>
+                                <th>Event Name</th>
+                                <th>Closed</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>A123</td>
+                                <td>Tender A</td>
+                                <td>08-09-2020 12:01:01</td>
+                                <th><span
+                                        class="kt-badge kt-badge--inline kt-badge--info kt-badge--md kt-badge--rounded">On-going</span>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>A123</td>
+                                <td>Tender A</td>
+                                <td>08-09-2020 12:01:01</td>
+                                <th><span
+                                        class="kt-badge kt-badge--inline kt-badge--warning kt-badge--md kt-badge--rounded">Pending
+                                        Opening</span></th>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>A123</td>
+                                <td>Tender A</td>
+                                <td>08-09-2020 12:01:01</td>
+                                <th><span
+                                        class="kt-badge kt-badge--inline kt-badge--success kt-badge--md kt-badge--rounded">On
+                                        Review</span></th>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>A123</td>
+                                <td>Tender A</td>
+                                <td>08-09-2020 12:01:01</td>
+                                <th><span
+                                        class="kt-badge kt-badge--inline kt-badge--primary kt-badge--md kt-badge--rounded">Final
+                                        Review</span></th>
+                            </tr>
+                        </tbody>
+                    </table> -->
+
+                    <div class="form-group">
+                        <base-list #onGoingList [(gridUrl)]="gridUrl" detailAligment="left"
+                            (onDetailClick)="review($event)" detail="true" [enableFilter]="false" [indexing]="true">
+                        </base-list>
+                    </div>
+                </div>
+                <!-- </div> -->
+
+                <!--end::Portlet-->
+            </div>
+
+        </div>
+    </div>
+
+    <!-- end:: Content -->
+</div>

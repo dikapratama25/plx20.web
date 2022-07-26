@@ -1,0 +1,336 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <h3 class="kt-subheader__title">{{title}}</h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="" class="kt-subheader__breadcrumbs-link">{{subTitle}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Subheader -->
+ 
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="row">
+            <div class="col-lg-12">
+               <div class="kt-portlet">
+                  <div class="kt-portlet__head">
+                     <div class="kt-portlet__head-label">
+                        <div class="" style="
+                           padding: 1.5em 0;
+                           ">
+                           <h1 class="kt-portlet__head-title kt-font-dark" style="
+                              font-size: 1.5em;
+                              ">{{eventName}}</h1>
+                           <div style="
+                              padding-top: 6px;
+                              ">{{eventID}}</div>
+                        </div>
+                     </div>
+                     <div class="kt-portlet__head-toolbar">
+                         <div class="kt-portlet__head-actions">
+                             <button type="button" class="btn btn-primary btn-pill" style="
+                              min-width: 100px;
+                              " (click)="reviewQuestionnaire()">
+                                 Review
+                             </button>
+                             <button *ngIf="checkData != 0" type="button" class="btn btn-secondary btn-elevate btn-pill kt-margin-r-5"><i class="la la-arrow-down"></i>Commercial Doc</button>
+                             <button *ngIf="checkData != 1" type="button" class="btn btn-secondary btn-elevate btn-pill kt-margin-r-5"><i class="la la-arrow-down"></i>Technical Doc</button>
+                             <button type="button" class="btn btn-success btn-pill" style="
+                              min-width: 100px;
+                              ">
+                                 Save
+                             </button>
+                         </div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                     <div class="kt-section kt-section--first">
+                        <div class="row">
+                           <div class="col-lg-9">
+                               <div class="form-group">
+                                   <label>Vendor Name </label>
+                                   <input type="text" class="form-control clTheme" disabled="" value="{{vendorName}}">
+                               </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Vendor ID</label>
+                                 <input type="text" class="form-control clTheme" disabled="" value="{{vendorID}}">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Reviewer ID    </label>
+                                 <input type="text" class="form-control clTheme" disabled="" value="{{reviewerID}}">
+                              </div>
+                           </div>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label>Document Type</label>
+                                 <input type="text" class="form-control clTheme" disabled="" value="{{roles}}">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-12">
+                                <tabset class="nav nav-tabs nav-tabs-line nav-tabs-line-2x nav-tabs-line-success clTheme tab-container">
+                                    <tab *ngIf="checkData != 1" heading="{{'techdoc' | localize}}">
+                                        <div class="row kt-margin-b-30">
+                                            <div class="col-lg-7"></div>
+                                            <div class="col-lg-5" style="
+                                               justify-content: flex-end;
+                                               display: flex;
+                                               ">
+                                                <div class="kt-widget kt-widget--user-profile-3 clTheme" style="
+                                                  flex: 1;
+                                                  ">
+                                                    <div class="kt-widget__bottom kt-margin-t-0" style="border: none;">
+                                                        <div class="kt-widget__item kt-padding-t-0">
+                                                            <div class="kt-widget__icon">
+                                                                <i class="flaticon-pie-chart"></i>
+                                                            </div>
+                                                            <div class="kt-widget__details">
+                                                                <span class="kt-widget__title">Calculated Score</span>
+                                                                <span class="kt-widget__value kt-align-right">275</span>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="kt-widget__item kt-padding-t-0">
+                                                            <div class="kt-widget__icon">
+                                                                <i class="flaticon-file-2"></i>
+                                                            </div>
+                                                            <div class="kt-widget__details">
+                                                                <span class="kt-widget__title">Adjusted Score</span>
+                                                                <span class="kt-widget__value kt-align-right kt-font-danger">285</span>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <base-list #baselistTabTechnical [(gridUrl)]="gridTechUrl" detailAligment="left"
+                                                   [enableFilter]="false" [indexing]="true">
+                                        </base-list>
+                                    </tab>
+                                    <tab *ngIf="checkData != 0" heading="{{'commdoc' | localize}}">
+                                        <div class="row kt-margin-b-30">
+                                            <div class="col-lg-7"></div>
+                                            <div class="col-lg-5" style="
+                                               justify-content: flex-end;
+                                               display: flex;
+                                               ">
+                                               <div class="kt-widget kt-widget--user-profile-3 clTheme" style="
+                                                  flex: 1;
+                                                  ">
+                                                  <div class="kt-widget__bottom kt-margin-t-0" style="border: none;">
+                                                     <div class="kt-widget__item kt-padding-t-0">
+                                                        <div class="kt-widget__icon">
+                                                           <i class="flaticon-pie-chart"></i>
+                                                        </div>
+                                                        <div class="kt-widget__details">
+                                                           <span class="kt-widget__title">Final Score</span>
+                                                           <span class="kt-widget__value kt-align-right">275</span>
+                                                        </div>
+                                                     </div>
+                                                     <div class="kt-widget__item kt-padding-t-0">
+                                                        <div class="kt-widget__icon">
+                                                           <i class="flaticon-file-2"></i>
+                                                        </div>
+                                                        <div class="kt-widget__details">
+                                                           <span class="kt-widget__title">Adjusted Score</span>
+                                                           <span class="kt-widget__value kt-align-right kt-font-danger">285</span>
+                                                        </div>
+                                                     </div>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                        </div>
+                                        <base-list #baselistTabCommercial [(gridUrl)]="gridComUrl" detailAligment="left"
+                                            [enableFilter]="false" [indexing]="true" (onIconClick)="comment($event)">
+                                        </base-list>
+                                    </tab>
+                                </tabset>
+                              <!-- <div class="">
+                                 <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-2x nav-tabs-line-success clTheme" role="tablist">
+                                    <li class="nav-item">
+                                       <a class="nav-link active" data-toggle="tab" href="#kt_tabs_4_1" role="tab" aria-selected="true">Technical</a>
+                                    </li>
+                                    <li class="nav-item">
+                                       <a class="nav-link" data-toggle="tab" href="#kt_tabs_4_3" role="tab" aria-selected="false">Commercial</a>
+                                    </li>
+                                 </ul>
+                                 <div class="tab-content">
+                                    <div class="tab-pane" id="kt_tabs_4_3" role="tabpanel">
+                                       <div class="row kt-margin-b-30">
+                                          <div class="col-lg-7"></div>
+                                          <div class="col-lg-5" style="
+                                             justify-content: flex-end;
+                                             display: flex;
+                                             ">
+                                             <div class="kt-widget kt-widget--user-profile-3 clTheme" style="
+                                                flex: 1;
+                                                ">
+                                                <div class="kt-widget__bottom kt-margin-t-0" style="border: none;">
+                                                   <div class="kt-widget__item kt-padding-t-0">
+                                                      <div class="kt-widget__icon">
+                                                         <i class="flaticon-pie-chart"></i>
+                                                      </div>
+                                                      <div class="kt-widget__details">
+                                                         <span class="kt-widget__title">Calculated Score</span>
+                                                         <span class="kt-widget__value kt-align-right">275</span>
+                                                      </div>
+                                                   </div>
+                                                   <div class="kt-widget__item kt-padding-t-0">
+                                                      <div class="kt-widget__icon">
+                                                         <i class="flaticon-file-2"></i>
+                                                      </div>
+                                                      <div class="kt-widget__details">
+                                                         <span class="kt-widget__title">Adjusted Score</span>
+                                                         <span class="kt-widget__value kt-align-right kt-font-danger">285</span>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <table class="table" style="
+                                          font-size: 1em;
+                                          ">
+                                          <thead>
+                                             <tr>
+                                                <th>#</th>
+                                                <th>Question Desc</th>
+                                                <th>Calculated Score</th>
+                                                <th>Adjusted Score</th>
+                                                <th>Action</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <tr>
+                                                <th scope="row">1</th>
+                                                <td>Question Description 1</td>
+                                                <td>
+                                                   <div class="kt-align-right" style="
+                                                      width: 120px;
+                                                      ">8</div>
+                                                </td>
+                                                <td><input type="text" class="form-control kt-align-right" value="" style="
+                                                   width: 120px;
+                                                   "></td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md btn-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <i class="flaticon-more-1"></i>
+                                                      </button>
+                                                      <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(32px, 33px, 0px);">
+                                                         <a class="dropdown-item" href="#"><i class="la la-comment" style="padding-top: 9px;"></i>Comment</a>
+                                                         <a class="dropdown-item" href="#"><i class="la la-paperclip" style="
+                                                            padding-top: 9px;
+                                                            "></i>Attachment</a>
+                                                      </div>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                    <div class="tab-pane active" id="kt_tabs_4_1" role="tabpanel">
+                                       <div class="row kt-margin-b-30">
+                                          <div class="col-lg-7"></div>
+                                          <div class="col-lg-5" style="
+                                             justify-content: flex-end;
+                                             display: flex;
+                                             ">
+                                             <div class="kt-widget kt-widget--user-profile-3 clTheme" style="
+                                                flex: 1;
+                                                ">
+                                                <div class="kt-widget__bottom kt-margin-t-0" style="border: none;">
+                                                   <div class="kt-widget__item kt-padding-t-0">
+                                                      <div class="kt-widget__icon">
+                                                         <i class="flaticon-pie-chart"></i>
+                                                      </div>
+                                                      <div class="kt-widget__details">
+                                                         <span class="kt-widget__title">Final Score</span>
+                                                         <span class="kt-widget__value kt-align-right">275</span>
+                                                      </div>
+                                                   </div>
+                                                   <div class="kt-widget__item kt-padding-t-0">
+                                                      <div class="kt-widget__icon">
+                                                         <i class="flaticon-file-2"></i>
+                                                      </div>
+                                                      <div class="kt-widget__details">
+                                                         <span class="kt-widget__title">Adjusted Score</span>
+                                                         <span class="kt-widget__value kt-align-right kt-font-danger">285</span>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <table class="table" style="
+                                          font-size: 1em;
+                                          ">
+                                          <thead>
+                                             <tr>
+                                                <th>#</th>
+                                                <th>Question Desc</th>
+                                                <th>Answer</th>
+                                                <th>Weight(%)</th>
+                                                <th>Reviewer Score</th>
+                                                <th>Weighted Score</th>
+                                                <th>Action</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <tr>
+                                                <th scope="row">1</th>
+                                                <td>Question Description 1</td>
+                                                <td>A</td>
+                                                <td>
+                                                   <div style="text-align:right;width:60px">2</div>
+                                                </td>
+                                                <td>
+                                                   <div class="kt-align-right" style="
+                                                      width: 120px;
+                                                      ">8</div>
+                                                </td>
+                                                <td><input type="text" class="form-control kt-align-right" value="" style="
+                                                   width: 120px;
+                                                   "></td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <button type="button" class="btn btn-hover-brand btn-elevate-hover btn-icon btn-sm btn-icon-md btn-circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      <i class="flaticon-more-1"></i>
+                                                      </button>
+                                                      <div class="dropdown-menu dropdown-menu-right" x-placement="top-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(32px, 0px, 0px);">
+                                                         <a class="dropdown-item" href="#"><i class="la la-comment" style="padding-top: 9px;"></i>Comment</a>
+                                                         <a class="dropdown-item" href="#"><i class="la la-paperclip" style="
+                                                            padding-top: 9px;
+                                                            "></i>Attachment</a>
+                                                      </div>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                              </div> -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>

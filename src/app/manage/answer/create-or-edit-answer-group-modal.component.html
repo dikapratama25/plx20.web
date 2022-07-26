@@ -1,0 +1,35 @@
+<div bsModal #createOrEditAnswerGroupModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form *ngIf="active" #userForm="ngForm" novalidate (ngSubmit)="save()">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="inputHelper.rowguid">{{'EditNewAnswerGroup' | localize}}: {{modalTitle}}</span>
+                        <span *ngIf="!inputHelper.rowguid">{{'CreateNewAnswerGroup' | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-sm-12">
+                       
+                        <div class="form-group" >
+                            <label class="required">{{'Name' | localize}}</label>
+                            <input  type="text" name="text" id="text" class="form-control" [(ngModel)]="inputHelper.Text">
+                        </div>
+                      
+                        <div class="form-group">
+                            <label class="required">{{'Description' | localize}} </label>
+                            <textarea  class="form-control" rows="3" name="Description" required [(ngModel)]="inputHelper.Description"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button  [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{"Cancel" | localize}}</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!userForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

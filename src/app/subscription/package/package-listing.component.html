@@ -1,0 +1,130 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Subscriptions" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"Service" | localize}}</span>
+                    </span>
+                </div>
+                <div class="kt-subheader__toolbar">
+                    <!-- div class="kt-subheader__wrapper">
+                        <button class="btn" style="background-color: #FF9332;color: #ffffff;" (click)="viewCurrentDetail($event)"--> <!--[disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 0 || checkData == 2 || checkData == 4">-->
+                            <!--i class="fa fa-search"></i>
+                            {{"BrowseServices" | localize}}
+                        </button>
+                    </div-->
+                    <div class="kt-subheader__wrapper">
+                        <!-- <button class="btn btn-primary" (click)="addService($event)"> [disabled]="!campaignForm.form.valid || inputHelper.EventStatus == 3" *ngIf="checkData == 1 || checkData == 3 || checkData == 5"> -->
+                        <!-- <button class="btn btn-primary" (click)="viewCurrentDetail($event)"> -->
+                        <button class="btn btn-primary" (click)="addService($event)">
+                            <i class="fa fa-plus"></i>
+                            {{"AddSubscription" | localize}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="row">
+               <div class="col-lg-3"> <!--(click)="onPanelClick('')">-->
+                  <div class="kt-portlet statBox">
+                     <div class="kt-portlet__body" style="padding: 10px 30px;background-color: #28961E;">
+                        <div class="kt-section" style="margin: 0;">
+                           <div class="row">
+                              <div class="col-10 kt-section__title text-white" style="margin-bottom: 0px;">
+                                 {{"Active" | localize}}
+                              </div>
+                              <div class="col-2 kt-section__title text-white" style="margin-bottom: 0px; text-align: right;">
+                                 <h4>{{totalActive}}</h4>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-3"> <!--(click)="onPanelClick('0')">-->
+                  <div class="kt-portlet statBox">
+                     <div class="kt-portlet__body" style="padding: 10px 30px;background-color: #6F6F6F;">
+                        <div class="kt-section" style="margin: 0;">
+                           <div class="row">
+                              <div class="col-10 kt-section__title text-white" style="margin-bottom: 0px;">
+                                 {{"Expired" | localize}}
+                              </div>
+                              <div class="col-2 kt-section__title text-white"
+                                 style="color:var(--info); margin-bottom: 0px; text-align: right;">
+                                 <h4>{{totalExpiry}}</h4>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="table-data kt-margin-t-30">
+                <div class="kt-portlet kt-portlet--mobile">
+                    <div class="kt-portlet__body  kt-padding-2">
+                        <div class="form-group">
+                            <base-list #subscriptiongrid [(gridUrl)]="gridUrl" [detail]="true" (onDetailClick)="viewCurrentDetail($event)" (onButtonClick)="startService($event)" [indexing]="true" [enableFilter]="true" [filterTemplate]="filterEvent">
+                            </base-list>
+                            <ng-template #filterEvent>
+                                <div class="row filterContent">
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <label class="col-form-label">{{"From" | localize}}</label>
+                                        <div class="input-group date">
+                                            <div class="input-group">
+                                                <input id="startDate" (dateChange)="onStartChange($event)" type="text"
+                                                    #processFilterStartPicker
+                                                    name="startDate" class="form-control"
+                                                    [(ngModel)]="startDate"
+                                                    datePickerMomentModifier bsDatepicker
+                                                    [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"
+                                                        id="basic-addon2">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <label class="col-form-label">{{"To" | localize}}</label>
+                                        <div class="input-group date">
+                                            <div class="input-group">
+                                                <input id="endDate" (dateChange)="onEndChange($event)" type="text"
+                                                    #processFilterStartPicker
+                                                    name="endDate" class="form-control"
+                                                    [(ngModel)]="endDate"
+                                                    datePickerMomentModifier bsDatepicker
+                                                    [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"
+                                                        id="basic-addon2">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+       <!-- end:: Content -->
+       <!-- <committeeInfoDetailModal #committeeInfoDetailModal (modalSave)="refresh()"></committeeInfoDetailModal> -->
+       <serviceListModal #serviceListModal></serviceListModal>
+       <addServiceModal #addServiceModal></addServiceModal>
+    </div>
+</div>

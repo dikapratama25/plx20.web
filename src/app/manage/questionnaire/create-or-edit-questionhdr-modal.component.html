@@ -1,0 +1,58 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <form *ngIf="active" #questionCreateForm="ngForm" novalidate (ngSubmit)="save()">
+          <div class="modal-header">
+            <h4 class="modal-title">
+              <span>{{modalTitle}}</span>
+            </h4>
+            <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+  
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="QuizType">{{"QuizType" | localize}} *</label>
+                  <input id="QuizType" #quizTypeInput="ngModel" class="form-control" type="text" name="QuizType" [(ngModel)]="inputHelper.QuizType" required maxlength="20" [disabled]="isDisable">
+                  <validation-messages [formCtrl]="quizTypeInput"></validation-messages>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="Role">{{"RoleID" | localize}} *</label>
+                  <input id="Role" #roleInput="ngModel" class="form-control" type="text" name="Role" [(ngModel)]="inputHelper.Role" required maxlength="100" [disabled]="isDisable">
+                  <validation-messages [formCtrl]="roleInput"></validation-messages>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="ScoreWeight">{{"ScoreWeight" | localize}} *</label>
+                  <input id="ScoreWeight" #scoreWeightInput="ngModel" class="form-control" type="number" name="ScoreWeight" [(ngModel)]="inputHelper.ScoreWeight" required min="0" max="1" maxlength="100" [disabled]="isDisable">
+                  <validation-messages [formCtrl]="scoreWeightInput"></validation-messages>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <!-- <label for="Description">{{"Description" | localize}} *</label>
+                  <input id="Description" #descriptionInput="ngModel" class="form-control" type="text" name="Description" [(ngModel)]="inputHelper.Description" required maxlength="100" [disabled]="isDisable"> -->
+                  <label class="required">{{'Description' | localize}} </label>
+                  <textarea  class="form-control" id="Description" #descriptionInput="ngModel" rows="3" name="Description" [disabled]="isDisable" required [(ngModel)]="inputHelper.Description"></textarea>
+                  <validation-messages [formCtrl]="descriptionInput"></validation-messages>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="modal-footer">
+            <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{"Cancel" | localize}}</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!questionCreateForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{"Save" | localize}}</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

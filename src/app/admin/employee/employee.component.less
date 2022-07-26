@@ -1,0 +1,127 @@
+/*Stlye for Chat Buttons */
+.dropdown-excel-operations .ui-button {
+    display: block;
+    margin: 0;
+    text-align: left;
+    border-radius: 0;
+    transition: none !important;
+    margin-left: -11px;
+}
+
+.ui-fileupload-choose.ui-button,
+.ui-fileupload-choose.ui-button .ui-widget,
+.ui-fileupload-choose.ui-button .ui-state-default {
+    background-color: #fff !important;
+    color: #b2b1c5 !important;
+}
+
+.ui-button-text {
+    color: #575962;
+    font-size: 13px;
+    margin-left: 9px;
+}
+
+.dropdown-excel-operations .ui-fileupload-choose.ui-button.ui-state-hover,
+.ui-fileupload-choose.ui-button.ui-state-focus,
+.ui-fileupload-choose.ui-button.ui-state-active {
+    background-color: #eee;
+}
+
+.dropdown-excel-operations {
+    a:hover {
+        span.ui-button,
+        div.ui-fileupload-buttonbar.ui-widget-header.ui-corner-top {
+            background-color: #f4f5f8 !important;
+        }
+    }
+
+    a.no-padding {
+        padding: 0px !important;
+    }
+}
+
+.dropdown-excel-operations .ui-fileupload-choose:not(.ui-state-disabled) {
+    border: none;
+}
+
+.dropdown-excel-operations .ui-fileupload-choose:not(.ui-state-disabled):hover,
+.dropdown-excel-operations .ui-fileupload-choose:not(.ui-state-disabled):focus,
+.dropdown-excel-operations
+    .ui-fileupload-choose:not(.ui-state-disabled):active {
+    background-color: #f4f5f8 !important;
+    color: #b2b1c5;
+    box-shadow: none !important;
+    border: none;
+}
+
+body .ui-fileupload .ui-fileupload-buttonbar {
+    border: none !important;
+    background-color: #fff !important;
+}
+
+.dropdown-excel-operations {
+    div.ui-fileupload-buttonbar {
+        &.ui-widget-header.ui-corner-top {
+            border: none;
+            background: #fff;
+            padding-bottom: 3px !important;
+            padding-top: 3px !important;
+
+            &:hover {
+                background-color: #f4f5f8 !important;
+            }
+        }
+    }
+
+    div.ui-fileupload-content.ui-widget-content.ui-corner-bottom {
+        display: none;
+    }
+
+    div.ui-fileupload-buttonbar.ui-widget-header.ui-corner-top:hover {
+        background-color: #f4f5f8 !important;
+    }
+}
+
+.ui-table img.img-circle{
+    height: 24px;
+    margin-right: 5px;
+    box-shadow: 1px 1px 5px 1px hsl(0, 0%, 66%);
+}
+
+//QR Code
+.ui-table-tbody > tr > td:nth-child(2),
+.ui-table-tbody > tr > td:nth-child(2) > span:nth-child(2){
+    position: relative;
+    // display: block;
+}
+.ui-table img.img-qr-circle{
+    height: 24px;
+    margin-right: 5px;
+    box-shadow: 1px 1px 5px 1px hsl(0, 0%, 66%);
+}
+.ui-table-tbody > tr > td:nth-child(2) > span:nth-child(2):hover a:nth-child(2){
+    display: block;
+    position: absolute;
+    width:220px;
+    height: 220px;
+    background-color: rgba(0, 0, 0,0.4);
+    z-index: 10;
+}
+.ui-table-tbody > tr > td:nth-child(2) > span:nth-child(2):hover a:nth-child(2)::before{
+    content:'Please click or scan the QR code.';
+    display: block;
+    position: absolute;
+    color:#fff;
+    text-align: center;
+    width:100%;
+}
+.ui-table-tbody > tr > td:nth-child(2) > span:nth-child(2):hover a:nth-child(2) > img{
+    transform: scale(5,5);
+    display: block;
+    margin:100px auto;
+}
+//End QR Code
+
+// .ui-table-scrollable-body {
+//     min-height: 250px;
+// }

@@ -1,0 +1,78 @@
+{
+  "remoteServiceBaseUrl": "https://localhost:44301",
+  "appBaseUrl": "http://localhost:4200",
+  "localeMappings": {
+    "angular": [
+      {
+        "from": "pt-BR",
+        "to": "pt"
+      },
+      {
+        "from": "zh-CN",
+        "to": "zh"
+      },
+      {
+        "from": "he-IL",
+        "to": "he"
+      },
+      {
+        "from": "es-MX",
+        "to": "es"
+      },
+      {
+        "from": "vi",
+        "to": "en"
+      }
+    ],
+    "moment": [
+      {
+        "from": "es-MX",
+        "to": "es"
+      },
+      {
+        "from": "zh-Hans",
+        "to": "zh-cn"
+      },
+      {
+        "from": "vi",
+        "to": "en-gb"
+      }
+    ],
+    "recaptcha": [
+      {
+        "from": "zh-Hans",
+        "to": "zh-cn"
+      },
+      {
+        "from": "es-MX",
+        "to": "es"
+      }
+    ]
+  },
+  "defaultTID": "1",
+  "svcAppBaseUrl": [
+    {
+      "appId" : 148960,
+      "appName": "P2P",
+      "url" : "http://localhost:4300"
+    },
+    {
+      "appId" : 393130,
+      "appName": "eBid",
+      "url" : "http://localhost:4300"
+    },
+    {
+      "appId" : 574587,
+      "appName": "VRMS",
+      "url" : "http://localhost:4300"
+    },
+    {
+      "appId" : 689653,
+      "appName": "Questil",
+      "url" : "http://localhost:4300"
+    }
+  ],
+  "Stimulsoft": {
+    "license": "6vJhGtLLLz2GNviWmUTrhSqnOItdDwjBylQzQcAOiHnS5hzEUPZrpU2U6sO1iFfT+RRg+mD+VEIfuBmZvh8VSX9kKJg5dvJwCDJeIZyLCgxCOb6TukJC3H7mnD/BJxk2ZMIpPLj4LbyGtAvH0c34tCkm+sdhjwog6NrvjTL9RxPpnQWn3TNfxmICK+/ahA0EoO0v0ViC/FiizE4gyUcvexG5tYTh5dp6waASKIrlM1KLHifWFdRVFvs9wfjXqTo8Fv8gw3VL7Ao+AvsWEHhP5PdZrCemeQYH+l/+zwrdwWER1e4j9ggOuQPO8L7ZxZyBdiuKN7HwILdIV64Dk40fHt7dzU354WOQ5LziTz+n4M//1VEyj23m3h15xEfQHKCCydkc82XVV/Ln3xa5ROR1X+n+MBLAiSeFd5wfxIvreuKfzjrF9jzxzho/Ouj/iZO3u57KdXnzrvpNob+/lYAW145ee4NwXf3JQMZE59wYHYPO/MgZOPPtZnyUfAq9uhpoubXztySrVdxx4TrSkKT/0xXjncM4fvHV3VCR9C+dW/E="
+  }
+}

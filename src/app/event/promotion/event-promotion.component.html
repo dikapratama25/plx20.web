@@ -1,0 +1,144 @@
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div *ngIf="EventList" class="kt-container  kt-container--fluid ">
+           
+            <div class="kt-subheader__main">
+                   
+                <h3 class="kt-subheader__title">
+                    <span>{{"Event" | localize}}</span>
+                </h3>
+                <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                <span class="kt-subheader__desc">
+                    <span class="kt-subheader__desc">{{"EventManage" | localize}}</span>
+                </span>
+            </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <button (click)="create()" class="btn btn-primary"><i class="fa fa-plus"></i> {{"Create" | localize}}</button>
+                    <!-- <div class="btn-group" dropdown>
+                        <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                aria-controls="dropdown-animated">
+                            {{"Create" | localize}}<span class="caret"></span>
+                        </button>
+                        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                            role="menu" aria-labelledby="button-animated">
+                            <li role="menuitem">
+                                <a class="dropdown-item" href="./app/event/create">{{"CreateBid" | localize}}</a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="dropdown-item" href="./app/event/create-tender">{{"CreateTender" | localize}}</a>
+                            </li>
+                            <li role="menuitem">
+                                <a class="dropdown-item" href="./app/event/create-evaluation">{{"CreateEvaluation" | localize}}</a>
+                            </li>                            
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div *ngIf="DiscoveryList" class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <!-- <h3 class="kt-subheader__title">{{"Opportunity" | localize}}</h3> -->
+                <h3 class="kt-subheader__title">{{"Discover" | localize}}</h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="/app/event/discovery" class="kt-subheader__breadcrumbs-link">{{"Oportunity" | localize}}</a>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="InvitedList" class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <!-- <h3 class="kt-subheader__title">{{"Opportunity" | localize}}</h3> -->
+                <h3 class="kt-subheader__title">{{"Event" | localize}}</h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="/app/event/invited" class="kt-subheader__breadcrumbs-link">{{"Invited" | localize}}</a>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="SubscribedList" class="kt-container  kt-container--fluid ">
+            <div class="kt-subheader__main">
+                <!-- <h3 class="kt-subheader__title">{{"Opportunity" | localize}}</h3> -->
+                <h3 class="kt-subheader__title">{{"Event" | localize}}</h3>
+                <span class="kt-subheader__separator kt-hidden"></span>
+                <div class="kt-subheader__breadcrumbs">
+                    <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                    <span class="kt-subheader__breadcrumbs-separator"></span>
+                    <a href="/app/event/subscribed" class="kt-subheader__breadcrumbs-link">{{"Subscribed" | localize}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Subheader -->
+
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="table-data kt-margin-t-30">
+            <div class="kt-portlet kt-portlet--mobile">
+                <div class="kt-portlet__body  kt-padding-2">
+                    <div class="form-group">
+                        <base-list #onGoingList [(gridUrl)]="onGoingGridUrl" detailAligment="left"
+                                   (onDetailClick)="edit($event)" detail="true" [enableFilter]="true" [filterTemplate]="filterEvent" [indexing]="true" (onIconClick)="subscribe($event)">
+                        </base-list>
+                        <ng-template #filterEvent>
+                            <div class="row filterContent">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label class="col-form-label">{{"Type" | localize}}</label>
+                                    <ng-select [(ngModel)]="selectedType" [items]="comboTypeName" [closeOnSelect]="true" bindValue="Code" bindLabel="CodeDesc" (change)="refreshFilter($event)">
+                                    </ng-select>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label class="col-form-label">{{"From" | localize}}</label>
+                                    <div class="input-group date">
+                                        <div class="input-group">
+                                            <input id="startDate" (dateChange)="onStartChange($event)" type="text"
+                                                #processFilterStartPicker
+                                                name="startDate" class="form-control"
+                                                [(ngModel)]="startDate"
+                                                datePickerMomentModifier bsDatepicker
+                                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"
+                                                    id="basic-addon2">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <label class="col-form-label">{{"To" | localize}}</label>
+                                    <div class="input-group date">
+                                        <div class="input-group">
+                                            <input id="endDate" (dateChange)="onEndChange($event)" type="text"
+                                                #processFilterStartPicker
+                                                name="endDate" class="form-control"
+                                                [(ngModel)]="endDate"
+                                                datePickerMomentModifier bsDatepicker
+                                                [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"
+                                                    id="basic-addon2">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Content -->
+    <!-- <popupMessageModal #popupMessageModal (modalSave)="popupResponse($event)"></popupMessageModal> -->
+</div>

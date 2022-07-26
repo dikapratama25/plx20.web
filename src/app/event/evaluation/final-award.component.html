@@ -1,0 +1,505 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+   <!-- begin:: Subheader -->
+   <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+      <div class="kt-container  kt-container--fluid ">
+         <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">{{"FinalReview" | localize}}</h3>
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+               <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+               <span class="kt-subheader__breadcrumbs-separator"></span>
+               <a href="" class="kt-subheader__breadcrumbs-link">{{"FinalReviewMgmt" | localize}}</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- end:: Subheader -->
+
+   <!-- begin:: Content -->
+   <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="kt-portlet">
+               <div class="kt-portlet__head">
+                  <div class="kt-portlet__head-label">
+                     <div class="" style="
+                            padding: 1.5em 0;
+                            ">
+                        <h1 class="kt-portlet__head-title kt-font-dark" style="
+                               font-size: 1.5em;
+                               ">{{EventName}}</h1>
+                        <div style="
+                               padding-top: 6px;
+                               ">{{DocNo}}</div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__head-toolbar">
+                     <div class="kt-portlet__head-actions">
+                        <button type="button" class="btn btn-success btn-pill" style="
+                               min-width: 100px;
+                               ">Submit</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="kt-portlet__body">
+                  <div class="kt-section kt-section--first">
+                     <div class="row">
+                        <div class="col-lg-2">
+                           <div class="form-group">
+                              <label>Reviewer ID </label>
+                              <input type="text" class="form-control clTheme" disabled=""
+                                 [(ngModel)]="empModel.EmployeeID">
+                           </div>
+                        </div>
+                        <div class="col-lg-3">
+                           <div class="form-group">
+                              <label>Reviewer Name</label>
+                              <input type="text" class="form-control clTheme" disabled=""
+                                 [(ngModel)]="empModel.FullName">
+                           </div>
+                        </div>
+                        <div class="col-lg-2">
+                           <div class="form-group">
+                              <label>Reviewer Type</label>
+                              <input type="text" class="form-control clTheme" disabled="" [(ngModel)]="roleName">
+                           </div>
+                        </div>
+                        <div class="col-lg-4">
+                           <div class="kt-invoice-2">
+                              <div class="kt-invoice__footer">
+                                 <div class="kt-invoice__container" style="
+                                        justify-content: flex-end;
+                                        display: flex;
+                                        ">
+                                    <table class="kt-margin-b-20" style="
+                                           padding: 20px;
+                                           display: block;
+                                           border: 1px solid #d6d3d3;
+                                           border-radius: 5px;
+                                           background-color: #fafafa;
+                                           ">
+                                       <thead>
+                                          <tr>
+                                             <th>Recommended Participant</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          <tr>
+                                             <td class="kt-font-danger kt-font-xl kt-font-boldest" style="
+                                                    text-align: right;
+                                                    ">3 / 15</td>
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <!-- <table class="table" style="
+                               font-size: 1em;
+                               ">
+                               <thead>
+                                  <tr>
+                                     <th>Section</th>
+                                     <th style="
+                                        text-decoration: underline;
+                                        ">Vendor A</th>
+                                     <th style="
+                                        text-decoration: underline;
+                                        ">Vendor B</th>
+                                     <th style="
+                                        text-decoration: underline;
+                                        ">Vendor C</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr style="
+                                     background-color: #f3f3f3;
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Technical Score</td>
+                                     <td style="
+                                        text-decoration: underline;
+                                        ">
+                                        <input type="text" class="form-control kt-align-right clTheme" value="40.00%" style="
+                                           width: 120px;
+                                           " disabled="">
+                                     </td>
+                                     <td style="
+                                        text-decoration: underline;
+                                        "><input type="text" class="form-control kt-align-right clTheme" value="42.00%" style="
+                                        width: 120px;
+                                        " disabled=""></td>
+                                     <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false" style="
+                                        text-decoration: underline;
+                                        ">
+                                        <div class="dropdown dropdown-inline" style="
+                                           text-decoration: underline;
+                                           ">
+                                           <input type="text" class="form-control kt-align-right clTheme" value="40.00%" style="
+                                              width: 120px;
+                                              " disabled="">
+                                        </div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 1</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 2</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 3</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 4</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     background-color: #f3f3f3;
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Commercial Score</td>
+                                     <td style="
+                                        text-decoration: underline;
+                                        ">
+                                        <input type="text" class="form-control kt-align-right clTheme" value="35.00%" style="
+                                           width: 120px;
+                                           " disabled="">
+                                     </td>
+                                     <td style="
+                                        text-decoration: underline;
+                                        "><input type="text" class="form-control kt-align-right clTheme" value="33.00%" style="
+                                        width: 120px;
+                                        " disabled=""></td>
+                                     <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false" style="
+                                        text-decoration: underline;
+                                        ">
+                                        <div class="dropdown dropdown-inline" style="
+                                           text-decoration: underline;
+                                           ">
+                                           <input type="text" class="form-control kt-align-right clTheme" value="40.00%" style="
+                                              width: 120px;
+                                              " disabled="">
+                                        </div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 1</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 2</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 3</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                                  <tr style="
+                                     ">
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">Section 4</td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">35
+                                        </div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                     <td style="
+                                        vertical-align: middle;
+                                        ">
+                                        <div class="kt-align-right" style="
+                                           width: 120px;
+                                           cursor: pointer;
+                                           text-decoration: underline;
+                                           ">30</div>
+                                     </td>
+                                  </tr>
+                               </tbody>
+                            </table> -->
+                        <base-list #finalReviewList [(gridUrl)]="evalScoreUrl" [enableFilter]="false"></base-list>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-12">
+                           <h3 class="kt-section__title" style="
+                                  padding-top: 1.2em;
+                                  ">Review &amp; Selection</h3>
+                           <div class="form-group">
+                              <base-list #baselist [(gridUrl)]="gridUrlBase" [enableFilter]="false"
+                                 [rowExpandTemplate]="rowExpand" [rowExpand]="true" rowKey="LotID"
+                                 rowExpandMode="single" [bodyTemplate]="body"></base-list>
+                              <ng-template #body let-rowData="rowData" let-i="rowData" let-col="col">
+                                 <div *ngIf="col.field === 'Section'">
+                                    <span
+                                       *ngIf="col.dataType != 'DateTime' && col.dataType != 'Byte' && col.dataType != 'Decimal' && col.statusBadges == undefined && col.iconSet == undefined">
+                                       {{col.caps == 'uppercase' ? (rowData[col.field] | uppercase) : col.caps == 'lowercase' ? (rowData[col.field] | lowercase) : col.caps == 'titlecase' ?  (rowData[col.field] | titlecase) : rowData[col.field]}}
+                                    </span>
+                                 </div>
+                                 <div *ngIf="col.field !== 'Section'">
+                                    <label class="kt-checkbox kt-checkbox--success">
+                                       <input class="form-control radio" name="check[{{i+1}}]" type="checkbox" />
+                                       <span></span>
+                                    </label>
+                                 </div>
+                              </ng-template>
+
+                              <ng-template #rowExpand let-rowData="rowData" let-columns="columns">
+                                 <tr>
+                                    <td colspan="5">
+                                       <!-- ColSpan == total columns displayed on the parent list -->
+                                       <base-list #baseListExpanded
+                                          [gridUrl]="gridUrlBaseLine + 'campId='+CampID+'&bizregid='+ rowData.BizRegID + '&bizlocid='+ rowData.BizLocID + '&lotid='+ rowData.LotID + '&'"
+                                          [enableFilter]="false" [enablePaginator]="false">
+                                       </base-list>
+                                    </td>
+                                 </tr>
+                              </ng-template>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-lg-12" style="
+                               padding-top: 1.5rem;
+                               ">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

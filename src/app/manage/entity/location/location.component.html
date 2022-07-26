@@ -1,0 +1,91 @@
+<div [@routerTransition]>
+  <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+    <div class="kt-subheader kt-grid__item">
+      <div [class]="containerClass">
+        <div class="kt-subheader__main">
+          <h3 class="kt-subheader__title">
+            {{"ManageLocation" | localize}}
+          </h3>
+          <div class="kt-subheader__breadcrumbs">
+            <a href="#" class="kt-subheader__breadcrumbs-home">
+              <i class="flaticon2-shelter"></i>
+            </a>
+            <span class="kt-subheader__breadcrumbs-separator"></span>
+            <a
+              class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">{{"ManageLocationhHeaderInfo" | localize}}</a>
+          </div>
+        </div>
+        <div class="kt-subheader__toolbar">
+          <div class="kt-subheader__wrapper">
+            <!-- <button (click)="goBack()" class="btn btn-bold btn-md btn-font-md btn-label-warning">
+                          <i class="fa fa-arrow-circle-left"></i> {{"Back" | localize}}
+                      </button> -->
+            <button (click)="createLocation()" class="btn btn-primary"><i class="fa fa-plus"></i> {{"CreateNewLocation" | localize}}</button>
+            <!-- <button (click)="createLocation()" *ngIf="'Pages.Administration.Users.Create' | permission"
+                class="btn btn-primary"><i class="fa fa-plus"></i> {{"CreateNewLocation" | localize}}</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+      <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+          <div class="row align-items-center mb-4">
+            <div class="col-xl-12">
+              <div class="input-group">
+                <!-- <input [(ngModel)]="inputFilter" name="inputFilter" id="inputFilter" (keyup.enter)="searchArea()"
+                  autoFocus class="form-control m-input" [placeholder]="l('AreaSearchWithThreeDot')" type="text">
+                <span class="input-group-btn">
+                  <button (click)="searchArea()" class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i> {{"Search" | localize}}</button>
+                </span> -->
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="locationType !== locTypeEnum.Country">
+            <div class="form-group required">
+              <label>{{'Country' | localize }} :</label>
+              <ng-select #country="ngModel" name="countryCombo" [(ngModel)]="selectedCountry"
+                  [items]="countryList" [closeOnSelect]="true" id="countryCombo" bindValue="Code" 
+                  bindLabel="Remark" (change)="onCountryChanged()" required>       
+              </ng-select>
+              <validation-messages [formCtrl]="country"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType !== locTypeEnum.Country && locationType !== locTypeEnum.State">
+            <div class="form-group required">
+              <label>{{'State' | localize }} :</label>
+              <ng-select #state="ngModel" name="stateCombo" [(ngModel)]="selectedState"
+                  [items]="stateList" [closeOnSelect]="true" id="stateCombo" bindValue="Code" 
+                  bindLabel="Remark" (change)="onStateChanged()" required>       
+              </ng-select>
+              <validation-messages [formCtrl]="state"></validation-messages>
+            </div>
+          </div>
+
+          <div *ngIf="locationType !== locTypeEnum.Country && locationType !== locTypeEnum.State && locationType !== locTypeEnum.City">
+            <div class="form-group required">
+              <label>{{'City' | localize }} :</label>
+              <ng-select #city="ngModel" name="cityCombo" [(ngModel)]="selectedCity"
+                  [items]="cityList" [closeOnSelect]="true" bindValue="Code"
+                  bindLabel="Remark" (change)="onCityChanged()" required>        
+              </ng-select>
+              <validation-messages [formCtrl]="city"></validation-messages>
+            </div>
+          </div>
+
+          <base-list #locationList [(gridUrl)]="gridUrl" actionColumn="action" [enableFilter]="false" 
+            [permissionView]="permissionView" (onViewClick)="viewLocation($event, 'view')" 
+            [permissionEdit]="permissionEdit" (onEditClick)="viewLocation($event)"
+            [permissionDelete]="permissionDelete" (onDeleteClick)="deleteLocation($event)">
+          </base-list>
+        </div>
+      </div>
+    </div>
+
+    <createOrEditLocationModal #createOrEditLocationModal (modalSave)="refresh()"></createOrEditLocationModal>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div [@routerTransition]>
+<div bsModal #selectBranchModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="selectModal" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{"WebsiteList" | localize}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <base-list #branchListComponent [(gridUrl)]="gridUrl" [enableFilter]="false" actionColumn="checkbox" (onSelectedChange)="onSelectedChange($event)"></base-list>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="subscribe()"><i class="fa fa-plus"></i>{{"subscribe" | localize}}</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<!-- <createOrEditBranchModal #createOrEditBranchModal (modalSave)="refresh()"></createOrEditBranchModal> -->
+</div>
+

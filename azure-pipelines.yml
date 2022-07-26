@@ -1,0 +1,38 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.15.3'
+  displayName: 'Install Node.js'
+
+- script: |
+    yarn global add @angular/cli@9.1.0
+    yarn install
+    node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod
+  displayName: 'npm install and build'
+
+ # Publish Artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    artifactName: dist
+    pathtoPublish: 'dist'
+
+# Deploy to Azure
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: 'Free Trial(9dac1926-4a9b-495d-a000-4064b5b35c01)'
+#     appType: 'webApp'
+#     WebAppName: 'plx-demo-atn'
+#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    

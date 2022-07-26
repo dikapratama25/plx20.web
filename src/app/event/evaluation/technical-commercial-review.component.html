@@ -1,0 +1,639 @@
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+        <div class="kt-container  kt-container--fluid ">
+            
+            <div class="kt-subheader__main">
+               <button type="button" style="margin-right:15px;" (click)="back()"
+                       class="btn btn-outline-metal back">
+                   <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+               </button>
+               <h3 class="kt-subheader__title">
+                   <span>{{ title }}</span>
+               </h3>
+               <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+               <span class="kt-subheader__desc">
+                   <span class="kt-subheader__desc">{{ subTitle }}</span>
+               </span>
+           </div>
+        </div>
+    </div>
+    
+    <!-- end:: Subheader -->
+
+    <!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <!-- Layout template-->
+        <div class="row">
+            <div class="col-lg-12">
+               <div class="kt-portlet">
+                  <div class="kt-portlet__head">
+                     <div class="kt-portlet__head-label">
+                         <div class="" style="
+                           padding: 1.5em 0;
+                           ">
+                             <h1 class="kt-portlet__head-title kt-font-dark" style="
+                              font-size: 1.5em;
+                              ">
+                                 {{eventName}}
+                             </h1>
+                             <div style="
+                              padding-top: 6px;
+                              ">{{eventID}}</div>
+                         </div>
+                     </div>
+                     <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions">
+                           <div *ngIf="showSuppDoc === true">
+                              <button type="button" *ngIf="checkData == 1" class="btn btn-secondary btn-elevate btn-pill kt-margin-r-5" style=""><i class="la la-arrow-down"></i>Buyer Doc</button>
+                            <button type="button" *ngIf="checkData == 0" class="btn btn-secondary btn-elevate btn-pill kt-margin-r-5" style=""><i class="la la-arrow-down"></i>HSE Doc</button>
+                            
+                           </div> 
+                           <!-- <button type="button" class="btn btn-success btn-pill" style="
+                              min-width: 100px;
+                              ">Submit</button> -->
+                        </div>
+                     </div>
+                  </div>
+                  <div class="kt-portlet__body">
+                     <div class="kt-section kt-section--first">
+                        <div class="row">
+                           <div class="col-lg-6" style="
+                              ">
+                              <div style="display:flex;justify-content: flex-start;">
+                                 <div class="form-group" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"Participant" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalValue}}" style="
+                                       text-align: right;
+                                       ">
+                                 </div>
+                                 <div class="form-group" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"PendingReview" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalPendingTech}}" style="
+                                       text-align: right;
+                                       color: #ffb822;
+                                       ">
+                                 </div>
+                                 <div class="form-group" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"Completed" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalCompletedTech}}" style="
+                                       text-align: right;
+                                       color: #0abb87;
+                                       ">
+                                 </div>
+                                 <!--Start Origin-->
+                                 <!-- <div class="form-group" *ngIf="checkData != 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"Participant" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalValue}}" style="
+                                       text-align: right;
+                                       ">
+                                 </div> -->
+                                 <!-- <div class="form-group" *ngIf="checkData == 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"Participant" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalValComm}}" style="
+                                       text-align: right;
+                                       ">
+                                 </div> -->
+                                 <!-- <div class="form-group" *ngIf="checkData != 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"PendingReview" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalPendingTech}}" style="
+                                       text-align: right;
+                                       color: #ffb822;
+                                       ">
+                                 </div> -->
+                                 <!-- <div class="form-group" *ngIf="checkData == 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"PendingSubmit" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalPendingSubmComm}}" style="
+                                       text-align: right;
+                                       color: #ffb822;
+                                       ">
+                                 </div>
+                                 <div class="form-group" *ngIf="checkData == 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"PendingReview" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalPendingRevComm}}" style="
+                                       text-align: right;
+                                       color: #ffb822;
+                                       ">
+                                 </div>
+                                 <div class="form-group" *ngIf="checkData == 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"Completed" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalCompletedComm}}" style="
+                                       text-align: right;
+                                       color: #ffb822;
+                                       ">
+                                 </div> -->
+                                 <!-- <div class="form-group" *ngIf="checkData != 1" style="
+                                    width: 150px;
+                                    margin-right: 10px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 5px;
+                                    padding: 5px 10px;
+                                    ">
+                                    <label>{{"Completed" | localize}}</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{totalCompletedTech}}" style="
+                                       text-align: right;
+                                       color: #0abb87;
+                                       ">
+                                 </div> -->
+                                 <!-- End Origin-->
+                              </div>
+                           </div>
+                           <div class="col-lg-6" style="
+                              ">
+                              <div style="display:flex;justify-content: flex-end;">
+                                 <div class="form-group col-lg-4">
+                                    <label>Reviewer ID    </label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{employeeID}}">
+                                 </div>
+                                 <div class="form-group col-lg-4">
+                                    <label>Reviewer Type</label>
+                                    <input type="text" class="form-control clTheme" disabled="" value="{{roles}}">
+                                 </div>
+                                 <!-- <div class="form-group col-lg-4">
+                                    <button type="button" class="btn btn-outline-success btn-elevate btn-pill kt-margin-r-5 btn-small" style="align-self: baseline;"
+                                    (click)="compare()">Compare Selected</button>
+                                 </div> -->
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+
+                            <div *ngIf="checkData == 0">
+                                <!--Region Baselist Technical-->
+                                <base-list #baselistTabTechnical [(gridUrl)]="gridTechUrl" detailAligment="left" [enableFilter]="false" [indexing]="true" actionColumn="checkbox" detail="true"
+                                           (onSelectedChange)="selectTech($event)" (onDetailClick)="reviewQuestionnaire($event)">
+                                </base-list>
+                                <!--End Region-->
+                            </div>
+
+                            <div *ngIf="checkData == 1">
+                                <!--Region Baselist Commercial-->
+                                <base-list #baselistTabCommercial [(gridUrl)]="gridComUrl" detailAligment="left"
+                                           [enableFilter]="false" [indexing]="true" actionColumn="checkbox" (onSelectedChange)="selectComm($event)" detail="true" (onDetailClick)="reviewQuestionnaire($event)">
+                                </base-list>
+                                <!--End Region-->
+                            </div>
+
+                           <!-- <div class="col-lg-12">
+                              <div class="">
+                                 <div class="tab-content">
+                                    <div class="tab-pane active" id="kt_tabs_4_1" role="tabpanel">
+                                       <table class="table" style="
+                                          font-size: 1em;
+                                          ">
+                                          <thead>
+                                             <tr>
+                                                <th>#</th>
+                                                <th></th>
+                                                <th>Participant ID</th>
+                                                <th>Participant Name</th>
+                                                <th>Commercial Score</th>
+                                                <th>Total Amount</th>
+                                                <th>Technical Score</th>
+                                                <th>Review Status</th>
+                                             </tr>
+                                          </thead>
+                                          <tbody>
+                                             <tr>
+                                                <td scope="row">1</td>
+                                                <td>
+                                                   <label class="kt-checkbox">
+                                                   <input type="checkbox"><span></span>
+                                                   </label>
+                                                </td>
+                                                <td>PCTR08AC5X</td>
+                                                <td>
+                                                   Vendor A
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">8.2</div>
+                                                </td>
+                                                <td style="text-align:right">
+                                                   <div style="width:120px">16,500.00</div>
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">270</div>
+                                                </td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <span class="kt-badge kt-badge--success  kt-badge--inline kt-badge--pill">attended</span>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td scope="row">2</td>
+                                                <td>
+                                                   <label class="kt-checkbox">
+                                                   <input type="checkbox"><span></span>
+                                                   </label>
+                                                </td>
+                                                <td>PCTR15ACX6</td>
+                                                <td>
+                                                   Vendor B
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">8.2</div>
+                                                </td>
+                                                <td style="text-align:right">
+                                                   <div style="width:120px">16,500.00</div>
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">270</div>
+                                                </td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <span class="kt-badge kt-badge--success  kt-badge--inline kt-badge--pill">attended</span>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td scope="row">3</td>
+                                                <td>
+                                                   <label class="kt-checkbox">
+                                                   <input type="checkbox"><span></span>
+                                                   </label>
+                                                </td>
+                                                <td>PCTR0CAC53</td>
+                                                <td>
+                                                   Vendor C
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">8.2</div>
+                                                </td>
+                                                <td style="text-align:right">
+                                                   <div style="width:120px">16,500.00</div>
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">270</div>
+                                                </td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <span class="kt-badge kt-badge--success  kt-badge--inline kt-badge--pill">attended</span>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td scope="row">4</td>
+                                                <td>
+                                                   <label class="kt-checkbox">
+                                                   <input type="checkbox"><span></span>
+                                                   </label>
+                                                </td>
+                                                <td>PCTR08AC5X</td>
+                                                <td>
+                                                   Vendor D
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">8.2</div>
+                                                </td>
+                                                <td style="text-align:right">
+                                                   <div style="width:120px">16,500.00</div>
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">270</div>
+                                                </td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <span class="kt-badge kt-badge--success  kt-badge--inline kt-badge--pill">attended</span>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td scope="row">5</td>
+                                                <td>
+                                                   <label class="kt-checkbox">
+                                                   <input type="checkbox"><span></span>
+                                                   </label>
+                                                </td>
+                                                <td>PCTR08AC5X</td>
+                                                <td>
+                                                   Vendor E
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">8.2</div>
+                                                </td>
+                                                <td style="text-align:right">
+                                                   <div style="width:120px">16,500.00</div>
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">270</div>
+                                                </td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill">Pending</span>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                             <tr>
+                                                <td scope="row">6</td>
+                                                <td>
+                                                   <label class="kt-checkbox">
+                                                   <input type="checkbox"><span></span>
+                                                   </label>
+                                                </td>
+                                                <td>PCTR08AC5X</td>
+                                                <td>
+                                                   Vendor F
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">8.2</div>
+                                                </td>
+                                                <td style="text-align:right">
+                                                   <div style="width:120px">16,500.00</div>
+                                                </td>
+                                                <td>
+                                                   <div style="width:120px;text-align:right">270</div>
+                                                </td>
+                                                <td class="kt-datatable__cell--left kt-datatable__cell" data-field="Actions" data-autohide-disabled="false">
+                                                   <div class="dropdown dropdown-inline">
+                                                      <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill">Pending</span>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </div>
+        <!-- End -->
+
+        <!-- <div class="kt-portlet kt-portlet--bordered kt-margin-r-40" style="border-radius: 10px">
+            
+                    <div class="kt-portlet__body"> -->
+
+
+                        <!--Technical Review Content-->
+
+                        <!--End Technical Review Content-->
+
+                        <!--Commercial Review Content-->
+
+                        <!--End Commercial Review Content-->
+
+                    <!-- </div> -->
+
+                    <!-- #region unused event final review
+                        begin::Portlet
+                        <div class="kt-portlet kt-portlet--bordered">
+                            <div class="kt-portlet__head">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                        Document Review
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="kt-portlet__body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Vendor A</th>
+                                            <th>Vendor B</th>
+                                            <th>Vendor C</th>
+                                        </tr>
+                                        <tr>
+                                            <th width="400px">Technical Score</th>
+                                            <th>250</th>
+                                            <th>282</th>
+                                            <th>275</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>TQ0O1A</td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 120
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 100
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 100
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TQ0O2A</td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 80
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 82
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 85
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>TQ0O3A</td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 50
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 100
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 90
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Vendor A</th>
+                                            <th>Vendor B</th>
+                                            <th>Vendor C</th>
+                                        </tr>
+                                        <tr>
+                                            <th width="400px">Commercial Score</th>
+                                            <th>180</th>
+                                            <th>150</th>
+                                            <th>275</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>QS0O1A</td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 60
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 50
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 95
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>QS0O2A</td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 60
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 70
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 85
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>QS0O3A</td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 60
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 30
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-comment-dots"></i>
+                                                 90
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            
+                            </div>
+                        </div>
+
+                        end::Portlet
+
+                        begin::Portlet
+                        <div class="kt-portlet kt-portlet--bordered kt-portlet--head--noborder">
+                            <div class="kt-portlet__head">
+                                <div class="kt-portlet__head-label">
+                                    <h3 class="kt-portlet__head-title">
+                                        Select Validation
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="kt-portlet__body">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-lg-3 col-sm-12">Awarded Vendor <span class="kt-link kt-link--state kt-link--danger">*</span></label>
+                                    <div class="col-lg-4 col-md-9 col-sm-12">
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-lg-3 col-sm-12">Awarded Reason <span class="kt-link kt-link--state kt-link--danger">*</span></label>
+                                    <div class="col-lg-4 col-md-9 col-sm-12">
+                                        <textarea class="form-control" readonly="" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="kt-portlet kt-callout kt-callout--danger" style="border-radius: 10px">
+                                <div class="kt-portlet__body">
+                                    <div class="kt-callout__body">
+                                        <div class="kt-callout__content">
+                                            <h3 class="kt-callout__title">Attention</h3>
+                                            <p class="kt-callout__desc">
+                                                In order to proceed with the submission, please enter the autentication code. Click send code to email authentication code
+                                            </p>
+                                        </div>
+                                        <div class="kt-callout__action">
+                                            <a href="#" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Send code</a>
+                                        </div>
+                                    </div>
+                                        <div class="kt-callout__action kt-margin-t-20">
+                                                <a href="#" class="btn btn-danger btn-elevate btn-pill btn-elevate-air">Send code</a>
+                                        </div>
+                                </div>
+                                <div class="row kt-margin-l-10">
+                                    <div class="col-lg-4 col-md-9 col-sm-12">
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="kt-callout__action kt-margin-l-10">
+                                            <a href="#" class="btn btn-success btn-elevate btn-pill btn-elevate-air">Submit</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        end::Portlet
+                        #endregion -->
+                
+        <!-- </div> -->
+    </div>
+
+</div>

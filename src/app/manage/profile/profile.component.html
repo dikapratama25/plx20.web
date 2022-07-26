@@ -1,0 +1,1213 @@
+<div>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="padding: 0">
+        <div class="kt-subheader kt-grid__item" id="kt_subheader">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Profile" | localize}}</span>
+                    </h3>
+                    <div class="kt-subheader__breadcrumbs">
+                        <a href="app/workorder/workorder" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <a href="" class="kt-subheader__breadcrumbs-link">
+                            {{"Review" | localize}}
+                        </a>
+                    </div>
+                    <!-- <div>
+                        <button (click)="testReset()">Test reset cookie</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" *ngIf="pendingCAMApproval==true" role="alert">
+                    <div class="alert-text">
+                        <h4 class="alert-heading">{{'ThankYou' | localize}}!</h4>
+                        <p>{{'UpdateWaitingCAM' | localize}}</p>
+                        <hr>
+                        <p class="mb-0">{{'UpdateWaitingCAMDetail' | localize}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-section__title mb-3 ng-tns-c372-1">User Information</h3>
+                </div>
+                <div class="kt-portlet__head-toolbar">
+
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="row">
+                        <div class="col-lg-12">
+                               <div class="form-group row ng-tns-c372-1">
+                               <div class="col-lg-6 ng-tns-c372-1"><label class="ng-tns-c372-1">Firstname<span class="kt-font-danger ng-tns-c372-1">*</span></label><input type="text" class="form-control ng-tns-c372-1"></div>
+                               <div class="col-lg-6 ng-tns-c372-1"><label class="ng-tns-c372-1">Lastname<span class="kt-font-danger ng-tns-c372-1">*</span></label><input type="text" class="form-control ng-tns-c372-1"></div>
+                            </div>
+                            <div class="form-group row ng-tns-c372-1">
+                               <div class="col-lg-4 ng-tns-c372-1"><label class="ng-tns-c372-1">Email<span class="kt-font-danger ng-tns-c372-1">*</span></label><input type="email" class="form-control ng-tns-c372-1"></div>
+                               <div class="col-lg-4 ng-tns-c372-1">
+                                  <label class="ng-tns-c372-1">Mobile Phone:<span class="kt-font-danger ng-tns-c372-1">*</span></label>
+                                  <div class="input-group mb-4 ng-tns-c372-1">
+                                     <div class="input-group-prepend ng-tns-c372-1"><span class="input-group-text ng-tns-c372-1"><i class="la la-phone ng-tns-c372-1"></i></span></div>
+                                     <input type="text" value="" placeholder="Mobile No" aria-describedby="basic-addon1" class="form-control ng-tns-c372-1">
+                                  </div>
+                               </div>
+                               <div class="col-lg-4 ng-tns-c372-1"><label class="ng-tns-c372-1">Subscription Type<span class="kt-font-danger ng-tns-c372-1">*</span></label>
+                                    <div style="display: flex;">
+                                        <input type="text" class="form-control ng-tns-c372-1" disabled style="flex: 1;">
+                                        <button _ngcontent-mir-c350="" data-ktwizard-type="action-save" class="btn-secondary btn btn-wide kt-font-bold kt-font-transform-u ng-star-inserted">Upgrade</button>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="kt-portlet">
+            <div class="kt-portlet__body">
+                <div class="kt-grid kt-wizard-v1 kt-wizard-v1--white" id="kt_wizard_v1" data-ktwizard-state="first">
+                    <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v1__wrapper">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success"  role="alert" *ngIf="isSubmited==true" style="border-radius: 5px;">
+                                    <div class="alert-text">
+                                        <span class="displayFlex"><i class="flaticon2-information" style="font-size: 1.4em;padding-right: 10px;"></i><h4 class="alert-heading">{{'Congratulation' | localize}}</h4></span>
+                                        <p>
+                                            You have completed your profile. The administrator is currently reviewing the profile.<br/>
+                                            You will get further notification when your profile has been approved.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="companyHeaderLine_Active_{{active}}_Flag_{{flag}}" [ngClass]="{'showThis':active == 0 && flag == 1}">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group ">
+                                                <label>{{'CompanyProfileName' | localize}} :</label>
+                                                <input #companyNameH="ngModel" id="companyNameH" type="text" name="companyNameH" class="form-control" [(ngModel)]="inputHelper.CompanyName" disabled>
+                                                <validation-messages [formCtrl]="companyNameH"></validation-messages>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group ">
+                                        <label>{{'CompanyID' | localize}} :</label>
+                                        <input #companyID="ngModel" id="companyIDH" type="text" name="companyID" placeholder="will be assign by system" class="form-control" [(ngModel)]="inputHelper.BizRegID" disabled>
+                                        <validation-messages [formCtrl]="companyID"></validation-messages>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group ">
+                                                <label>{{'CEO' | localize }} :</label>
+                                                <input #ceoH="ngModel" id="ceoH" type="text" name="ceoH" class="form-control" [(ngModel)]="inputHelper.ContactPerson2" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group ">
+                                        <label>{{'TelNo' | localize }} :</label>
+                                        <input #companyTelNoH="ngModel" id="companyTelNoH" type="text" name="companyTelNoH"
+                                               onkeydown="return ( event.ctrlKey || event.altKey
+                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                        || (95<event.keyCode && event.keyCode<106)
+                                        || (event.keyCode==8) || (event.keyCode==9)
+                                        || (event.keyCode>34 && event.keyCode<40)
+                                        || (event.keyCode==46) || (event.keyCode==189) )"
+                                    maxlength="12" class="form-control" [(ngModel)]="inputHelper.TelNo" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>{{'FaxNo' | localize }} :</label>
+                                        <input id="businessFaxNoH" type="text" name="businessFaxNo"
+                                               onkeydown="return ( event.ctrlKey || event.altKey
+                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                        || (95<event.keyCode && event.keyCode<106)
+                                        || (event.keyCode==8) || (event.keyCode==9)
+                                        || (event.keyCode>34 && event.keyCode<40)
+                                        || (event.keyCode==46) || (event.keyCode==189) )"
+                                maxlength="12"
+                                    class="form-control" [(ngModel)]="inputHelper.FaxNo" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabWrapper tabWizard3 noLineTab">
+                            <tabset #mainTabs>
+                                <!--Section 1 : Terms & Conditions-->
+                                <tab heading="1. {{'TermsConditions' | localize}}" index="0" id="tab1" class="tab-wrapper">
+                                    <div class="row displayAbs">
+                                        <div class="col-lg-12">
+                                            <div class="displayFlex regActions elAlignRight">
+                                                <!-- <button class="btn btn-secondary btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="preTabTnc(1)">
+                                                    Back
+                                                </button> -->
+                                                <button class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="nextTabTnc(0)" [disabled]="formStep <= 0">
+                                                    {{'Next' | localize}}
+                                                </button>
+                                                <!-- <button class="btn btn-dark btn-sm btn-wide kt-font-transform-u kt-margin-r-10">
+                                                    Close
+                                                </button> -->
+                                                <!-- <button class="btn btn-brand btn-sm btn-wide kt-font-transform-u kt-margin-r-10" data-ktwizard-type="action-save" (click)="saveProfile()" [disabled]="profileForm.form.status!='VALID' || stepOne == true || BizRegStatus > 1">
+                                                    {{ 'Save' | localize }}
+                                                </button> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="kt-wizard-v1__content">
+                                        <terms-and-conditions #termsAndConditions></terms-and-conditions>
+                                        <div class="accept kt-margin-t-25">
+                                            <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                                <input type="checkbox" (change)="firstRegistration()" [(ngModel)]="checkTC" [checked]="checkTC" [disabled]="checkTC">{{'AcceptTermsConditions' | localize}}
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </tab>
+                                <!--Section 2 : Company Profile-->
+                                <tab heading="2. {{'CompanyProfile' | localize}}" index="1" id="tab2" class="tab-wrapper" [disabled]="formStep < 1">
+                                    <form #profileForm="ngForm" name="profileForm">
+                                        <div class="kt-wizard-v1__content">
+                                            <!-- <div class="kt-heading kt-heading--md">{{'EditCompanyProfile' | localize }}</div> -->
+                                            <div class="row">
+                                                <div class="col-lg-12 hideThis">
+                                                    <h3 class="kt-section__title mb-3 ng-tns-c372-1"></h3>
+                                                </div>
+                                                <div class="col-lg-12 col-sm-12">
+                                                    <div class="kt-wizard-v1__form">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="displayFlex regActions elAlignRight">
+                                                                    <button *ngIf="(active == 0 && flag == 0) && updatePermission == true" class="btn btn-danger btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="saveProfile(1)" [disabled]="profileForm.form.status!='VALID'">
+                                                                        {{'SaveAsDraft' | localize }}
+                                                                    </button>
+                                                                    <button class="btn btn-secondary btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="preTabTnc(1)">
+                                                                        {{'Back' | localize}}
+                                                                    </button>
+                                                                    <button *ngIf="formStep < 2" class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="saveProfile(0)" [disabled]="profileForm.form.status!='VALID' || stepOne == true">
+                                                                        {{'Next' | localize}}
+                                                                    </button>
+                                                                    <button *ngIf="BizRegStatus >= 2" class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="nextTabTnc(1)">
+                                                                        {{'Next' | localize}}
+                                                                    </button>
+                                                                    <!-- <button class="btn btn-dark btn-sm btn-wide kt-font-transform-u kt-margin-r-10">
+                                                                        Close
+                                                                    </button> -->
+                                                                    <!-- <button class="btn btn-brand btn-sm btn-wide kt-font-transform-u kt-margin-r-10" data-ktwizard-type="action-save" (click)="saveProfile()" [disabled]="profileForm.form.status!='VALID' || stepOne == true || BizRegStatus > 1">
+                                                                        {{ 'Save' | localize }}
+                                                                    </button> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div [ngClass]="(active == 0 && flag == 1) ? 'hideThis' : 'col-lg-6'">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                            <label>{{'CompanyProfileName' | localize }} :</label>
+                                                                            <input #companyName="ngModel" id="companyName" type="text" name="companyName" class="form-control" [(ngModel)]="inputHelper.CompanyName" [disabled]="!allowTC" required>
+                                                                            <validation-messages [formCtrl]="companyName"></validation-messages>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div [ngClass]="(active == 0 && flag == 1) ? 'hideThis' : 'col-lg-6'">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                            <label>{{'CEO' | localize }} :</label>
+                                                                            <input #ceo="ngModel" id="ceo" type="text" name="ceo" class="form-control" [(ngModel)]="inputHelper.ContactPerson2" [disabled]="!allowTC" required>
+                                                                            <validation-messages [formCtrl]="ceo"></validation-messages>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <!-- </div> -->
+                                                        <!-- <div class="row"> -->
+                                                            <div [ngClass]="(active == 0 && flag == 1) ? 'hideThis' : 'col-lg-6'">
+                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                    <label>{{'CompanyID' | localize}} :</label>
+                                                                    <input #companyID="ngModel" id="companyID" type="text" name="companyID" placeholder="will be assign by system" class="form-control" [(ngModel)]="inputHelper.BizRegID" disabled>
+                                                                    <validation-messages [formCtrl]="companyID"></validation-messages>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                    <label>{{'TaxOrganizationType' | localize}} :</label>
+                                                                    <div class="form-group campID">
+                                                                        <div class="campIDLbl">
+                                                                            <select #type
+                                                                                    required
+                                                                                    name="type"
+                                                                                    id="type"
+                                                                                    class="form-control"
+                                                                                    [disabled]="!allowTC"
+                                                                                    [(ngModel)]="inputHelper.ReqCode"
+                                                                                    [attr.data-live-search]="true">
+                                                                                <option *ngFor="let data of dataTaxType" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <!-- </div>
+                                                        <div class="row"> -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                    <label>{{'SupplierType' | localize}} :</label>
+                                                                    <div class="form-group campID">
+                                                                        <div class="campIDLbl">
+                                                                            <select #supplyID
+                                                                                    required
+                                                                                    name="supplyID"
+                                                                                    id="supplyID"
+                                                                                    class="form-control"
+                                                                                    [disabled]="!allowTC"
+                                                                                    [(ngModel)]="inputHelper.BusinessType"
+                                                                                    [attr.data-live-search]="true">
+                                                                                <option *ngFor="let data of dataSupplierID" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- <input #supplierType="ngModel" id="supplierType" type="text" name="supplierType" class="form-control" [(ngModel)]="inputHelper.SupplierType" [disabled]="stepOne == true || BizRegStatus > 1" required>
+                                                                        <validation-messages [formCtrl]="supplierType"></validation-messages> -->
+                                                                </div>
+                                                            </div>
+                                                            <div [ngClass]="(active == 0 && flag == 1) ? 'hideThis' : 'col-lg-3'">
+                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                    <label>{{'TelNo' | localize }} :</label>
+                                                                    <input #companyTelNo="ngModel" id="businessTelNo" type="text" name="businessTelNo"
+                                                                           onkeydown="return ( event.ctrlKey || event.altKey
+                                                                           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                    || (95<event.keyCode && event.keyCode<106)
+                                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                                    || (event.keyCode==46) || (event.keyCode==189) )"
+                                                                maxlength="12" class="form-control" [(ngModel)]="inputHelper.TelNo" [disabled]="!allowTC" required>
+                                                                <validation-messages [formCtrl]="companyTelNo"></validation-messages>
+                                                                </div>
+                                                            </div>
+                                                            <div [ngClass]="(active == 0 && flag == 1) ? 'hideThis' : 'col-lg-3'">
+                                                                <div class="form-group">
+                                                                    <label>{{'FaxNo' | localize }} :</label>
+                                                                    <input id="businessFaxNo" type="text" name="businessFaxNo"
+                                                                           onkeydown="return ( event.ctrlKey || event.altKey
+                                                                           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                    || (95<event.keyCode && event.keyCode<106)
+                                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                                    || (event.keyCode==46) || (event.keyCode==189) )"
+                                                            maxlength="12"
+                                                                class="form-control" [(ngModel)]="inputHelper.FaxNo" [disabled]="!allowTC">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                    <label>{{'TaxpayerID' | localize}} :</label>
+                                                                    <input #taxpayerID="ngModel" title="SSM ID / Registration Number for Foreign Supplier / IC Number for Individual" id="taxpayerID" type="text" name="taxpayerID" class="form-control" [(ngModel)]="inputHelper.RegNo" [disabled]="(!allowTC) || inputHelper.Country == null || inputHelper.Country == ''" required>
+                                                                    <validation-messages [formCtrl]="taxpayerID"></validation-messages>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                    <label>{{'TaxRegistrationNumber' | localize}} :</label>
+                                                                    <input #taxRegNo="ngModel" title="SST / Tax Registration Number" id="taxRegNo" type="text" name="taxRegNo" class="form-control" [(ngModel)]="inputHelper.ReqNo" [disabled]="(!allowTC) || inputHelper.Country == null || inputHelper.Country == ''" required>
+                                                                    <validation-messages [formCtrl]="taxRegNo"></validation-messages>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                            <label>{{'BusinessAddress' | localize }} :</label>
+                                                                            <input #companyAddress="ngModel" id="businessAddress1" type="text" name="businessAddress1" class="form-control" [(ngModel)]="inputHelper.Address1" (ngModelChange)="inputHelper.Address1=$event.toUpperCase()" [disabled]="!allowTC" required>
+                                                                            <validation-messages [formCtrl]="companyAddress"></validation-messages>
+                                                                            <input id="businessAddress2" type="text" name="businessAddress2" class="form-control kt-margin-t-50" [(ngModel)]="inputHelper.Address2" (ngModelChange)="inputHelper.Address2=$event.toUpperCase()" [disabled]="!allowTC">
+                                                                            <input id="businessAddress3" type="text" name="businessAddress3" class="form-control  kt-margin-t-50" [(ngModel)]="inputHelper.Address3" (ngModelChange)="inputHelper.Address3=$event.toUpperCase()" [disabled]="!allowTC">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <!-- <div class="row">
+
+                                                                </div> -->
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                            <label>{{'Country' | localize}} :</label>
+                                                                            <div class="form-group campID">
+                                                                                <div class="campIDLbl">
+                                                                                    <select #CountryID
+                                                                                            required
+                                                                                            name="CountryID"
+                                                                                            id="CountryID"
+                                                                                            class="form-control"
+                                                                                            [disabled]="!allowTC"
+                                                                                            (change)="populateState()"
+                                                                                            [(ngModel)]="inputHelper.Country"
+                                                                                            [attr.data-live-search]="true">
+                                                                                        <option *ngFor="let data of dataCountryID" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label>{{'State' | localize}} :</label>
+                                                                                <div class="form-group campID">
+                                                                                    <div class="campIDLbl">
+                                                                                        <select #companyState
+                                                                                                required
+                                                                                                name="companyState"
+                                                                                                id="companyState"
+                                                                                                class="form-control"
+                                                                                                (change)="populateCity()"
+                                                                                                [disabled]="(!allowTC) || inputHelper.Country == null || inputHelper.Country == ''"
+                                                                                                [(ngModel)]="inputHelper.State"
+                                                                                                [attr.data-live-search]="true">
+                                                                                            <option *ngFor="let data of stateList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <label>{{'City' | localize}} :</label>
+                                                                                <div class="campIDLbl">
+                                                                                    <select #companyCity
+                                                                                            required
+                                                                                            name="companyCity"
+                                                                                            id="companyCity"
+                                                                                            class="form-control"
+                                                                                            [disabled]="(!allowTC) || inputHelper.State == null || inputHelper.State == ''"
+                                                                                            [(ngModel)]="inputHelper.City"
+                                                                                            [attr.data-live-search]="true">
+                                                                                        <option *ngFor="let data of cityList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                                    <label>{{'PostCode' | localize }} :</label>
+                                                                                    <input #companyPostCodeReview="ngModel" id="companyPostCodeReview" type="text"
+                                                                                           onkeydown="return ( event.ctrlKey || event.altKey
+                                                                                           || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                                || (95<event.keyCode && event.keyCode<106)
+                                                                                || (event.keyCode==8) || (event.keyCode==9)
+                                                                                || (event.keyCode>34 && event.keyCode<40)
+                                                                                || (event.keyCode==46) )"
+                                                                                name="companyPostCodeReview" class="form-control" minlength="5" maxlength="5" [(ngModel)]="inputHelper.PostalCode" [disabled]="!allowTC" required>
+                                                                                <validation-messages [formCtrl]="companyPostCodeReview"></validation-messages>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- Lawas -->
+                                                                    <!-- <div class="col-lg-6">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label>State</label>
+                                                                                <div class="form-group campID">
+                                                                                    <div class="campIDLbl">
+                                                                                        <select #companyState
+                                                                                                required
+                                                                                                name="companyState"
+                                                                                                id="companyState"
+                                                                                                class="form-control"
+                                                                                                (change)="populateCity()"
+                                                                                                [disabled]="((active == 0 && flag == 1) || (active == 1 && flag == 1)) || selectState == false"
+                                                                                                [(ngModel)]="inputHelper.State"
+                                                                                                [attr.data-live-search]="true">
+                                                                                            <option *ngFor="let data of stateList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <label>City</label>
+                                                                                <div class="campIDLbl">
+                                                                                    <select #companyCity
+                                                                                            required
+                                                                                            name="companyCity"
+                                                                                            id="companyCity"
+                                                                                            class="form-control"
+                                                                                            [disabled]="((active == 0 && flag == 1) || (active == 1 && flag == 1)) || selectCity == false"
+                                                                                            [(ngModel)]="inputHelper.City"
+                                                                                            [attr.data-live-search]="true">
+                                                                                        <option *ngFor="let data of cityList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <div class="col-lg-12">
+                                                                        <div class="row">
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                            </div>
+                                            <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                                <div class="kt-form__actions save-company-profile" style="
+                                            display: flex;
+                                            justify-content: flex-end;">
+                                                    <!-- <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="saveProfile()" [disabled]="profileForm.form.status!='VALID' || stepOne == true || BizRegStatus > 1">
+                                                        {{ 'Save' | localize }}
+                                                    </button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </tab>
+                                <!--Section 3 : Contact-->
+                                <tab heading="3. {{'Contact' | localize}}" index="2" id="tab3" class="tab-wrapper" [disabled]="formStep < 2">
+                                    <form #contactForm="ngForm" name="contactForm">
+                                        <div class="kt-wizard-v1__content">
+                                            <div class="row hideThis">
+                                                <div _ngcontent-qna-c350="" class="col-lg-12"><h3 _ngcontent-qna-c350="" class="kt-section__title mb-3 ng-tns-c372-1"></h3></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="displayFlex regActions elAlignRight">
+                                                        <button *ngIf="(active == 0 && flag == 0) && updatePermissionContact == true" class="btn btn-danger btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="saveContact(1)" [disabled]="contactForm.form.status!='VALID'">
+                                                            {{ 'SaveAsDraft' | localize }}
+                                                        </button>
+                                                        <button class="btn btn-secondary btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="preTabTnc(2)">
+                                                            {{'Back' | localize}}
+                                                        </button>
+                                                        <button *ngIf="formStep < 3" class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="saveContact(0)" [disabled]="contactForm.form.status!='VALID' || stepTwo == true">
+                                                            {{'Next' | localize}}
+                                                        </button>
+                                                        <button *ngIf="BizRegStatus >= 3" class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="nextTabTnc(2)">
+                                                            {{'Next' | localize}}
+                                                        </button>
+                                                        <!-- <button class="btn btn-dark btn-sm btn-wide kt-font-transform-u kt-margin-r-10">
+                                                            Close
+                                                        </button> -->
+                                                        <!-- <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="saveContact()" [disabled]="contactForm.form.status!='VALID' || BizRegStatus > 2">
+                                                            {{ 'Save' | localize }}
+                                                        </button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                        <label>{{'ContactPersonProfile' | localize }} :</label>
+                                                        <input #contactPerson="ngModel" id="contactPerson" type="text" name="contactPerson" class="form-control" [(ngModel)]="inputHelper.ContactPerson"
+                                                               (ngModelChange)="inputHelper.ContactPerson=$event.toUpperCase()" [disabled]="!allowTC" required>
+                                                        <validation-messages [formCtrl]="contactPerson"></validation-messages>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                        <label>{{'NRICNo' | localize }} :</label>
+                                                        <input #nric="ngModel" id="nric" type="text" name="nric"
+                                                               onkeydown="return ( event.ctrlKey || event.altKey
+                                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                    || (95<event.keyCode && event.keyCode<106)
+                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                    || (event.keyCode==46) )"
+                                                    class="form-control" minlength="12" maxlength="12" [(ngModel)]="inputHelper.ICNo" [disabled]="!allowTC" required>
+                                                    <validation-messages [formCtrl]="nric"></validation-messages>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                <label>{{'Email' | localize }} :</label>
+                                                                <input #email="ngModel" id="email" type="email" name="email" class="form-control" [(ngModel)]="inputHelper.ContactPersonEmail" [disabled]="!allowTC" email required>
+                                                                <validation-messages [formCtrl]="email"></validation-messages>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                        <label>{{'CPMobileNo' | localize }} :</label>
+                                                        <input #CPMobileNo="ngModel" id="CPMobileNo" type="text" name="CPMobleNo" class="form-control"
+                                                               onkeydown="return ( event.ctrlKey || event.altKey
+                                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                        || (95<event.keyCode && event.keyCode<106)
+                                                        || (event.keyCode==8) || (event.keyCode==9)
+                                                        || (event.keyCode>34 && event.keyCode<40)
+                                                        || (event.keyCode==46) || (event.keyCode==189) )"
+                                                        maxlength="12"
+                                                        [(ngModel)]="inputHelper.ContactPersonMobile" [disabled]="!allowTC" required>
+                                                    <validation-messages [formCtrl]="CPMobileNo"></validation-messages>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                <label>{{'BillingAddress' | localize }} :</label>
+                                                                <input #branchAddress="ngModel" id="collectAddress1" type="text" name="collectAddress1" class="form-control" [(ngModel)]="inputHelper.AddressBl1" (ngModelChange)="inputHelper.BranchAddress1=$event.toUpperCase()" [disabled]="!allowTC" required>
+                                                                <validation-messages [formCtrl]="branchAddress"></validation-messages>
+                                                                <input id="collectAddress2" type="text" name="collectAddress2" class="form-control kt-margin-t-50" [(ngModel)]="inputHelper.AddressBl2" (ngModelChange)="inputHelper.BranchAddress2=$event.toUpperCase()" [disabled]="!allowTC">
+                                                                <input id="collectAddress3" type="text" name="collectAddress3" class="form-control kt-margin-t-50" [(ngModel)]="inputHelper.AddressBl3" (ngModelChange)="inputHelper.BranchAddress3=$event.toUpperCase()" [disabled]="!allowTC">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                <label>{{'State' | localize }} :</label>
+                                                                <div class="campIDLbl">
+                                                                    <select #branchState
+                                                                            required
+                                                                            name="branchState"
+                                                                            id="branchState"
+                                                                            class="form-control"
+                                                                            (change)="populateCityBranch()"
+                                                                            [disabled]="!allowTC"
+                                                                            [(ngModel)]="inputHelper.stateBl"
+                                                                            [attr.data-live-search]="true">
+                                                                        <option *ngFor="let data of BranchStateList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                        <label>{{'City' | localize}} :</label>
+                                                                        <div class="campIDLbl">
+                                                                            <select #branchCity
+                                                                                    required
+                                                                                    name="branchCity"
+                                                                                    id="branchCity"
+                                                                                    class="form-control"
+                                                                                    [disabled]="(!allowTC) || branchCityStatus == false"
+                                                                                    [(ngModel)]="inputHelper.cityBl"
+                                                                                    [attr.data-live-search]="true">
+                                                                                <option *ngFor="let data of BranchCityList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group" [ngClass]="{'required': !isPreview}">
+                                                                        <label>{{'PostCode' | localize }} :</label>
+                                                                        <input #branchPostCode="ngModel" id="collectPostCode" type="text" name="collectPostCode"
+                                                                               onkeydown="return ( event.ctrlKey || event.altKey
+                                                                               || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                    || (95<event.keyCode && event.keyCode<106)
+                                                                    || (event.keyCode==8) || (event.keyCode==9)
+                                                                    || (event.keyCode>34 && event.keyCode<40)
+                                                                    || (event.keyCode==46) )"
+                                                                    class="form-control" minlength="5" maxlength="5" [(ngModel)]="inputHelper.PostalCodeBl" [disabled]="!allowTC" required>
+                                                                    <validation-messages [formCtrl]="branchPostCode"></validation-messages>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-sm-12">
+                                                </div>
+                                                <div class="col-lg-6 col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-12">
+
+                                                    </div>
+                                                    <div class="col-xl-12">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                            </div>
+                                            <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                                <div class="kt-form__actions save-company-profile" style="
+                                            display: flex;
+                                            justify-content: flex-end;">
+                                                    <!-- <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="saveContact()" [disabled]="contactForm.form.status!='VALID' || BizRegStatus > 2">
+                                                        {{ 'Save' | localize }}
+                                                    </button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </tab>
+                                <!--Section 4 : Supporting Document heading="4. Supporting Document" {{name | ellipsesFilter:flag ? 10 : 13}}-->
+                                <!-- <tab heading="{{(active == 0 && flag == 1) ? '4. Activate' : '4. Supporting Document'}}" index="3" id="tab4" (selectTab)="populateDocList()" class="tab-wrapper" [disabled]="formStep < 3"> -->
+                                <tab heading="4. {{'SupportingDocument' | localize}}" index="3" id="tab4" (selectTab)="populateDocList()" class="tab-wrapper" [disabled]="formStep < 3">
+                                    <form #profileForm="ngForm" name="profileForm">
+                                        <div class="kt-wizard-v1__content">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="displayFlex regActions elAlignRight">
+                                                        <button class="btn btn-secondary btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="preTabTnc(3)">
+                                                            {{'Back' | localize}}
+                                                        </button>
+                                                        <button  class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" *ngIf="(active == 0 && flag == 0)" [disabled]="totalDataFilled < 5" (click)="nextTabTnc(3)">
+                                                            {{'Next' | localize}}
+                                                        </button>
+                                                        <!-- <button  class="btn btn-success btn-sm btn-wide kt-font-transform-u kt-margin-r-10" *ngIf="(active != 0 && flag != 1) || (active == 1 && flag == 1)" (click)="nextTabTnc(3)">
+                                                            Next
+                                                        </button> -->
+                                                        <!-- <button  *ngIf="(active == 0 && flag == 1)" class="btn btn-brand btn-sm btn-wide kt-font-transform-u" data-ktwizard-type="action-save" (click)="Submit()" >
+                                                            {{ 'Confirm' | localize }}
+                                                        </button> -->
+                                                        <!-- <button class="btn btn-dark btn-sm btn-wide kt-font-transform-u kt-margin-r-10">
+                                                            Close
+                                                        </button> -->
+                                                        <!-- <button class="btn btn-brand btn-sm btn-wide kt-font-transform-u kt-margin-r-10" data-ktwizard-type="action-save" (click)="saveProfile()" [disabled]="profileForm.form.status!='VALID' || stepOne == true || BizRegStatus > 1">
+                                                            {{ 'Save' | localize }}
+                                                        </button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row" *ngIf="(active == 0 && flag == 0)"> -->
+                                            <div class="row kt-margin-t-20" *ngIf="(active == 0 && flag == 0)">
+                                                <div class="col-md-12 col-lg-8">
+                                                    <div id="fileUploadEnvWrp">
+                                                        <div class="tableBase form-group">
+                                                            <base-list
+                                                                       [actionColumn]="actionFlag" [(gridUrl)]="urlSupportingDocs" [permissionDelete]="permissionDelete"
+                                                                       (onDeleteClick)="delete($event)"
+                                                                       [downloadDoc]="downloadFlag" downloadDocAlignment="right" downloadDocLabel="Download"
+                                                                       (onDownloadDocClick)="onDownloadClick($event)" downloadDocField="PathRef"
+                                                                       #baselistTab
+                                                                       [enableFilter]="false">
+
+                                                            </base-list>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div id="uploadUIWrp">
+                                                        <div class="form-group">
+                                                            <file-upload #fileUploadInput ng-disabled="!uploadedAll" [multiple]="false" id="fileUploadInput"
+                                                                         [customUpload]="true" name="DefaultFileUploadFileInput[]" [APIUrl]="uploadUrl" [accept]="accept"
+                                                                         [maxFileSize]="10000000" [showChoosenUpload]="false" [showUploaded]="false" [showCancelButton]="false"
+                                                                         [chooseLabel]="DropZone" [showUploadButton]="false" (onSelect)="dealWithFiles($event)">
+                                                            </file-upload>
+
+                                                        </div>
+                                                        <div id="statUpload">
+                                                            <div class="statGraph">
+                                                            </div>
+                                                            <div class="displayFlex ttlVal"><div class="lblStat">{{'TotalFile' | localize}} : </div><div class="valStat">{{totalDataFilled}} / {{totalData}}</div></div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accept kt-margin-t-25" *ngIf="(active == 0 && flag == 1)">
+                                                <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                                    <input type="checkbox" [checked]="totalDataFilled == 5" disabled>{{'SupportingDocument' | localize}}
+                                                    <span></span>
+                                                </label>
+                                                <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                                </div>
+                                                <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                                    <div class="kt-form__actions save-company-profile" style="
+                                                display: flex;
+                                                justify-content: flex-end;">
+                                                        <!-- <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="Submit()" [disabled]="stepThree === true || BizRegStatus == 4">
+                                                            {{ 'Save' | localize }}
+                                                        </button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </tab>
+                                <!--Section 5 : Review-->
+                                <tab heading="5. {{'ReviewAndSubmit' | localize}}" index="4" id="tab5" class="tab-wrapper" [disabled]="totalDataFilled < 4">
+                                    <form #profileForm="ngForm" name="profileForm">
+                                        <div class="kt-wizard-v1__content">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="displayFlex regActions elAlignRight">
+                                                        <button class="btn btn-secondary btn-sm btn-wide kt-font-transform-u kt-margin-r-10" (click)="preTabTnc(4)">
+                                                           {{ 'Back' | localize }}
+                                                        </button>
+                                                        <!-- <button class="btn btn-dark btn-sm btn-wide kt-font-transform-u kt-margin-r-10">
+                                                            Close
+                                                        </button> -->
+                                                        <button class="btn btn-brand btn-sm btn-wide kt-font-transform-u" data-ktwizard-type="action-save" (click)="Submit()" [disabled]="stepThree === true || BizRegStatus == 4">
+                                                            {{ 'Confirm' | localize }}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label *ngIf="allowTC" class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                                <input type="checkbox" [checked]="BizRegStatus >= 3" disabled>{{'TermsAndCondition' | localize}}
+                                                <span></span>
+                                            </label>
+                                            <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                            </div>
+                                            <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                                <input type="checkbox" [checked]="BizRegStatus >= 3" disabled>{{'CompanyProfile' | localize}}
+                                                <span></span>
+                                            </label>
+                                            <!-- Region Company Profile Review -->
+                                            <div class="col-lg-12 col-sm-12">
+                                                <div class="kt-wizard-v1__form">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{'CompanyProfileName' | localize }} :</label>
+                                                                        <input #companyNameReview="ngModel" id="companyNameReview" type="text" name="companyNameReview" class="form-control" [(ngModel)]="inputHelper.CompanyName" disabled>
+                                                                        <validation-messages [formCtrl]="companyNameReview"></validation-messages>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{'CEO' | localize }} :</label>
+                                                                        <input #ceoReview="ngModel" id="ceoReview" type="text" name="ceoReview" class="form-control" [(ngModel)]="inputHelper.ContactPerson2" disabled>
+                                                                        <validation-messages [formCtrl]="ceoReview"></validation-messages>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>{{'CompanyID' | localize}} :</label>
+                                                                <input #companyIDReview="ngModel" id="companyIDReview" type="text" name="companyIDReview" class="form-control" [(ngModel)]="inputHelper.BizRegID" disabled>
+                                                                <validation-messages [formCtrl]="companyIDReview"></validation-messages>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>{{'TaxOrganizationType' | localize}} :</label>
+                                                                <div class="form-group campID">
+                                                                    <div class="campIDLbl">
+                                                                        <select #typeReview
+                                                                                name="typeReview"
+                                                                                id="typeReview"
+                                                                                class="form-control"
+                                                                                disabled
+                                                                                [(ngModel)]="inputHelper.ReqCode"
+                                                                                [attr.data-live-search]="true">
+                                                                            <option *ngFor="let data of dataTaxType" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>{{'SupplierType' | localize}} :</label>
+                                                                <div class="form-group campID">
+                                                                    <div class="campIDLbl">
+                                                                        <select #supplyIDReview
+                                                                                name="supplyIDReview"
+                                                                                id="supplyIDReview"
+                                                                                class="form-control"
+                                                                                disabled
+                                                                                [(ngModel)]="inputHelper.BusinessType"
+                                                                                [attr.data-live-search]="true">
+                                                                            <option *ngFor="let data of dataSupplierID" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>{{'TelNo' | localize }} :</label>
+                                                                <input #companyTelNoReview="ngModel" id="companyTelNoReview" type="text" name="companyTelNoReview"
+                                                                       onkeydown="return ( event.ctrlKey || event.altKey
+                                                                       || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                || (95<event.keyCode && event.keyCode<106)
+                                                                || (event.keyCode==8) || (event.keyCode==9)
+                                                                || (event.keyCode>34 && event.keyCode<40)
+                                                                || (event.keyCode==46) || (event.keyCode==189) )"
+                                                            maxlength="12" class="form-control" [(ngModel)]="inputHelper.TelNo" disabled>
+                                                            <validation-messages [formCtrl]="companyTelNoReview"></validation-messages>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>{{'FaxNo' | localize }} :</label>
+                                                                <input id="businessFaxNoReview" type="text" name="businessFaxNoReview"
+                                                                       onkeydown="return ( event.ctrlKey || event.altKey
+                                                                       || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                || (95<event.keyCode && event.keyCode<106)
+                                                                || (event.keyCode==8) || (event.keyCode==9)
+                                                                || (event.keyCode>34 && event.keyCode<40)
+                                                                || (event.keyCode==46) || (event.keyCode==189) )"
+                                                        maxlength="12"
+                                                            class="form-control" [(ngModel)]="inputHelper.FaxNo" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>{{'TaxpayerID' | localize}} :</label>
+                                                                <input #taxpayerIDReview="ngModel" id="taxpayerIDReview" type="text" name="taxpayerIDReview" class="form-control" [(ngModel)]="inputHelper.RegNo" disabled>
+                                                                <validation-messages [formCtrl]="taxpayerIDReview"></validation-messages>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label>{{'TaxRegistrationNumber' | localize}} :</label>
+                                                                <input #taxRegNoReview="ngModel" id="taxRegNoReview" type="text" name="taxRegNoReview" class="form-control" [(ngModel)]="inputHelper.ReqNo" disabled>
+                                                                <validation-messages [formCtrl]="taxRegNoReview"></validation-messages>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>{{'BusinessAddress' | localize }} :</label>
+                                                                        <input #companyAddress="ngModel" id="businessAddress1Review" type="text" name="businessAddress1Review" class="form-control" [(ngModel)]="inputHelper.Address1" (ngModelChange)="inputHelper.Address1=$event.toUpperCase()" disabled>
+                                                                        <validation-messages [formCtrl]="companyAddress"></validation-messages>
+                                                                        <input id="businessAddress2Review" type="text" name="businessAddress2Review" class="form-control kt-margin-t-50" [(ngModel)]="inputHelper.Address2" (ngModelChange)="inputHelper.Address2=$event.toUpperCase()" disabled>
+                                                                        <input id="businessAddress3Review" type="text" name="businessAddress3Review" class="form-control  kt-margin-t-50" [(ngModel)]="inputHelper.Address3" (ngModelChange)="inputHelper.Address3=$event.toUpperCase()" disabled>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label>{{'Country' | localize}} :</label>
+                                                                        <div class="form-group campID">
+                                                                            <div class="campIDLbl">
+                                                                                <select #CountryIDReview
+                                                                                        name="CountryIDReview"
+                                                                                        id="CountryIDReview"
+                                                                                        class="form-control"
+                                                                                        disabled
+                                                                                        (change)="populateState()"
+                                                                                        [(ngModel)]="inputHelper.Country"
+                                                                                        [attr.data-live-search]="true">
+                                                                                    <option *ngFor="let data of dataCountryID" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <label>{{'State' | localize}} :</label>
+                                                                            <div class="form-group campID">
+                                                                                <div class="campIDLbl">
+                                                                                    <select #companyStateReview
+                                                                                            name="companyStateReview"
+                                                                                            id="companyStateReview"
+                                                                                            class="form-control"
+                                                                                            (change)="populateCity()"
+                                                                                            disabled
+                                                                                            [(ngModel)]="inputHelper.State"
+                                                                                            [attr.data-live-search]="true">
+                                                                                        <option *ngFor="let data of stateList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <label>{{'City' | localize}} :</label>
+                                                                            <div class="campIDLbl">
+                                                                                <select #companyCityReview
+                                                                                        name="companyCityReview"
+                                                                                        id="companyCityReview"
+                                                                                        class="form-control"
+                                                                                        disabled
+                                                                                        [(ngModel)]="inputHelper.City"
+                                                                                        [attr.data-live-search]="true">
+                                                                                    <option *ngFor="let data of cityList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label>{{'PostCode' | localize }} :</label>
+                                                                                <input #companyPostCode="ngModel" id="businessPostCode" type="text"
+                                                                                       onkeydown="return ( event.ctrlKey || event.altKey
+                                                                                       || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                            || (95<event.keyCode && event.keyCode<106)
+                                                                            || (event.keyCode==8) || (event.keyCode==9)
+                                                                            || (event.keyCode>34 && event.keyCode<40)
+                                                                            || (event.keyCode==46) )"
+                                                                            name="businessPostCode" class="form-control" minlength="5" maxlength="5" [(ngModel)]="inputHelper.PostalCode" disabled>
+                                                                            <validation-messages [formCtrl]="companyPostCode"></validation-messages>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="row">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Region Company Profile Review -->
+                                            <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                            </div>
+                                            <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                                <input type="checkbox" [checked]="BizRegStatus >= 3" disabled>{{'ContactProfile' | localize}}
+                                                <span></span>
+                                            </label>
+                                            <!-- Region Contact Profile Review -->
+                                            <div class="kt-wizard-v1__content">
+                                                <div class="row hideThis">
+                                                    <div _ngcontent-qna-c350="" class="col-lg-12"><h3 _ngcontent-qna-c350="" class="kt-section__title mb-3 ng-tns-c372-1"></h3></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>{{'ContactPersonProfile' | localize }} :</label>
+                                                            <input #contactPersonReview="ngModel" id="contactPersonReview" type="text" name="contactPersonReview" class="form-control" [(ngModel)]="inputHelper.ContactPerson"
+                                                                   (ngModelChange)="inputHelper.ContactPerson=$event.toUpperCase()" disabled>
+                                                            <validation-messages [formCtrl]="contactPersonReview"></validation-messages>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>{{'NRICNo' | localize }} :</label>
+                                                            <input #nricReview="ngModel" id="nricReview" type="text" name="nricReview"
+                                                                   onkeydown="return ( event.ctrlKey || event.altKey
+                                                                   || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                        || (95<event.keyCode && event.keyCode<106)
+                                                        || (event.keyCode==8) || (event.keyCode==9)
+                                                        || (event.keyCode>34 && event.keyCode<40)
+                                                        || (event.keyCode==46) )"
+                                                        class="form-control" minlength="12" maxlength="12" [(ngModel)]="inputHelper.ICNo" disabled>
+                                                        <validation-messages [formCtrl]="nricReview"></validation-messages>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>{{'Email' | localize }} :</label>
+                                                                    <input #emailReview="ngModel" id="emailReview" type="email" name="emailReview" class="form-control" [(ngModel)]="inputHelper.ContactPersonEmail" disabled email>
+                                                                    <validation-messages [formCtrl]="emailReview"></validation-messages>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>{{'CPMobileNo' | localize }} :</label>
+                                                            <input #CPMobileNoReview="ngModel" id="CPMobileNoReview" type="text" name="CPMobleNo" class="form-control"
+                                                                   onkeydown="return ( event.ctrlKey || event.altKey
+                                                                   || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                            || (95<event.keyCode && event.keyCode<106)
+                                                            || (event.keyCode==8) || (event.keyCode==9)
+                                                            || (event.keyCode>34 && event.keyCode<40)
+                                                            || (event.keyCode==46) || (event.keyCode==189) )"
+                                                            maxlength="12"
+                                                            [(ngModel)]="inputHelper.ContactPersonMobile" disabled>
+                                                        <validation-messages [formCtrl]="CPMobileNoReview"></validation-messages>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>{{'BillingAddress' | localize }} :</label>
+                                                                    <input #branchAddress="ngModel" id="collectAddress1Review" type="text" name="collectAddress1Review" class="form-control" [(ngModel)]="inputHelper.AddressBl1" (ngModelChange)="inputHelper.AddressBl1=$event.toUpperCase()" disabled>
+                                                                    <validation-messages [formCtrl]="branchAddress"></validation-messages>
+                                                                    <input id="collectAddress2Review" type="text" name="collectAddress2Review" class="form-control kt-margin-t-50" [(ngModel)]="inputHelper.AddressBl2" (ngModelChange)="inputHelper.AddressBl2=$event.toUpperCase()" disabled>
+                                                                    <input id="collectAddress3Review" type="text" name="collectAddress3Review" class="form-control kt-margin-t-50" [(ngModel)]="inputHelper.AddressBl3" (ngModelChange)="inputHelper.AddressBl3=$event.toUpperCase()" disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label>{{'State' | localize }} :</label>
+                                                                    <div class="campIDLbl">
+                                                                        <select #branchStateReview
+                                                                                name="branchStateReview"
+                                                                                id="branchStateReview"
+                                                                                class="form-control"
+                                                                                (change)="populateCityBranch()"
+                                                                                disabled
+                                                                                [(ngModel)]="inputHelper.stateBl"
+                                                                                [attr.data-live-search]="true">
+                                                                            <option *ngFor="let data of BranchStateList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label>{{'City' | localize}} :</label>
+                                                                            <div class="campIDLbl">
+                                                                                <select #branchCityReview
+                                                                                        name="branchCityReview"
+                                                                                        id="branchCityReview"
+                                                                                        class="form-control"
+                                                                                        disabled
+                                                                                        [(ngModel)]="inputHelper.cityBl"
+                                                                                        [attr.data-live-search]="true">
+                                                                                    <option *ngFor="let data of BranchCityList" [value]="data.Code">{{data.Remark | uppercase}}</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group">
+                                                                            <label>{{'PostCode' | localize }} :</label>
+                                                                            <input #collectPostCodeReview="ngModel" id="collectPostCodeReview" type="text" name="collectPostCodeReview"
+                                                                                   onkeydown="return ( event.ctrlKey || event.altKey
+                                                                                   || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                                                                        || (95<event.keyCode && event.keyCode<106)
+                                                                        || (event.keyCode==8) || (event.keyCode==9)
+                                                                        || (event.keyCode>34 && event.keyCode<40)
+                                                                        || (event.keyCode==46) )"
+                                                                        class="form-control" minlength="5" maxlength="5" [(ngModel)]="inputHelper.PostalCodeBl" disabled>
+                                                                        <validation-messages [formCtrl]="collectPostCodeReview"></validation-messages>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-sm-12">
+                                                    </div>
+                                                    <div class="col-lg-6 col-sm-12">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-12">
+
+                                                        </div>
+                                                        <div class="col-xl-12">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                                </div>
+                                            </div>
+                                            <div *ngIf="allowSupportingDoc" class="accept kt-margin-t-25">
+                                                <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+                                                    <input type="checkbox" [checked]="totalDataFilled == 5" disabled>{{'SupportingDocument' | localize}}
+                                                    <span></span>
+                                                </label>
+                                                <div class="line kt-margin-b-25" style="border-bottom: 1px solid #ebedf2;">
+                                                </div>
+                                                <div class="btn-next-save kt-margin-t-25" style="max-width: 200px; margin: auto; margin-right: 0;">
+                                                    <div class="kt-form__actions save-company-profile" style="
+                                                display: flex;
+                                                justify-content: flex-end;">
+                                                        <!-- <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u" data-ktwizard-type="action-save" (click)="Submit()" [disabled]="stepThree === true || BizRegStatus == 4">
+                                                            {{ 'Save' | localize }}
+                                                        </button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<selectDoctypeModal #selectDoctypeModal (modalSave)="uploadHandlers($event)"></selectDoctypeModal>

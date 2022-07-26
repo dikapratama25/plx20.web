@@ -1,0 +1,141 @@
+<div class="kt-portlet borderStd cardSubsDtl">
+    <div
+        class="kt-portlet__head kt-portlet__head--noborder kt-ribbon kt-ribbon--shadow kt-ribbon--right kt-ribbon--round kt-ribbon--success">
+        <div *ngIf="item.edition.isActive" class="kt-ribbon__target" style="top: 12px; right:-5px">
+            {{ 'Active' | localize}}
+        </div>
+
+        <div class="kt-portlet__head-label">
+            <div class="col" style="padding: 15px 0px;">
+                <h3 class="kt-font-bold kt-font-dark">
+                    {{item.edition.displayName}}
+                </h3>
+                <div class="kt-separator kt-margin-t-0 kt-margin-b-10"
+                    style=" border: 2px solid #28961E; background-color: #28961E; width: 30px;"></div>
+                <span class="kt-font-dark">Subscription rate</span>
+            </div>
+        </div>
+    </div>
+    <div class="kt-portlet__body kt-portlet__body--fit-top" style="padding-bottom: 0px;">
+
+        <!-- <div class="kt-pricing-1__visual">
+            <div class="kt-pricing-1__hexagon1"></div>
+            <div class="kt-pricing-1__hexagon2"></div>
+            <span class="kt-pricing-1__icon kt-font-brand">
+                <i class="fa {{editionIcons[i]}}"></i>
+            </span>
+        </div> -->
+        <h3 class="kt-align-left kt-font-dark kt-font-bold" *ngIf="isFree(item.edition)">
+            {{"Free" | localize}}
+        </h3>
+
+        <h3 class="kt-align-left" *ngIf="!isFree(item.edition)">
+            <span *ngIf="item.edition.dailyPrice > 0"
+                class="kt-pricing-1__label kt-font-dark kt-font-bold">
+                <div class="crcSymbol">{{appSession.application.currencySign}}</div>
+                <div class="pricingType">{{item.edition.dailyPrice  | number : '1.2-2'}}</div>
+                <div class="typePeriod">{{"PerDay" | localize}}</div>
+            </span>
+            <span *ngIf="item.edition.weeklyPrice > 0"
+                class="kt-pricing-1__label kt-font-dark kt-font-bold displayFlex">
+                <div class="crcSymbol">{{appSession.application.currencySign}}</div>
+                <div class="pricingType">{{item.edition.weeklyPrice | number : '1.2-2'}}</div>
+                <div class="typePeriod">{{"PerWeek" | localize}}</div>
+            </span>
+            <span *ngIf="item.edition.monthlyPrice > 0"
+                class="kt-pricing-1__label kt-font-dark kt-font-bold displayFlex">
+                <div  class="crcSymbol"> {{appSession.application.currencySign}}</div>
+                <div class="pricingType">{{item.edition.monthlyPrice | number : '1.2-2'}}</div>
+                <div class="typePeriod">{{"PerMonth" | localize}}</div>
+            </span>
+            <span *ngIf="item.edition.annualPrice > 0" 
+                class="kt-pricing-1__label kt-font-dark kt-font-bold displayFlex">
+                <div class="crcSymbol">{{appSession.application.currencySign}}</div>
+                <div class="pricingType">{{item.edition.annualPrice | number : '1.2-2'}}</div>
+                <div class="typePeriod">{{"PerYear" | localize}}</div>
+            </span>
+        </h3>
+
+        <div class="kt-align-center btnSubscribeWrp" style="padding: 15px 0;">
+
+            <button class="btn btn-success btn-pill  btn-brand btn-wide btn-uppercase btn-sm mx-2"
+                [routerLink]="['/app/payment/portal']"
+                [queryParams]="{editionId: item.edition.id, subscriptionStartType: subscriptionStartType.Free}"
+                *ngIf="!item.edition.isActive && isFree(item.edition) && !item.edition.isUpgradeable && !item.edition.isOnSubcription">
+                {{"Start" | localize}}
+            </button>
+
+            <button class="btn btn-warning btn-pill  btn-brand btn-wide btn-uppercase  btn-sm mx-2"
+                [routerLink]="['/app/payment/portal']"
+                [queryParams]="{editionId: item.edition.id, subscriptionStartType: subscriptionStartType.Trial}"
+                *ngIf="!item.edition.isActive && !isFree(item.edition) && item.edition.trialDayCount && !item.edition.isUpgradeable && !item.edition.isOnSubcription">
+                {{"FreeTrial" | localize}}
+            </button>
+
+            <button class="btn btn-success btn-pill  btn-brand btn-wide btn-uppercase btn-sm mx-2"
+                [routerLink]="['/app/payment/portal']"
+                [queryParams]="{editionId: item.edition.id, subscriptionStartType: subscriptionStartType.Paid, editionPaymentType: editionPaymentType.NewRegistration}"
+                *ngIf="!item.edition.isActive && !isFree(item.edition) && !item.edition.isUpgradeable && !item.edition.isOnSubcription">
+                {{"BuyNow" | localize}}
+            </button>
+
+            <button class="btn btn-success btn-pill  btn-brand btn-wide btn-uppercase btn-sm mx-2"
+                [routerLink]="['/app/payment/portal']"
+                [queryParams]="{editionId: item.edition.id, subscriptionStartType: subscriptionStartType.Paid, editionPaymentType: editionPaymentType.Upgrade}"
+                *ngIf="!item.edition.isActive && !isFree(item.edition) && item.edition.isUpgradeable && item.edition.isOnSubcription">
+                {{"Upgrade" | localize}}
+            </button>
+
+            <button class="btn btn-warning btn-pill  btn-brand btn-wide btn-uppercase btn-bolder btn-sm mx-2"
+                [routerLink]="['/app/payment/portal']"
+                [queryParams]="{editionId: item.edition.id, subscriptionStartType: subscriptionStartType.Paid, editionPaymentType: editionPaymentType.Extend}"
+                *ngIf="item.edition.isActive && !isFree(item.edition) && item.edition.isUpgradeable && item.edition.isOnSubcription">
+                {{"Extend" | localize}}
+            </button>
+
+        </div>
+
+        <span class="kt-pricing-1__description">
+            <ng-container *ngFor="let feature of features">
+                <div class="kt-widget2">
+                    <div class="kt-widget2__item">
+                        <div class="kt-widget2__info">
+                            <!--Checbox Feature-->
+                            <ng-container *ngIf="isTrueFalseFeature(feature)">
+                                <h5 class="kt-widget2__tittle"><i class="fas fa-check kt-font-success"
+                                        *ngIf="featureEnabledForEdition(feature,item, true)"></i></h5>
+                                <h5 class="kt-widget2__tittle"><i class="fas fa-times kt-font-danger"
+                                        *ngIf="!featureEnabledForEdition(feature,item, true)"></i></h5>
+                            </ng-container>
+                            <!--Checbox Feature-->
+
+                            <!--Not Checbox Feature-->
+                            <ng-container *ngIf="!isTrueFalseFeature(feature)">
+                                <h5 class="kt-widget2__tittle"><i class="fas fa-check kt-font-success"
+                                        *ngIf="featureEnabledForEdition(feature,item, false)"></i></h5>
+                                <h5 class="kt-widget2__tittle"><i class="fas fa-times kt-font-danger"
+                                        *ngIf="!featureEnabledForEdition(feature,item, false)"></i></h5>
+                            </ng-container>
+                            <!--Not Checbox Feature-->
+                        </div>
+                        <!--Checbox Feature-->
+                        <ng-container *ngIf="isTrueFalseFeature(feature)">
+                            <p class="kt-font-bold kt-align-right kt-padding-l-10">{{feature.displayName}}</p>
+                        </ng-container>
+                        <!--Checbox Feature-->
+
+                        <!--Not Checbox Feature-->
+                        <ng-container *ngIf="!isTrueFalseFeature(feature)">
+                            <div class="featureWrpFlex displayFlex" style="justify-content: space-between;">
+                            <div class="kt-font-bold kt-align-left featureName">
+                                {{feature.displayName}}</div>
+                                <div class="valueEdition">{{getFeatureValueForEdition(feature,item)}}</div>
+                            </div>
+                        </ng-container>
+                        <!--Not Checbox Feature-->
+                    </div>
+                </div>
+            </ng-container>
+        </span>
+    </div>
+</div>

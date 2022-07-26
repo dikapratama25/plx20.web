@@ -1,0 +1,214 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <button type="button" [disabled]="saving" style="margin-right:15px;" (click)="back()"
+                            class="btn btn-outline-metal back">
+                        <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+                    </button>
+                    <h3 class="kt-subheader__title">
+                        <span>{{"ChannelTitle" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        <span class="kt-subheader__desc">{{"History" | localize}}</span>
+                    </span>
+                </div>
+
+                <!-- <div class="kt-subheader__toolbar">
+                    <div class="kt-subheader__wrapper">
+                        <button type="button" style="float:left;" (click)="showGallery()" [buttonBusy]="saving" class="btn btn-secondary" *ngIf="isGranted('Pages.Event.Channel.Subscribe')">
+                            <i class="flaticon2-browser"></i>
+                            <span>{{"Subscribe" | localize}}</span>
+                        </button>
+                        <button class="btn btn-primary" (click)="assignBanner($event)" [disabled]="!evenForm.form.valid || errorDateRange" *ngIf="saveType === SaveType.Insert">
+                        <i class="flaticon2-plus"></i>
+                            {{"addBanner" | localize}}
+                        </button>
+                        <button class="btn btn-primary" (click)="assignBanner($event)" [disabled]="!evenForm.form.valid" *ngIf="saveType === SaveType.Update && isGranted('Pages.Event.Channel.Gallery.Upload')">
+                            <i class="flaticon2-plus"></i>
+                                {{"addBanner" | localize}}
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__body">
+                    <div class="portletPage">
+                        <tabset>
+                            <!--  -->
+                            <!-- BEGIN OF HEADER FORM -->
+                            <tab heading="{{'CampaignDetail' | localize}}">
+                                <form #evenForm="ngForm" novalidate>
+                                    <div id="voucherHeaderForm" class="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group campID">
+                                                    <div class="campIDLbl">
+                                                        <label class="required">{{"CampaignID" | localize}}</label>
+                                                    </div>
+                                                    <div class="campIDVal">
+                                                        <input class="form-control" type="text" name="eventCode" [value]="eventNo" [disabled]="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group campID">
+                                                    <div class="campIDLbl">
+                                                        <label class="required">{{"RecruiterID" | localize}}</label>
+                                                    </div>
+                                                    <div class="campIDVal">
+                                                        <input class="form-control" type="text" name="eventRecID" [value]="eventRecruiterID" [disabled]="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6" style="margin-top: -20px;">
+                                                        <div id="onGoingEven" class="metricBox col-md-12">
+                                                            <div class="labelTopDash">
+                                                                <span>{{"Subscribed" | localize}}</span>
+                                                            </div>
+                                                            <div class="valueBelowDash">
+                                                                <span>{{subscribed}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" style="margin-top: -20px;">
+                                                        <div id="onGoingPerformance" class="metricBox col-md-12">
+                                                            <div class="labelTopDash">
+                                                                <span>{{"ApprovedApplication" | localize}}</span>
+                                                            </div>
+                                                            <div class="valueBelowDash">
+                                                                <span>{{approved}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top: 10px;">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="reqInput">{{"EventTitle" | localize}}</label>
+                                                    <input class="form-control" #titleInput="ngModel" type="text" name="eventTitle" [(ngModel)]="eventTitle" [disabled]="true">
+                                                    <validation-messages [formCtrl]="titleInput"></validation-messages>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group m-form__group">
+                                                    <label class="reqInput">{{"CampaignPeriod" | localize}}</label>
+                                                    <div class="input-group">
+                                                        <input id="inpDateFrom" type="text" #processFilterFromPicker="ngModel" name="inpDateFrom" class="form-control" [(ngModel)]="eventStart" datePickerMomentModifier [(date)]="dateFrom"  bsDatepicker [disabled]="true">
+                                                        <div class="input-group-append"><span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span></div>
+                                                        <div class="input-group-append"><span class="input-group-text" id="basic-addon3">To</span></div>
+                                                        <input id="inpDateTo" type="text" #processFilterToPicker="ngModel" name="inpDateTo" class="form-control" [(ngModel)]="eventEnd" datePickerMomentModifier [(date)]="dateTo" bsDatepicker [disabled]="true">
+                                                        <div class="input-group-append"><span class="input-group-text" id="basic-addon4"><i class="fa fa-calendar"></i></span></div>
+                                                    </div>
+                                                    <!-- <validation-messages [formCtrl]="processFilterFromPicker" [formCtrl]="processFilterToPicker"></validation-messages>
+                                                    <div class="has-danger">
+                                                        <div *ngIf="dateRangeMsg!=''" class="form-control-feedback">
+                                                            {{ dateRangeMsg | localize }}
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label class="required">{{"Category" | localize}}</label>
+                                                            <select #categoryCombobox
+                                                                    name="category"
+                                                                    id="category"
+                                                                    class="form-control"
+                                                                    [(ngModel)]="eventType"
+                                                                    [attr.data-live-search]="true"
+                                                                    [disabled]="true">
+                                                                <option *ngFor="let data of dataEventType" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label class="required">{{"Status" | localize}}</label>
+                                                            <select #statusCombobox
+                                                                    name="status"
+                                                                    id="status"
+                                                                    class="form-control"
+                                                                    [(ngModel)]="eventStatus"
+                                                                    [attr.data-live-search]="true"
+                                                                    [disabled]="true">
+                                                                <option *ngFor="let data of dataEventStatus" [value]="data.Code">{{data.CodeDesc | uppercase}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group m-form__group">
+                                                            <label class="reqInput">{{"PaymentDate" | localize}}</label>
+                                                            <div class="input-group">
+                                                                <input id="inpPaymentDate" type="text" #processFilterStartPicker="ngModel" name="inpPaymentDate" class="form-control" [(ngModel)]="eventPaymentDate" [disabled]="true" bsDatepicker>
+                                                                <div class="input-group-append"><span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span></div>
+                                                            </div>
+                                                            <validation-messages [formCtrl]="processFilterStartPicker"></validation-messages>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="reqInput">{{"CampaignTarget" | localize}}</label>
+                                                            <input class="form-control" #targetInput="ngModel" type="number" name="eventTarget" [(ngModel)]="eventTarget" [disabled]="true">
+                                                            <validation-messages [formCtrl]="targetInput"></validation-messages>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </tab>
+
+                            <!-- <tab heading="{{'BannerDetail' | localize}}" *ngIf="isGranted('Pages.Event.Channel.Gallery.Upload') && DeleteBanner === true">
+                                    <div class="portletPage">
+                                        <div class="col-sm-12">
+                                            <base-list #galleryPreview [gridUrl]="galleryUrl" [enableFilter]="false" actionColumn="action"
+                                            [permissionView]="itemPermissionView" (onViewClick)="viewGallery($event, 'preview')"
+                                            [permissionDelete]="itemPermissionDelete" (onDeleteClick)="deleteGallery($event)">
+                                            </base-list>
+                                            <gallery #gallery [(galleryUrl)]="galleryUrl" [selectMode]="selectMode"></gallery>
+                                        </div>
+                                    </div>
+                            </tab> -->
+                            <tab heading="{{'BannerDetail' | localize}}">
+                                <div class="portletPage">
+                                    <div class="col-sm-12">
+                                        <base-list #galleryPreview [gridUrl]="galleryUrl" [enableFilter]="false">
+                                        </base-list>
+                                        <!-- <gallery #gallery [(galleryUrl)]="galleryUrl" [selectMode]="selectMode"></gallery> -->
+                                    </div>
+                                </div>
+                            </tab>
+                         <tab heading="{{'Subscribe' | localize}}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <base-list #itemList [gridUrl]="itemGridUrl" [enableFilter]="false"></base-list>
+                                    </div>
+                                </div>
+                            </tab>
+
+                        </tabset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

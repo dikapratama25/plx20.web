@@ -1,0 +1,568 @@
+<div [@routerTransition]>
+	<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+		<div class="kt-subheader   kt-grid__item" id="kt_subheader" >
+			<div [class]="containerClass">
+				<div class="kt-subheader__main">
+					<h3 class="kt-subheader__title">
+						Payment Method</h3>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="kt-subheader   kt-grid__item" id="" style="background-color: transparent;">
+			<div [class]="containerClass">
+				<div class="kt-subheader__main">
+					<h3 class="kt-subheader__title">
+						Choose a payment method </h3>
+				</div>
+			</div>
+		</div> -->
+		<!-- konten disini -->
+		<div [class]="containerClass">
+			<div class="row">
+				<div class="col-md-9">
+					<div *ngIf="topUp" class="kt-portlet kt-portlet--tabs payType"  style="background-color: #fff; border: 2px solid #AEAFB0; border-radius: 5px">
+						<tabset class="tab-container tabbable-line" style="padding: 10px;">
+							<!-- <tab>
+								<ng-template tabHeading><img [src]="appRootUrl() + 'assets/common/images/tab-visa.png'" height="52" /></ng-template>
+								<label class="kt-margin-b-20">Please enter your card information below :</label>
+								<form class="kt-form-group kt-font-dark" id="form_card" action="">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Card number</label>
+												<input type="text" id="number" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Expiration date</label>
+												<input type="date" id="exp_date" class="form-control">
+											</div>
+										</div>	
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Name on card</label>
+												<input type="text" id="name_card" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Card security code</label>
+												<input type="text" id="sec_code" class="form-control">
+											</div>
+										</div>	
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<a href="">Got a discount code ?</a>
+										</div>	
+									</div>
+								</form>
+								<div class="kt-separator" style="border: 2px solid #ffffff"></div>
+								<div class="row" style="background-color: #F4F6FA">
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<div class="form-group kt-margin-b-10">
+														<label class="">You've selected :</label>
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<h3 class="kt-font-dark kt-font-bold">Procurement</h3>
+															<label class="kt-font-dark">(one year package)</label>	
+														</div>
+													</div>
+													<div class="kt-margin-t-20">
+														<a href="" class="">Change Subscription</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<form class="kt-form-group" id="form_promo">
+														<div class="form-group">
+															<label class="">You will be charged :</label>
+																<div class="kt-margin-t-10">
+																	<h3 class="kt-font-dark kt-font-bold">RM 500.00</h3>
+																</div>
+														</div>
+													</form>
+													<div>
+														<a href="#" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tab> -->
+							<tab>
+								<ng-template tabHeading><img [src]="appRootUrl() + 'assets/common/images/tab-fpx.png'" height="52" /></ng-template>
+								<!-- <img [src]="appRootUrl() + 'assets/common/images/tab-fpx.png'" height="34" /> -->
+								<form class="kt-margin-t-30" id="bank">
+									<div class="form-group">
+										<div class="kt-radio-inline">
+											<label class="kt-radio kt-font-dark">
+												<input type="radio" name="radio2" id="corp_bank" (click)="selectBank('02')"> Corporate Bank
+												<span></span>
+											</label>
+											<label class="kt-radio kt-font-dark">
+												<input type="radio" name="radio2" id="per_bank" (click)="selectBank('01')"> Personal Bank
+												<span></span>
+											</label>
+											<label class="col-md-4">
+												<ng-select *ngIf="bankListShow" id="bankTypeList" [(ngModel)]="inputHelper.buyerBankID"
+													[items]="bankListModel" [closeOnSelect]="true" bindLabel="bankdisplayname" placeholder="Select Bank"
+													[loading]="bankLoading" (change)="bankListChange($event)">
+												</ng-select>
+												<!-- <select id="select_bank" class="form-control kt-selectpicker" data-size="7" data-live-search="true">
+													<option>Select Bank</option>
+												</select> -->
+											</label>
+										</div>
+									</div>
+								</form>
+								<!-- <a href="">Got a discount code?</a> -->
+								<div class="kt-separator" style="border: 1px solid #6F6F6F"></div>
+								<!-- <div class="row" style="background-color: #F4F6FA">
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<div class="form-group kt-margin-b-10">
+														<label class="">You've selected :</label>
+													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<h5 class="kt-font-dark kt-font-bold">TOP UP <small>(Credit Balance)</small></h5>	
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<form class="kt-form-group" id="form_promo">
+														<div class="form-group">
+															<label class="">Type in top up amount :</label>
+															<div class="kt-margin-t-10">
+																<div class="input-group">
+																	<div [hidden]="!(creditCurrency.length < 3)"
+																		class="input-group-prepend">
+																		<span class="input-group-text"
+																			id="topupAmt">{{creditCurrency}}</span>
+																	</div>
+																	<input #topupAmt="ngModel" name="topupAmt" required
+																		[(ngModel)]="transAmt" step='0.01' min="0.00" type="number"
+																		autocomplete="off" class="form-control" style="text-align: right;">
+																	<div [hidden]="creditCurrency.length < 3" class="input-group-append">
+																		<span class="input-group-text"
+																			id="topupAmt">{{creditCurrency}}</span>
+																	</div>
+																</div>
+																<validation-messages [formCtrl]="topupAmt"></validation-messages>
+															</div>
+														</div>
+													</form>
+													<div>
+														<a href="javascript:;" (click)="proceedPayment(997)" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
+							</tab>
+						</tabset>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="kt-portlet__body">
+									<div class="kt-callout__body">
+										<div class="kt-callout__content">
+											<div class="form-group kt-margin-b-10">
+												<label class="">You've selected :</label>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<h5 class="kt-font-dark kt-font-bold">TOP UP <small>(Credit Balance)</small></h5>	
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="kt-portlet__body">
+									<div class="kt-callout__body">
+										<div class="kt-callout__content">
+											<form class="kt-form-group" id="form_promo">
+												<div class="form-group">
+													<label class="">Type in top up amount :</label>
+													<div class="kt-margin-t-10">
+														<div class="input-group">
+															<div [hidden]="!(creditCurrency.length < 3)"
+																class="input-group-prepend">
+																<span class="input-group-text"
+																	id="topupAmt">{{creditCurrency}}</span>
+															</div>
+															<input #topupAmt="ngModel" name="topupAmt" required
+																[(ngModel)]="transAmt" step='0.01' min="0.00" type="number"
+																autocomplete="off" class="form-control" style="text-align: right;">
+															<div [hidden]="creditCurrency.length < 3" class="input-group-append">
+																<span class="input-group-text"
+																	id="topupAmt">{{creditCurrency}}</span>
+															</div>
+														</div>
+														<validation-messages [formCtrl]="topupAmt"></validation-messages>
+													</div>
+												</div>
+											</form>
+											<div>
+												<!-- <a href="javascript:;" (click)="proceedPayment()" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</a> -->
+												<button [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')" (click)="proceedPayment()" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Top-up Now</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="!topUp" class="kt-portlet kt-portlet--tabs payType kt-padding-b-20"  style="background-color: #fff; border: 2px solid #AEAFB0; border-radius: 5px">
+						<tabset class="tab-container tabbable-line" style="padding: 10px;">
+							<tab>
+								<ng-template tabHeading><img (click)="onTabSelect('Credit')" [src]="appRootUrl() + 'assets/common/images/tab-agora.png'" height="52" /></ng-template>
+								<div class="row">
+									<div class="col-md-6">
+										<h5 class="kt-font-dark">Available Credit</h5>
+									</div>
+									<div class="col-md-6">
+										<div class="row">
+											<div class="col-md-6 row">
+												<p class="kt-font-dark kt-margin-r-5" style="font-weight: 600">{{creditCurrency}} </p><h2 class="text-dark"> {{creditLimit | number:'.2-2'}}</h2>	
+											</div>
+											<div class="col-md-6">
+												<button type="button" (click)="redirectTopUp()" class="btn btn-outline btn-wide" style="border-radius: 10px;border-color: #025EA8;color: #025EA8;font-weight: 600"><i class="fa fa-file-upload"></i> Top Up</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <a href="" style="font-weight: 500">Got a discount code?</a> -->
+								<!-- <label class="kt-checkbox kt-checkbox--tick kt-checkbox--success">
+									<input type="checkbox" (change)="agreeTNC()" [(ngModel)]="checkTC" [checked]="checkTC">{{'AcceptTermsConditions' | localize}}
+									<span></span>
+								</label> -->
+								<!-- <label class="kt-radio kt-font-dark kt-font-bold kt-margin-t-10">
+									<input type="radio" name="radio1"> I agree to the <b>Term and Conditions</b> 
+									<span></span>
+								</label> -->
+								<div class="kt-separator" style="border: 1px solid #6F6F6F"></div>
+								<!-- <div class="row">
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__content">
+												<div class="form-group kt-margin-b-10">
+													<label class="kt-font-dark">You've selected :</label>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<ng-container [ngTemplateOutlet]="editionSelect"></ng-container>														
+													</div>
+												</div>
+												<div class="kt-margin-t-20">
+													<a href="" style="font-weight: 500">Change Subscription</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="kt-callout__content">
+											<form class="kt-form-group" id="form_promo">
+												<div class="form-group">
+													<label class="">You will be charged :</label>
+													<div class="kt-margin-t-10">
+														<h3 class="kt-font-dark kt-font-bold">{{creditCurrency}} {{transAmt | number:'.2-2'}} <small>{{selectedType}}</small></h3>
+													</div>
+												</div>
+											</form>
+											<div>
+												<label *ngIf="creditLimit<transAmt" class="" style="color:red;">Your Credit Balance not enought to do this transaction.</label>
+												<button [disabled]="creditLimit<transAmt" (click)="proceedPayment('CR001')" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</button>
+											</div>
+										</div>
+									</div>
+								</div> -->
+							</tab>
+							<!-- <tab>
+								<ng-template tabHeading><img [src]="appRootUrl() + 'assets/common/images/tab-visa.png'" height="52" /></ng-template>
+								<label class="kt-margin-b-20">Please enter your card information below :</label>
+								<form class="kt-form-group kt-font-dark" id="form_card" action="">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Card number</label>
+												<input type="text" id="number" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Expiration date</label>
+												<input type="date" id="exp_date" class="form-control">
+											</div>
+										</div>	
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Name on card</label>
+												<input type="text" id="name_card" class="form-control">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Card security code</label>
+												<input type="text" id="sec_code" class="form-control">
+											</div>
+										</div>	
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<a href="">Got a discount code ?</a>
+										</div>	
+									</div>
+								</form>
+								<div class="kt-separator" style="border: 2px solid #ffffff"></div>
+								<div class="row" style="background-color: #F4F6FA">
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<div class="form-group kt-margin-b-10">
+														<label class="">You've selected :</label>
+													</div>
+													<div class="row">
+														<div class="col-md-6">
+															<h3 class="kt-font-dark kt-font-bold">Procurement</h3>
+															<label class="kt-font-dark">(one year package)</label>	
+														</div>
+													</div>
+													<div class="kt-margin-t-20">
+														<a href="" class="">Change Subscription</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<form class="kt-form-group" id="form_promo">
+														<div class="form-group">
+															<label class="">You will be charged :</label>
+																<div class="kt-margin-t-10">
+																	<h3 class="kt-font-dark kt-font-bold">RM 500.00</h3>
+																</div>
+														</div>
+													</form>
+													<div>
+														<a href="#" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tab> -->
+							<tab>
+								<ng-template tabHeading><img (click)="onTabSelect('FPX')" [src]="appRootUrl() + 'assets/common/images/tab-fpx.png'" height="52" /></ng-template>
+								<img [src]="appRootUrl() + 'assets/common/images/tab-fpx.png'" height="34" />
+								<form class="kt-margin-t-30" id="bank">
+									<div class="form-group">
+										<div class="kt-radio-inline">
+											<label class="kt-radio kt-font-dark">
+												<input type="radio" name="radio2" id="corp_bank" (click)="selectBank('02')"> Corporate Bank
+												<span></span>
+											</label>
+											<label class="kt-radio kt-font-dark">
+												<input type="radio" name="radio2" id="per_bank" (click)="selectBank('01')"> Personal Bank
+												<span></span>
+											</label>
+											<label class="col-md-4">
+												<ng-select *ngIf="bankListShow" id="bankTypeList" [(ngModel)]="inputHelper.buyerBankID"
+													[items]="bankListModel" [closeOnSelect]="true" bindLabel="bankdisplayname" placeholder="Select Bank"
+													[loading]="bankLoading" (change)="bankListChange($event)">
+												</ng-select>
+												<!-- <select id="select_bank" class="form-control kt-selectpicker" data-size="7" data-live-search="true">
+													<option>Select Bank</option>
+												</select> -->
+											</label>
+										</div>
+									</div>
+								</form>
+								<!-- <a href="">Got a discount code?</a> -->
+								<div class="kt-separator" style="border: 1px solid #6F6F6F"></div>
+								<!-- <div class="row" style="background-color: #F4F6FA">
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<div class="form-group kt-margin-b-10">
+														<label class="">You've selected :</label>
+													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<ng-container [ngTemplateOutlet]="editionSelect"></ng-container>														
+														</div>
+													</div>
+													<div class="kt-margin-t-20">
+														<a href="" class="">Change Subscription</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="kt-portlet__body">
+											<div class="kt-callout__body">
+												<div class="kt-callout__content">
+													<form class="kt-form-group" id="form_promo">
+														<div class="form-group">
+															<label class="">You will be charged :</label>
+															<div class="kt-margin-t-10">
+																<h3 class="kt-font-dark kt-font-bold">{{creditCurrency}} {{transAmt | number:'.2-2'}} <small>{{selectedType}}</small></h3>
+															</div>
+														</div>
+													</form>
+													<div>
+														<a href="javascript:;" (click)="proceedPayment(997)" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
+							</tab>
+						</tabset>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="kt-portlet__body" style="padding: 0px 25px;">
+									<div class="kt-callout__content">
+										<div class="form-group kt-margin-b-10">
+											<label class="kt-font-dark">You've selected :</label>
+										</div>
+										<div class="row">
+											<div class="col-md-12 kt-margin-t-10">
+												<ng-container [ngTemplateOutlet]="editionSelect"></ng-container>														
+											</div>
+										</div>
+										<div style="margin-bottom: 20px;margin-top: 0px im !important;">
+											<a href="javascript:;" (click)="redirectChange()" style="font-weight: 500">Change Subscription</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="kt-callout__content" style="padding-right: 25px;">
+									<form class="kt-form-group" id="form_promo">
+										<div class="form-group">
+											<label class="">You will be charged :</label>
+											<div class="kt-margin-t-10 displayFlex">
+												<p class="kt-font-dark kt-margin-r-5" style="font-weight: 600">{{creditCurrency}} </p><h3 class="kt-font-dark kt-font-bold">{{transAmt | number:'.2-2'}} <small>{{selectedType}}</small></h3>
+											</div>
+										</div>
+									</form>
+									<div>
+										<div class="checkAccept">
+											<label class="kt-checkbox kt-checkbox--tick kt-checkbox--success kt-margin-b-10">
+												<input type="checkbox" (change)="agreeTNC()" [(ngModel)]="checkTC" [checked]="checkTC">{{'AcceptTermsConditions' | localize}}
+												<span></span>
+											</label>
+										</div>
+										<button *ngIf="isCreditPay && creditLimit<transAmt && isCreditPay" [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')" [disabled]="creditLimit<transAmt && isCreditPay" (click)="proceedPayment()" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</button>
+										<button *ngIf="isCreditPay && creditLimit>=transAmt && isCreditPay" [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')" [disabled]="!checkTC" (click)="proceedPayment()" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</button>
+										<button *ngIf="!isCreditPay" [buttonBusy]="paying" [busyText]="l('PayingWithThreeDot')" [disabled]="!checkTC" (click)="proceedPayment()" class="btn btn-wide btn-block btn-bold btn-font-sm" style="background-color: #025EA8;border-radius: 5px; color: #ffffff">Pay Now</button>
+										<div id="errorCredit" class="kt-margin-t-10">
+										   <label *ngIf="creditLimit<transAmt && isCreditPay" class="" style="color:red;">Your Credit Balance not enought to do this transaction.</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<label class="kt-font-dark kt-font-bold">Your data is secure</label>
+					<label>
+						We don't store cardholder information on our servers.
+						All payments are encrypted and securely processed
+					</label>
+					<div class="kt-margin-t-20">
+						<label class="kt-font-dark kt-font-bold" style="font-size: 12px">
+							Do you have any question? <a href="">Contact Us!</a>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ng-template #editionSelect>
+		<div style="margin: 0px;">{{buyType}}</div>
+		<h4 class="kt-align-left">{{appName}} - {{edition.displayName}}</h4>
+		<div *ngIf="edition.dailyPrice != null && edition.dailyPrice > 0" class="form-group" style="margin-bottom: 0px;">
+			<label class="kt-radio">
+				<input class="form-control" type="radio" name="PaymentPeriodType"  [checked]="selectedPaymentPeriodType==paymentPeriodType.Daily"
+					[value]="paymentPeriodType.Daily" (change)="onPaymentPeriodChangeChange(paymentPeriodType.Daily, edition.dailyPrice)" />
+				{{"DailyPrice" | localize}}:
+				{{appSession.application.currencySign}}{{edition.dailyPrice | number : '1.2-2'}}
+				<span></span>
+			</label>
+		</div>
+		<div *ngIf="edition.weeklyPrice != null && edition.weeklyPrice > 0" class="form-group" style="margin-bottom: 0px;">
+				<label class="kt-radio">
+					<input class="form-control" type="radio" name="PaymentPeriodType" [checked]="selectedPaymentPeriodType==paymentPeriodType.Weekly"
+						[value]="paymentPeriodType.Weekly" (change)="onPaymentPeriodChangeChange(paymentPeriodType.Weekly, edition.weeklyPrice)" />
+					{{"WeeklyPrice" | localize}}:
+					{{appSession.application.currencySign}}{{edition.weeklyPrice | number : '1.2-2'}}
+					<span></span>
+				</label>
+			</div>
+		<div *ngIf="edition.monthlyPrice != null && edition.monthlyPrice > 0" class="form-group" style="margin-bottom: 0px;">
+			<label class="kt-radio">
+				<input class="form-control" type="radio" name="PaymentPeriodType" [checked]="selectedPaymentPeriodType==paymentPeriodType.Monthly"
+					[value]="paymentPeriodType.Monthly"
+					(change)="onPaymentPeriodChangeChange(paymentPeriodType.Monthly, edition.monthlyPrice)" />
+				{{"MonthlyPrice" | localize}}:
+				{{appSession.application.currencySign}}{{edition.monthlyPrice | number : '1.2-2'}}
+				<span></span>
+			</label>
+		</div>
+		<div *ngIf="edition.annualPrice != null && edition.annualPrice > 0" class="form-group" style="margin-bottom: 0px;">
+			<label class="kt-radio">
+				<input class="form-control" type="radio" name="PaymentPeriodType" [checked]="selectedPaymentPeriodType==paymentPeriodType.Annual"
+				[value]="paymentPeriodType.Annual"
+					(change)="onPaymentPeriodChangeChange(paymentPeriodType.Annual, edition.annualPrice)" />
+				{{"AnnualPrice" | localize}}:
+				{{appSession.application.currencySign}}{{edition.annualPrice | number : '1.2-2'}}
+				<span></span>
+			</label>
+		</div>
+		<div *ngIf="supportsRecurringPayments" class="form-group">
+			<label class="kt-checkbox mb-0">
+				<input class="form-control" type="checkbox" name="RecurringPaymentEnabled"
+					[(ngModel)]="recurringPaymentEnabled" />
+				{{"AutomaticallyBillMyAccount" | localize}}
+				<span></span>
+			</label>
+		</div>
+	</ng-template>
+</div>

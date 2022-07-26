@@ -1,0 +1,53 @@
+:root{
+    --contrastMain : #007eff;
+}
+
+body{
+    margin:0;
+}
+.maxWrp{
+    width:100%;
+    max-width:700px;
+    padding:20px;
+    box-sizing: border-box;
+    margin:0 auto;
+    padding:20px;
+ }
+ .upcase{
+     text-transform: uppercase;
+ }
+ .subListing ul{padding-left:0}
+ .subListing li{
+     list-style-type:none;
+     padding-bottom:1em;
+ }
+ [type="a"] li{list-style-type: lower-alpha;}
+ .importantLinks a{
+    text-align: center;
+    flex-basis:30%;
+    max-width: 700px;
+    box-sizing: border-box;
+    padding:1em;
+ }
+ @media only screen and (min-width:700px){
+    .displayFlex{
+        display: flex;
+    }
+ }
+ @media only screen and (max-width:699px){
+    .importantLinks a{
+        display: block;
+        width:100%;
+    }
+ }
+/*------------------- standard to hide unecessary elements ----------------------*/
+#kt_login > div:first-child > div:first-child,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__signup-label,
+#kt_login > div:first-child > div:nth-child(2) .kt-login__head
+{
+    display: none;
+}
+#kt_login > div:first-child > div:nth-child(2){
+    padding:0;
+}
+/*-------------------- End -------------------------------------------------------*/

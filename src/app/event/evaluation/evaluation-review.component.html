@@ -1,0 +1,396 @@
+<div [@routerTransition]>
+   <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+      <div class="kt-subheader kt-grid__item">
+         <div [class]="containerClass">
+            <div class="kt-subheader__main">
+               <h3 class="kt-subheader__title">
+                  Evaluation Submission
+               </h3>
+               <div class="kt-subheader__breadcrumbs">
+                  <a href="#" class="kt-subheader__breadcrumbs-home">
+                     <i class="flaticon2-shelter"></i>
+                  </a>
+                  <span class="kt-subheader__breadcrumbs-separator"></span>
+                  <a class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Evaluation
+                     Submission</a>
+               </div>
+            </div>
+            <!-- <div class="kt-subheader__toolbar">
+                   <div class="kt-subheader__wrapper">
+                       <button (click)="goBack()" class="btn btn-bold btn-md btn-font-md btn-label-warning">
+                           <i class="fa fa-arrow-circle-left"></i> {{"Back" | localize}}
+                       </button> 
+                       <button (click)="createBranch()" class="btn btn-primary"><i class="fa fa-plus"></i>
+                           {{"CreateNewBranch" | localize}}</button>
+                   </div>
+               </div> -->
+         </div>
+      </div>
+      <!----- Summary view---------->
+      <div [class]="containerClass">
+         <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+               <!-- <div class="row">
+                  <div class="col-lg-3">
+                     <div class="kt-portlet " style="
+                     /* border: 1px solid #5d78ff; */
+                     border: 1px solid #a9a9a9;
+                     ">
+                        <div class="kt-portlet__head">
+                           <div class="kt-portlet__head-label">
+                              <h3 class="kt-portlet__head-title" style="
+                              /* color: #fff; */
+                              ">Submitted</h3>
+                           </div>
+                           <div class="kt-portlet__head-toolbar">
+                              <div class="kt-portlet__head-actions" style="
+                              /* color: #fff; */
+                              ">
+                                 <h3 style="
+                                 color: #5d78ff;
+                                 ">1</h3>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-3">
+                     <div class="kt-portlet" style="
+                     /* background-color: #ffc33e; */
+                     border: 1px solid #a9a9a9;
+                     ">
+                        <div class="kt-portlet__head" style="
+                        color: #525252;
+                        ">
+                           <div class="kt-portlet__head-label" style="
+                           /* color: #ffff; */
+                           ">
+                              <h3 class="kt-portlet__head-title" style="
+                              /* color: #fff; */
+                              ">Pending</h3>
+                           </div>
+                           <div class="kt-portlet__head-toolbar">
+                              <div class="kt-portlet__head-actions">
+                                 <h3 style="
+                                 color: #ffb822;
+                                 ">1</h3>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-6">
+                     <div class="displayFlex" style="
+                     margin: auto;
+                     justify-content: flex-end;
+                     display: flex;
+                     height: calc(100% - 20px);
+                     flex-grow: unset;
+                     ">
+                        <button type="button" class="btn btn-bold btn-secondary btn-pill" data-toggle="modal"
+                           data-target="#kt_modal_4_2" style="
+                        margin-right: 15px;
+                        ">Send reminder</button>
+                        <button type="button" class="btn btn-bold btn-secondary btn-pill" data-toggle="modal"
+                           data-target="#kt_modal_4_2" style="
+                         margin-right: 15px;
+                         ">Compare selection</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-lg-8"> Advanced Filter <i class="flaticon2-down" style="
+                  font-size: 10px;
+                  "></i> </div>
+                  <div class="col-lg-4">
+                     <div class="kt-input-icon kt-input-icon--left">
+                        <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                           <span><i class="la la-search"></i></span>
+                        </span>
+                     </div>
+                  </div>
+               </div> -->
+               <div class="row">
+                  <tabset>
+                     <tab heading="{{'HSE' | localize}}">
+                        <base-list #reviewListHSE [(gridUrl)]="gridUrlHSE" detailAligment="left" [indexing]="true" detail="true"
+                        [enableFilter]="true" [filterTemplate]="filterHSE" (onDetailClick)="reviewEventHSE($event)">
+                        </base-list>
+                        <ng-template #filterHSE>
+                           <div class="row filterContent">
+                               <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <label class="col-form-label">{{"Vendor" | localize}}</label>
+                                   <ng-select [(ngModel)]="selectedVendorHSE" [items]="comboVendor" [closeOnSelect]="true" bindValue="Code" bindLabel="Remark" (change)="refreshFilter($event)">
+                                    <ng-template ng-option-tmp let-item="item">{{item.Remark}}<br/>
+                                       <small>{{item.Code}}</small><br>
+                                     </ng-template>    
+                                 </ng-select>
+                               </div>
+                               <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <label class="col-form-label">{{"From" | localize}}</label>
+                                   <div class="input-group date">
+                                       <div class="input-group">
+                                           <input id="startDate" (dateChange)="refreshFilter($event)" type="text"
+                                               #processFilterStartPicker
+                                               name="startDate" class="form-control"
+                                               [(ngModel)]="startDate"
+                                               datePickerMomentModifier bsDatepicker
+                                               [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                           <div class="input-group-append">
+                                               <span class="input-group-text"
+                                                   id="basic-addon2">
+                                                   <i class="fa fa-calendar"></i>
+                                               </span>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <label class="col-form-label">{{"To" | localize}}</label>
+                                   <div class="input-group date">
+                                       <div class="input-group">
+                                           <input id="endDate" (dateChange)="refreshFilter($event)" type="text"
+                                               #processFilterStartPicker
+                                               name="endDate" class="form-control"
+                                               [(ngModel)]="endDate"
+                                               datePickerMomentModifier bsDatepicker
+                                               [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                           <div class="input-group-append">
+                                               <span class="input-group-text"
+                                                   id="basic-addon2">
+                                                   <i class="fa fa-calendar"></i>
+                                               </span>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </ng-template>      
+                     </tab>
+                     <tab heading="{{'Buyer' | localize}}">
+                        <base-list #reviewListBuyer [(gridUrl)]="gridUrlBuyer" detailAligment="left" [indexing]="true" detail="true"
+                        [enableFilter]="true" [filterTemplate]="filterBuyers" (onDetailClick)="reviewEventBuyer($event)">
+                        </base-list>
+                        <ng-template #filterBuyers>
+                           <div class="row filterContent">
+                               <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <label class="col-form-label">{{"Vendor" | localize}}</label>
+                                   <ng-select [(ngModel)]="selectedVendorBuyers" [items]="comboVendor" id="vendorDrop" name="vendorDrop" [closeOnSelect]="true"
+                                    bindValue="Code" bindLabel="Remark" (change)="refreshFilterBuyers($event)">
+                                    <ng-template ng-option-tmp let-item="item">{{item.Remark}}<br/>
+                                       <small>{{item.Code}}</small><br>
+                                     </ng-template>  
+                                 </ng-select>
+                               </div>
+                               <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <label class="col-form-label">{{"From" | localize}}</label>
+                                   <div class="input-group date">
+                                       <div class="input-group">
+                                           <input id="startDate" (dateChange)="refreshFilterBuyers($event)" type="text"
+                                               #processFilterStartPicker
+                                               name="startDate" class="form-control"
+                                               [(ngModel)]="startDateBuyers"
+                                               datePickerMomentModifier bsDatepicker
+                                               [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                           <div class="input-group-append">
+                                               <span class="input-group-text"
+                                                   id="basic-addon2">
+                                                   <i class="fa fa-calendar"></i>
+                                               </span>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-lg-4 col-md-6 col-sm-12">
+                                   <label class="col-form-label">{{"To" | localize}}</label>
+                                   <div class="input-group date">
+                                       <div class="input-group">
+                                           <input id="endDate" (dateChange)="refreshFilterBuyers($event)" type="text"
+                                               #processFilterStartPicker
+                                               name="endDate" class="form-control"
+                                               [(ngModel)]="endDateBuyers"
+                                               datePickerMomentModifier bsDatepicker
+                                               [bsConfig]="{dateInputFormat: 'DD/MM/YYYY',showWeekNumbers:false,customTodayClass: 'custom-today-class'}">
+                                           <div class="input-group-append">
+                                               <span class="input-group-text"
+                                                   id="basic-addon2">
+                                                   <i class="fa fa-calendar"></i>
+                                               </span>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </ng-template>        
+                     </tab>
+                  </tabset>
+               </div>
+               <!-- <table class="table">
+                  <thead>
+                     <tr>
+                        <th><label class="kt-checkbox">
+                              <input type="checkbox">
+                              <span></span>
+                           </label>
+                        </th>
+                        <th>Vendor ID</th>
+                        <th>Vendor Name</th>
+                        <th>Person in Charge</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Notification Date</th>
+                        <th>Status</th>
+                        <th>Total Mark</th>
+                        <th>Score</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <th><label class="kt-checkbox">
+                              <input type="checkbox">
+                              <span></span>
+                           </label>
+                        </th>
+                        <td>VDR001AC</td>
+                        <td>Prospect Sdn Bhd</td>
+                        <td>John Mandieta</td>
+                        <td>info@company.com</td>
+                        <td>+60-135-5577</td>
+                        <td>01/12/2020</td>
+                        <td><span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">submitted</span></td>
+                        <td>230</td>
+                        <td>70%</td>
+                     </tr>
+                     <tr>
+                        <th><label class="kt-checkbox">
+                              <input type="checkbox">
+                              <span></span>
+                           </label>
+                        </th>
+                        <td>VDR002BC</td>
+                        <td>Solution Solid Sdn Bhd</td>
+                        <td>Marcell Tio</td>
+                        <td>info@company.com</td>
+                        <td>+60-135-5577</td>
+                        <td>01/12/2020</td>
+                        <td><span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">submitted</span></td>
+                        <td>230</td>
+                        <td>70%</td>
+                     </tr>
+                     <tr>
+                        <th><label class="kt-checkbox">
+                              <input type="checkbox">
+                              <span></span>
+                           </label>
+                        </th>
+                        <td>VDR003CC</td>
+                        <td>CRANE Sdn Bhd</td>
+                        <td>James Wang</td>
+                        <td>info@company.com</td>
+                        <td>+60-135-5577</td>
+                        <td>01/12/2020</td>
+                        <td><span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">submitted</span></td>
+                        <td>230</td>
+                        <td>70%</td>
+                     </tr>
+                     <tr>
+                        <th><label class="kt-checkbox">
+                              <input type="checkbox">
+                              <span></span>
+                           </label>
+                        </th>
+                        <td>VDR004DC</td>
+                        <td>Chemical Pertama Sdn Bhd</td>
+                        <td>Luke William</td>
+                        <td>info@company.com</td>
+                        <td>+60-135-5577</td>
+                        <td>01/12/2020</td>
+                        <td><span class="kt-badge kt-badge--brand kt-badge--inline kt-badge--pill">submitted</span></td>
+                        <td>230</td>
+                        <td>70%</td>
+                     </tr>
+                  </tbody>
+               </table> -->
+            </div>
+         </div>
+      </div>
+
+      <!------------- Detail view ------------->
+      <!-- <div [class]="containerClass">
+         <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__body">
+               <div class="row">
+                  <div class="col-lg-8"> Advanced Filter <i class="flaticon2-down" style="
+                  font-size: 10px;
+                  "></i> </div>
+                  <div class="col-lg-4">
+                     <div class="kt-input-icon kt-input-icon--left">
+                        <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                           <span><i class="la la-search"></i></span>
+                        </span>
+                     </div>
+                  </div>
+               </div>
+               <table class="table">
+                  <thead>
+                     <tr>
+                        <th class="kt-align-right">No
+                        </th>
+                        <th>Question</th>
+                        <th class="kt-align-right">Base Score</th>
+                        <th class="kt-align-right">Final Score</th>
+                        <th class="kt-align-center">Overall</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td class="kt-align-right" style="width: 40px;">1</td>
+                        <td>Vendor participated in Cenviro Safety Passport (CSP) program</td>
+                        <td class="kt-align-right" style="width: 150px;">2</td>
+                        <td class="kt-align-right" style="width: 150px;">2</td>
+                        <td class="kt-align-center" style="width: 100px;"><i class="fas fa-sort-down kt-font-danger"  style="font-size: 20px;"></i></td>
+                     </tr>
+                     <tr>
+                        <td class="kt-align-right">2</td>
+                        <td>Not contribute towards any safety incidents &amp; LTI recorded, no pollutions to the environment</td>
+                        <td class="kt-align-right">5</td>
+                        <td class="kt-align-right">4</td>
+                        <td class="kt-align-center"><i class="fas fa-sort-up kt-font-success"  style="font-size: 20px;"></i></td>
+                     </tr>
+                     <tr>
+                        <td class="kt-align-right">3</td>
+                        <td>PPE is well enforced among the workers</td>
+                        <td class="kt-align-right">2</td>
+                        <td class="kt-align-right">3</td>
+                        <td class="kt-align-center"><i class="fas fa-minus kt-font-warning"  style="font-size: 15px;"></i></td>
+                     </tr>
+                     <tr>
+                        <td class="kt-align-right">4</td>
+                        <td>No penalty issued due to any HSSE violations</td>
+                        <td class="kt-align-right">4</td>
+                        <td class="kt-align-right">4</td>
+                        <td class="kt-align-center"><i class="fas fa-sort-up kt-font-success"  style="font-size: 20px;"></i></td>
+                     </tr>
+                     <tr>
+                        <td class="kt-align-right">5</td>
+                        <td>Vendor participated in HSSE Contractor Audit Program</td>
+                        <td class="kt-align-right">2</td>
+                        <td class="kt-align-right">1</td>
+                        <td class="kt-align-center"><i class="fas fa-sort-down kt-font-danger"  style="font-size: 20px;"></i></td>
+                     </tr>
+                     <tr>
+                        <td></td>
+                        <td style="font-weight: bold;">Total</td>
+                        <td class="kt-align-right" style="font-weight: bold;">15</td>
+                        <td class="kt-align-right" style="font-weight: bold;">14</td>
+                        <td class="kt-align-center"><i class="fas fa-minus kt-font-warning" style="font-size: 15px;"></i></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div> -->
+   </div>
+</div>

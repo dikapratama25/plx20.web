@@ -1,0 +1,36 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div class="kt-subheader kt-grid__item">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        <span>{{"Event" | localize}}</span>
+                    </h3>
+                    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+                    <span class="kt-subheader__desc">
+                        {{"Event Detail" | localize}}
+
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head-label displayFlex" style="padding: 2em;padding-bottom: 0;">
+                    <span class="kt-portlet__head-icon" style="padding-right:1em;"><i
+                            class="flaticon-file-2"></i></span>
+
+                    <h3 class="kt-portlet__head-title headTitleEvt">{{eventID}} - {{eventName}}</h3>
+                </div>
+                <div class="kt-portlet__body ">
+                    <base-list #itemsListComponents (onSelectedChange)="detail($event)" [(gridUrl)]="gridUrl"
+                        [enableFilter]="false">
+                    </base-list>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+<!-- <div [@routerTransition]> -->
+<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+   <!-- begin:: Subheader -->
+   <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+      <div class="kt-container  kt-container--fluid ">
+         
+         <div class="kt-subheader__main">
+            <button type="button" style="margin-right:15px;" (click)="back()"
+                    class="btn btn-outline-metal back">
+                <i class="fa fa-arrow-left"></i>{{"Back" | localize}}
+            </button>
+            <h3 class="kt-subheader__title">
+                <span>{{"EvalSubmission" | localize}} : {{eventID}} - {{eventName}}</span>
+            </h3>
+            <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+            <span class="kt-subheader__desc">
+                <span class="kt-subheader__desc">{{"EvalSubmissionReview" | localize}}</span>
+            </span>
+        </div>
+
+      </div>
+   </div>
+   <!-- end:: Subheader -->
+
+   <!-- begin:: Content -->
+   <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+      <div class="filter d-flex justify-content-between">
+         <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filter
+                </button> -->
+         <a href="" class="kt-subheader__breadcrumbs-link">{{eventID}} - {{eventName}}</a>
+         <div class="edit-event">
+            
+            <!-- <button type="button" (click)="exportToExcel()" [disabled]="disabledButton" class="btn btn-outline-success"><i
+                  class="fa fa-file-excel-o"></i> {{"Excel" | localize}} </button>
+             <button type="button" (click)="printPDF()" [disabled]="disabledButton" class="btn btn-outline-success"><i
+                  class="fa fa-file-pdf-o"></i> {{"PDF" | localize}} </button> -->
+                  <div class="btn-group dropdown" dropdown container="body" style="margin-right:10px;">
+                     <button dropdownToggle class="dropdown-toggle btn btn-outline-success">
+                         <i class="flaticon-download"></i><span class="caret"></span>
+                         {{"Export" | localize}}
+                     </button>
+                     <ul class="dropdown-menu" *dropdownMenu>
+                         <li>
+                           <a [routerLink]="" (click)="exportToExcel()"  > {{"Excel" | localize}} </a>
+                         </li>
+                         <li>
+                           <a [routerLink]="" (click)="printPDF()"  >{{"PDF" | localize}} </a>
+                         </li>
+                     </ul>
+                 </div>
+                 <button type="button" [disabled]="disabledButton" class="btn btn-outline-primary"><i
+                  class="flaticon-email"></i> {{"SendReminder" | localize}} </button>
+         </div>
+      </div>
+      <div class="filter d-flex justify-content-between">
+         <a href="" class="kt-subheader__breadcrumbs-link"></a>
+      </div>
+      <div class="row" style="margin-top:15px">
+         <div class="col-lg-3">
+            <div class="kt-portlet statBox">
+               <div class="kt-portlet__body" style="padding: 10px 30px;">
+                  <div class="kt-section" style="margin: 0;">
+                     <div class="row">
+                        <div class="col-10 kt-section__title" style="margin-bottom: 0px;">
+                           {{"Pending" | localize}}
+                        </div>
+                        <div class="col-2 kt-section__title" style="margin-bottom: 0px; text-align: right;">
+                           <h4>{{ pending }}</h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="kt-separator-fit"></div>
+                  <div class="kt-section" style="margin: 0;">
+                     <div class="row">
+                        <div class="col-10 kt-section__desc" style="margin-bottom: 0px;">
+                           {{"Review" | localize}}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-3">
+            <div class="kt-portlet statBox">
+               <div class="kt-portlet__body" style="padding: 10px 30px;">
+                  <div class="kt-section" style="margin: 0;">
+                     <div class="row">
+                        <div class="col-10 kt-section__title" style="margin-bottom: 0px;">
+                           {{"InProgress" | localize}}
+                        </div>
+                        <div class="col-2 kt-section__title" style="margin-bottom: 0px; text-align: right;">
+                           <h4>{{ inProgress }}</h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="kt-separator-fit"></div>
+                  <div class="kt-section" style="margin: 0;">
+                     <div class="row">
+                        <div class="col-10 kt-section__desc" style="margin-bottom: 0px;">
+                           {{"Review" | localize}}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-3">
+            <div class="kt-portlet statBox">
+               <div class="kt-portlet__body" style="padding: 10px 30px;">
+                  <div class="kt-section" style="margin: 0;">
+                     <div class="row">
+                        <div class="col-10 kt-section__title" style="margin-bottom: 0px;">
+                           {{"Submitted" | localize}}
+                        </div>
+                        <div class="col-2 kt-section__title"
+                           style="color:var(--info); margin-bottom: 0px; text-align: right;">
+                           <h4>{{ submitted }}</h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="kt-separator-fit"></div>
+                  <div class="kt-section" style="margin: 0;">
+                     <div class="row">
+                        <div class="col-10 kt-section__desc" style="margin-bottom: 0px;">
+                           {{"Review" | localize}}
+                        </div>
+                        <div class="col-2 kt-section__desc"
+                           style="color:var(--info); margin-bottom: 0px; text-align: right;">
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div [class]="containerClass + ' kt-grid__item kt-grid__item--fluid'">
+      <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+
+         <div class="table-data kt-margin-t-30">
+            <div class="kt-portlet kt-portlet--mobile">
+               <div class="kt-portlet__body  kt-padding-2">
+
+                  <div class="form-group">
+                     <base-list #participantgrid [(gridUrl)]="gridUrl" [detail]="true"
+                        (onDetailClick)="detailSubmission($event)" [indexing]="true" [enableFilter]="true">
+                     </base-list>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- end:: Content -->
+</div>
+<!-- </div> -->

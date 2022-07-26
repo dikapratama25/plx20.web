@@ -1,0 +1,239 @@
+<div [@routerTransition]>
+    <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
+            <!-- <div class="kt-container  kt-container--fluid ">
+                <div class="kt-subheader__main">
+                    <h3 class="kt-subheader__title">
+                        Dashboard </h3>
+                    <span class="kt-subheader__separator kt-hidden"></span>
+                    <div class="kt-subheader__breadcrumbs">
+                        <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                        <span class="kt-subheader__breadcrumbs-separator"></span>
+                        <a href="" class="kt-subheader__breadcrumbs-link">
+                            Application </a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div [class]="containerClass" id="dash_alert" style="flex: 0">
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-warning alert-elevate fade show" role="alert">
+                        <div class="alert-icon"><i class="flaticon2-speaker kt-font-dark"></i></div>
+                        <div class="alert-text">
+                            There will be system maintenance on Tuesday 02/02/2021 from 08.00 am to 12 pm.
+                            <br>
+                            Please backup your work.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-subheader   kt-grid__item" id="dash_user">
+            <div [class]="containerClass">
+                <div class="kt-subheader__main">
+                    <div class="kt-block-left">
+                        <h2 class="kt-align-left kt-font-dark kt-font-bold">Congratulation Andrew,</h2>
+                        <span class="kt-align-left">Now it is time for a higher level, complete these steps to get the full benefits of our offers</span>
+                    </div>	
+                </div>
+            </div>
+        </div>
+        <div [class]="containerClass + 'kt-margin-t-30'" id="dash_content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="kt-section__content kt-section__content--border kt-section__content--fit bg-white">
+                        <!--begin: Grid Nav -->
+                        <div class="kt-grid-nav kt-grid-nav--skin-light">
+                            <div class="kt-grid-nav__row">
+                                <div class="kt-grid-nav__item">
+                                    <span class="kt-grid-nav__icon">
+                                        <img class="kt-margin-b-10" src="assets/media/users/personal.png">
+                                    </span>
+                                    <span class="kt-grid-nav__desc kt-font-dark kt-font-bold">Verify &amp; complete Account info</span>
+                                    <span class="kt-grid-nav__title kt-font-success kt-margin-t-30" style="height: 35px"><i class="flaticon2-check-mark"></i> It's Completed</span>
+                                </div>
+                                <div class="kt-grid-nav__item">
+                                    <span class="kt-grid-nav__icon">
+                                        <img class="kt-margin-b-10" src="assets/media/users/personal.png">
+                                    </span>
+                                    <span class="kt-grid-nav__desc kt-font-dark kt-font-bold">Complete Workspace info</span>
+                                    <button id="Workspace" type="button" class="btn btn-pill btn-outline-success kt-margin-t-30">Lets complete it</button>
+                                </div>
+                                <div class="kt-grid-nav__item">
+                                    <span class="kt-grid-nav__icon">
+                                        <img class="kt-margin-b-10" src="assets/media/users/personal.png">
+                                    </span>
+                                    <span class="kt-grid-nav__desc kt-font-dark kt-font-bold">Browse and Subscribe Service</span>
+                                    <button id="plan" type="button" class="btn btn-pill btn-outline-success kt-margin-t-30">Browse Service</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Grid Nav -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="kt-portlet" id="dash_notification" style="height: 300px">
+                        <div class="kt-portlet__head">
+                            <div class="kt-portlet__head-label">
+                                <h3 class="kt-portlet__head-title">
+                                    Latest Notification
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="kt-portlet__body kt-padding-t-10">
+                            <div class="kt-timeline-v2">
+                                <div class="kt-timeline-v2__items  kt-padding-top-25 kt-padding-bottom-30">
+                                    <div class="kt-timeline-v2__item">
+                                        <span class="kt-timeline-v2__item-time">10:00</span>
+                                        <div class="kt-timeline-v2__item-cricle">
+                                            <i class="fa fa-genderless kt-font-danger"></i>
+                                        </div>
+                                        <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                                            Welcome please explore the services<br>
+                                            available
+                                        </div>
+                                    </div>
+                                    <div class="kt-timeline-v2__item">
+                                        <span class="kt-timeline-v2__item-time">10:45</span>
+                                        <div class="kt-timeline-v2__item-cricle">
+                                            <i class="fa fa-genderless kt-font-warning"></i>
+                                        </div>
+                                        <div class="kt-timeline-v2__item-text  kt-padding-top-5">
+                                            Please Register your company to enjoy the complete services and features
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="kt-subheader   kt-grid__item" id="">
+                    <div [class]="containerClass">
+                        <div class="kt-subheader__main">
+                            <h3 class="kt-subheader__title">
+                                Available Services </h3>
+                        </div>
+                        <div class="kt-subheader__toolbar">
+                            <div class="kt-subheader__wrapper">
+                                <a href="#">
+                                    View All &nbsp;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div [class]="containerClass">
+                    <div class="col-md-4" style="padding-right: 10px; padding-left: 10px">
+                        <div class="kt-portlet" style="border-radius: 10px">
+                            <!-- <div class="kt-portlet__body"> -->
+                                <div class="kt-grid-nav kt-grid-nav--skin-light">
+                                    <div class="kt-grid-nav__row">
+                                        <div class="kt-grid-nav__item">
+                                            <span class="kt-grid-nav__icon">
+                                                <img class="kt-margin-b-10" src="assets/media/users/personal.png">
+                                            </span>
+                                            <span class="kt-grid-nav__desc kt-font-dark kt-font-bold">Procurement</span>
+                                            <span class="kt-grid-nav__desc" style="font-size: 0.9rem">Digitalise your Procurement</span>
+                                            <button id="" type="button" class="btn btn-wide btn-outline-info kt-margin-t-30">View Detail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                            <div class="kt-portlet__foot kt-portlet__foot--sm bg-primary" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-right: 10px; padding-left: 10px">
+                        <div class="kt-portlet" style="border-radius: 10px">
+                            <!-- <div class="kt-portlet__body"> -->
+                                <div class="kt-grid-nav kt-grid-nav--skin-light">
+                                    <div class="kt-grid-nav__row">
+                                        <div class="kt-grid-nav__item">
+                                            <span class="kt-grid-nav__icon">
+                                                <img class="kt-margin-b-10" src="assets/media/users/personal.png">
+                                            </span>
+                                            <span class="kt-grid-nav__desc kt-font-dark kt-font-bold">E-Bidding</span>
+                                            <span class="kt-grid-nav__desc" style="font-size: 0.9rem">with Direct & Reverse bidding</span>
+                                            <button id="" type="button" class="btn btn-wide btn-outline-info kt-margin-t-30">View Detail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                            <div class="kt-portlet__foot kt-portlet__foot--sm bg-warning" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="padding-right: 10px; padding-left: 10px">
+                        <div class="kt-portlet" style="border-radius: 10px">
+                            <!-- <div class="kt-portlet__body"> -->
+                                <div class="kt-grid-nav kt-grid-nav--skin-light">
+                                    <div class="kt-grid-nav__row">
+                                        <div class="kt-grid-nav__item">
+                                            <span class="kt-grid-nav__icon">
+                                                <img class="kt-margin-b-10" src="assets/media/users/personal.png">
+                                            </span>
+                                            <span class="kt-grid-nav__desc kt-font-dark kt-font-bold">E-Tendering</span>
+                                            <span class="kt-grid-nav__desc" style="font-size: 0.9rem">Digitalise your Tendering</span>
+                                            <button id="" type="button" class="btn btn-wide btn-outline-info kt-margin-t-30">View Detail</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                            <div class="kt-portlet__foot kt-portlet__foot--sm bg-danger" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" id="dash_credit">
+                <div class="kt-subheader   kt-grid__item">
+                    <div [class]="containnerClass">
+                        <div class="kt-subheader__main">
+                            <!-- <h3 class="kt-subheader__title">
+                                Available Services </h3> -->
+                        </div>
+                        <div class="kt-subheader__toolbar">
+                            <div class="kt-subheader__wrapper">
+                                <h5 class="kt-font-dark kt-font-bold">Available Credit</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-subheader kt-grid__item" style="margin-top: -15px" id="">
+                    <div [class]="containerClass">
+                        <div class="kt-subheader__main">
+                            <!-- <h3 class="kt-subheader__title">
+                                Available Services </h3> -->
+                        </div>
+                        <div class="kt-subheader__toolbar">
+                            <div class="kt-subheader__wrapper">
+                                <p class="kt-align-right">Agora credit enables you to suvscribe or participate in available services and features</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div [class]="containerClass">
+                    <div class="kt-portlet" style="border-radius: 10px">
+                        <div class="kt-portlet__body">
+                            <div class="kt-infobox" style="padding: 0px">
+                                <div class="kt-infobox__body">
+                                    <div class="kt-infobox__section">
+                                        <div class="kt-infobox__content kt-align-right">
+                                            <h3 class="kt-font-dark">RM</h3>
+                                            <h3 class="kt-font-dark" style="font-size: 5rem">0.00</h3>
+                                            <br>
+                                            <a href="#" class="kt-font-success">Transaction History</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-wide btn-info kt-pull-right" style="border-radius: 10px">Top Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
